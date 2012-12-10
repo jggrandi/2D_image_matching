@@ -16,21 +16,71 @@ using namespace cv;
 double getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
 
+short **image;
+short *image2d;
+Mat imagecv;
 
 int main(int argc, char *argv[])
 {
+	char* originalFile=argv[1];
+	short unsigned int width = atoi(argv[2]);
+	short unsigned int height = atoi(argv[3]);
+	short unsigned int slices = atoi(argv[4]);
 
-    Mat img1;
-    Mat img2;
-    Mat img3;
+	FILE* inFile;
+	
+	// allocate memory for the 3d image
+	image = (short**)malloc(slices * sizeof(short*));
+	for (int k=0; k < slices; k++)
+		image[k] = (short*)malloc(sizeof(short) * (height*width)); // only for square images right now
+	
+	// allocate memory for the 2d image	
+	image2d = (short*)malloc(sizeof(short) * (height*width));
 
-    img1 = imread( argv[1], -1 );
-    img2 = imread( argv[2], -1 );
-    img3 = imread( argv[3], -1 );
+	if( inFile = fopen( originalFile, "rb" ) )
+	{
+		// read file into image matrix
+		int res = height*width;
+		for( int i = 0; i < slices; i++ )
+		{
+			for( int j = 0; j < height; j++ )
+			{
+				short value;
+				fread( &value, 1, sizeof(short), inFile );
+				image[i][j] = value;
+			}
+		}
+		fclose(inFile);
+	}
+	else
+	{
+		cout << "FAIL"<<endl;
+	}
+	int sz[] = {slices,height*width};
+	Mat cube(2, sz, CV_16UC1,*image);
+	
+//	cout << cube<<endl;
+	int rr=width*height;
+	for( int i = 0; i < rr ; i++ )
+	{
+		short value = image[0][i];
+		image2d[i]= value;
+	}
+
+	int sz2[] = {height,width};
+	Mat cube2(2, sz, CV_16UC1,*image2d);
+	cout << cube2 << endl;
+
+//	imageMatrix.create(width,height,slices,CV_16UC1);
+
+//    img1 = imread( argv[1], -1 );
+//    img2 = imread( argv[2], -1 );
+//    img3 = imread( argv[3], -1 );
 
     const char* WIN_UT1 = "Under Test1";
     const char* WIN_UT2 = "Under Test2";
     const char* WIN_RF = "Reference";
+//	imshow(WIN_UT1,cube);
 
     // Windows
     namedWindow(WIN_RF, CV_WINDOW_AUTOSIZE );
@@ -44,50 +94,50 @@ int main(int argc, char *argv[])
     Scalar mssimV;
 
         ///////////////////////////////// PSNR ////////////////////////////////////////////////////
-	psnrV = getPSNR(img1,img2);					//get PSNR
+//	psnrV = getPSNR(img1,img2);					//get PSNR
 	cout << setiosflags(ios::fixed) << setprecision(3) << psnrV << "dB";
 
 	//////////////////////////////////// MSSIM /////////////////////////////////////////////////
 	//if (psnrV < psnrTriggerValue && psnrV)
 	//{
-		mssimV = getMSSIM(img1,img2);
+//		mssimV = getMSSIM(img1,img2);
 
-		cout << " MSSIM: "
-			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
-			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
-			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
+//		cout << " MSSIM: "
+//			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
+//			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
+//			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
 	//}
-	int m1=mssimV.val[2];
+//	int m1=mssimV.val[2];
 	cout << endl;
 
-	psnrV = getPSNR(img1,img3);					//get PSNR
-	cout << setiosflags(ios::fixed) << setprecision(3) << psnrV << "dB";
+//	psnrV = getPSNR(img1,img3);					//get PSNR
+//	cout << setiosflags(ios::fixed) << setprecision(3) << psnrV << "dB";
 
 	//////////////////////////////////// MSSIM /////////////////////////////////////////////////
 	//if (psnrV < psnrTriggerValue && psnrV)
 	//{
-		mssimV = getMSSIM(img1,img3);
+//		mssimV = getMSSIM(img1,img3);
 
-		cout << " MSSIM: "
-			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
-			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
-			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
+//		cout << " MSSIM: "
+//			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
+//			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
+//			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
 	//}
 
-	cout << endl;
-	int m2=mssimV.val[2];
+//	cout << endl;
+//	int m2=mssimV.val[2];
 
 
 	////////////////////////////////// Show Image /////////////////////////////////////////////
-	imshow( WIN_RF, img1);
-	imshow( WIN_UT1, img2);
-	imshow( WIN_UT2, img3);
+//	imshow( WIN_RF, img1);
+//	imshow( WIN_UT1, img2);
+//	imshow( WIN_UT2, img3);
 
 	//c = cvWaitKey(delay);
 	//if (c == 27) break;
-	if (m1>m2) cout << "IMG2 é mais parecida com imagem de referencia" <<endl;
-	else cout << "IMG3 é mais parecida com imagem de referencia" <<endl;
-	  waitKey(0);
+	//if (m1>m2) cout << "IMG2 é mais parecida com imagem de referencia" <<endl;
+	//else cout << "IMG3 é mais parecida com imagem de referencia" <<endl;
+	//  waitKey(0);
     return 0;
 }
 
