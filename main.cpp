@@ -15,11 +15,17 @@ using namespace std;
 using namespace cv;
 
 unsigned short **datasetRaw;
+vector<Mat> datasetSlices;
 
-Mat imagecv;
 
 double getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
+
+
+void onTrackbar( int val, void* )
+{
+	imshow( "Slice Selection", datasetSlices[val]);
+}
 
 
 int main(int argc, char *argv[])
@@ -61,8 +67,8 @@ int main(int argc, char *argv[])
 	//namedWindow(WIN_RF, CV_WINDOW_AUTOSIZE );
     //cvMoveWindow(WIN_RF, 10, 0);
 	const int sl =slices;
-	Mat cube(slices, height*width, CV_16UC1,datasetRaw);
-	vector<Mat> datasetSlices;
+	//Mat cube(slices, height*width, CV_16UC1,datasetRaw);
+	//vector<Mat> datasetSlices;
 	int d     = CV_8UC3;
 	
 
@@ -75,7 +81,11 @@ int main(int argc, char *argv[])
 		//imshow( ss, datasetSlices[i]);
 	}
 
-	for (int i=0;i<slices;i++)
+
+//	imshow("110",datasetSlices[10]);
+//	imshow("100",datasetSlices[100]);
+
+/*	for (int i=0;i<slices;i++)
 	{
 		stringstream output;
 		output << i;
@@ -83,9 +93,14 @@ int main(int argc, char *argv[])
 		const char * ss = sulfix.c_str();
 		imshow(ss, datasetSlices[i]);
 	}
+*/
 
-//	double psnrV;
-//	Scalar mssimV;
+	namedWindow("Trackbar",0);
+	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
+	onTrackbar(0,0);
+
+	double psnrV;
+	Scalar mssimV;
 
         ///////////////////////////////// PSNR ////////////////////////////////////////////////////
 //	psnrV = getPSNR(plane,plane2);					//get PSNR
@@ -94,23 +109,31 @@ int main(int argc, char *argv[])
 	//////////////////////////////////// MSSIM /////////////////////////////////////////////////
 	//if (psnrV < psnrTriggerValue && psnrV)
 	//{
-//		mssimV = getMSSIM(plane,plane2);
+	float out[2]={0,0};
+	for(int i=0; i < datasetSlices.size(); i++)
+	{
+		mssimV = getMSSIM(datasetSlices[168],datasetSlices[i]);
 
 //		cout << " MSSIM: "
-//			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
-//			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
-//			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
-	//}
+//			<< " R " << setiosflags(ios::fixed) << setprecision(3) << mssimV.val[2] * 100 << "%"
+//			<< " G " << setiosflags(ios::fixed) << setprecision(3) << mssimV.val[1] * 100 << "%"
+//			<< " B " << setiosflags(ios::fixed) << setprecision(3) << mssimV.val[0] * 100 << "%";
+		if(mssimV.val[0]>out[0])
+		{
+			out[0] = mssimV.val[0];
+			out[1] = i;
+		}
+		
+	}
 
-
+	cout << "Slice mais parecido:"<<out[1]<<endl;
 
 	////////////////////////////////// Show Image /////////////////////////////////////////////
 //	imshow( WIN_RF, cube);
 //	imshow( WIN_UT1, p2);
 
-	cout << endl;
-
-	  waitKey(0);
+	waitKey(0);
+	destroyAllWindows();
     return 0;
 }
 
