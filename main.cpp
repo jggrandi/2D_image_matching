@@ -76,7 +76,6 @@ int main(int argc, char *argv[])
 	Mat plane(height,width, CV_16UC1,image2d);
 	Mat plane2(height,width, CV_16UC1,image2d2);
 	
-<<<<<<< HEAD
 	int d     = CV_8UC3;
 
     Mat p1, p2;
@@ -85,10 +84,6 @@ int main(int argc, char *argv[])
 	plane2.convertTo(p2, d); 
 	//cout << plane <<endl;
 	//cout << p1 <<endl;
-=======
-
-    
->>>>>>> c9cc126a396511b1d5d06320acf44b13db3e7d15
     // Window
     const char* WIN_RF = "Reference";
 	const char* WIN_UT1 = "Under Test1";
@@ -96,11 +91,7 @@ int main(int argc, char *argv[])
 	namedWindow(WIN_RF, CV_WINDOW_AUTOSIZE );
 	namedWindow(WIN_UT1, CV_WINDOW_AUTOSIZE );
     cvMoveWindow(WIN_RF, 10, 0);
-<<<<<<< HEAD
 	cvMoveWindow(WIN_UT1, 522,0);
-=======
-	cvMoveWindow(WIN_UT1, 522,            0);		 //1500, 2
->>>>>>> c9cc126a396511b1d5d06320acf44b13db3e7d15
 
 	double psnrV;
 	Scalar mssimV;
@@ -123,17 +114,8 @@ int main(int argc, char *argv[])
 
 
 	////////////////////////////////// Show Image /////////////////////////////////////////////
-<<<<<<< HEAD
 	imshow( WIN_RF, p1);
 	imshow( WIN_UT1, p2);
-=======
-	imshow( WIN_RF, plane);
-	imshow( WIN_UT1, plane2);
-
-
-	imshow(WIN_RF,plane);
-	imshow(WIN_UT1,plane2);
->>>>>>> c9cc126a396511b1d5d06320acf44b13db3e7d15
 
 	cout << endl;
 
