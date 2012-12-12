@@ -1,6 +1,3 @@
-
-
-
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -15,11 +12,17 @@ using namespace std;
 using namespace cv;
 
 unsigned short **datasetRaw;
+vector<Mat> datasetSlices;
 
-Mat imagecv;
 
 double getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
+
+
+void onTrackbar( int val, void* )
+{
+	imshow( "Slice Selection", datasetSlices[val]);
+}
 
 
 int main(int argc, char *argv[])
@@ -56,61 +59,43 @@ int main(int argc, char *argv[])
 		cout << "FAIL"<<endl;
 	}
 
-    // Window
-    //vector<const char*> WIN_RF;
-	//namedWindow(WIN_RF, CV_WINDOW_AUTOSIZE );
-    //cvMoveWindow(WIN_RF, 10, 0);
-	const int sl =slices;
-	Mat cube(slices, height*width, CV_16UC1,datasetRaw);
-	vector<Mat> datasetSlices;
-	int d     = CV_8UC3;
-	
-
+	// split the dataset into image planes for easy data access
 	for( int i = 0; i < slices; i++ )
 	{
 		Mat slice(height,width,CV_16UC1,datasetRaw[i]);
 		Mat plane;
-		slice.convertTo(plane,d);
+		slice.convertTo(plane,CV_8UC3);
 		datasetSlices.push_back(plane);
-		//imshow( ss, datasetSlices[i]);
 	}
 
-	for (int i=0;i<slices;i++)
+//	int to string
+//		stringstream output;
+//		output << i;
+//		string sulfix = output.str();
+//		const char * ss = sulfix.c_str();
+
+	namedWindow("Trackbar",0);
+	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
+	onTrackbar(0,0);
+
+	double psnrV;
+	Scalar mssimV;
+
+	float out[2]={0,0};
+	for(int i=0; i < datasetSlices.size(); i++)
 	{
-		stringstream output;
-		output << i;
-		string sulfix = output.str();
-		const char * ss = sulfix.c_str();
-		imshow(ss, datasetSlices[i]);
+		mssimV = getMSSIM(datasetSlices[168],datasetSlices[i]);
+		if(mssimV.val[0]>out[0])
+		{
+			out[0] = mssimV.val[0];
+			out[1] = i;
+		}		
 	}
 
-//	double psnrV;
-//	Scalar mssimV;
+	cout << "Slice mais parecido:"<<out[1] << " "<< setprecision(3)<<out[0]*100<<"%"<<endl;
 
-        ///////////////////////////////// PSNR ////////////////////////////////////////////////////
-//	psnrV = getPSNR(plane,plane2);					//get PSNR
-//	cout << setiosflags(ios::fixed) << setprecision(3) << psnrV << "dB";
-
-	//////////////////////////////////// MSSIM /////////////////////////////////////////////////
-	//if (psnrV < psnrTriggerValue && psnrV)
-	//{
-//		mssimV = getMSSIM(plane,plane2);
-
-//		cout << " MSSIM: "
-//			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
-//			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
-//			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
-	//}
-
-
-
-	////////////////////////////////// Show Image /////////////////////////////////////////////
-//	imshow( WIN_RF, cube);
-//	imshow( WIN_UT1, p2);
-
-	cout << endl;
-
-	  waitKey(0);
+	waitKey(0);
+	destroyAllWindows();
     return 0;
 }
 
