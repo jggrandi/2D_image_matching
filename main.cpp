@@ -5,6 +5,7 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
+#include <vector>
 
 #include <opencv2/imgproc/imgproc.hpp>  // Gaussian Blur
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
@@ -13,8 +14,8 @@
 using namespace std;
 using namespace cv;
 
-unsigned short *image2d;
-unsigned short *image2d2;
+unsigned short **datasetRaw;
+
 Mat imagecv;
 
 double getPSNR ( const Mat& I1, const Mat& I2);
@@ -24,29 +25,29 @@ Scalar getMSSIM( const Mat& I1, const Mat& I2);
 int main(int argc, char *argv[])
 {
 	char* originalFile=argv[1];
-	char* originalFile2=argv[2];
-	short unsigned int width = atoi(argv[3]);
-	short unsigned int height = atoi(argv[4]);
-	short unsigned int slices = atoi(argv[5]);
+	short unsigned int width = atoi(argv[2]);
+	short unsigned int height = atoi(argv[3]);
+	short unsigned int slices = atoi(argv[4]);
 
 	FILE* inFile;
-	
-	
-	// allocate memory for the 2d image	
-	image2d = (unsigned short*)malloc(sizeof(unsigned short*) * (height*width));
-	image2d2 = (unsigned short*)malloc(sizeof(unsigned short*) * (height*width));
-//	for (int i=0; i < height; i++)
-//		image2d[i] = (short*)malloc(sizeof(short) * width);
+
+	// allocate memory for the 3d dataset
+	datasetRaw = (unsigned short**)malloc(slices * sizeof(unsigned short*));
+	for (int i=0; i < slices; i++)
+		datasetRaw[i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
 
 	if( inFile = fopen( originalFile, "rb" ) )
 	{
-		// read file into image matrix
+		// read file into dataset matrix
 		int rrr=height*width;
-		for( int i = 0; i < rrr; i++ )
+		for( int i = 0; i < slices; i++ )
 		{
-				unsigned short value;
-				fread( &value, 1, sizeof(unsigned short), inFile );
-				image2d[i] = value;
+			for( int j = 0; j < rrr; j++ )
+			{
+					unsigned short value;
+					fread( &value, 1, sizeof(unsigned short), inFile );
+					datasetRaw[i][j] = value;
+			}
 		}
 		fclose(inFile);
 	}
@@ -55,67 +56,57 @@ int main(int argc, char *argv[])
 		cout << "FAIL"<<endl;
 	}
 
-	if( inFile = fopen( originalFile2, "rb" ) )
-	{
-		// read file into image matrix
-		int rrr=height*width;
-		for( int i = 0; i < rrr; i++ )
-		{
-				unsigned short value;
-				fread( &value, 1, sizeof(unsigned short), inFile );
-				image2d2[i] = value;
-		}
-		fclose(inFile);
-	}
-	else
-	{
-		cout << "FAIL"<<endl;
-	}
-
-
-	Mat plane(height,width, CV_16UC1,image2d);
-	Mat plane2(height,width, CV_16UC1,image2d2);
-	
-	int d     = CV_8UC3;
-
-    Mat p1, p2;
-
-    plane.convertTo(p1, d);
-	plane2.convertTo(p2, d); 
-	//cout << plane <<endl;
-	//cout << p1 <<endl;
     // Window
-    const char* WIN_RF = "Reference";
-	const char* WIN_UT1 = "Under Test1";
+    //vector<const char*> WIN_RF;
+	//namedWindow(WIN_RF, CV_WINDOW_AUTOSIZE );
+    //cvMoveWindow(WIN_RF, 10, 0);
+	const int sl =slices;
+	Mat cube(slices, height*width, CV_16UC1,datasetRaw);
+	vector<Mat> datasetSlices;
+	int d     = CV_8UC3;
+	
 
-	namedWindow(WIN_RF, CV_WINDOW_AUTOSIZE );
-	namedWindow(WIN_UT1, CV_WINDOW_AUTOSIZE );
-    cvMoveWindow(WIN_RF, 10, 0);
-	cvMoveWindow(WIN_UT1, 522,0);
+	for( int i = 0; i < slices; i++ )
+	{
+		Mat slice(height,width,CV_16UC1,datasetRaw[i]);
+		Mat plane;
+		slice.convertTo(plane,d);
+		datasetSlices.push_back(plane);
+		//imshow( ss, datasetSlices[i]);
+	}
 
-	double psnrV;
-	Scalar mssimV;
+	for (int i=0;i<slices;i++)
+	{
+		stringstream output;
+		output << i;
+		string sulfix = output.str();
+		const char * ss = sulfix.c_str();
+		imshow(ss, datasetSlices[i]);
+	}
+
+//	double psnrV;
+//	Scalar mssimV;
 
         ///////////////////////////////// PSNR ////////////////////////////////////////////////////
-	psnrV = getPSNR(plane,plane2);					//get PSNR
-	cout << setiosflags(ios::fixed) << setprecision(3) << psnrV << "dB";
+//	psnrV = getPSNR(plane,plane2);					//get PSNR
+//	cout << setiosflags(ios::fixed) << setprecision(3) << psnrV << "dB";
 
 	//////////////////////////////////// MSSIM /////////////////////////////////////////////////
 	//if (psnrV < psnrTriggerValue && psnrV)
 	//{
-		mssimV = getMSSIM(plane,plane2);
+//		mssimV = getMSSIM(plane,plane2);
 
-		cout << " MSSIM: "
-			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
-			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
-			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
+//		cout << " MSSIM: "
+//			<< " R " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[2] * 100 << "%"
+//			<< " G " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[1] * 100 << "%"
+//			<< " B " << setiosflags(ios::fixed) << setprecision(2) << mssimV.val[0] * 100 << "%";
 	//}
 
 
 
 	////////////////////////////////// Show Image /////////////////////////////////////////////
-	imshow( WIN_RF, p1);
-	imshow( WIN_UT1, p2);
+//	imshow( WIN_RF, cube);
+//	imshow( WIN_UT1, p2);
 
 	cout << endl;
 
