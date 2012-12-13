@@ -11,8 +11,8 @@
 using namespace std;
 using namespace cv;
 
-unsigned short **datasetRaw;
-vector<Mat> datasetSlices;
+unsigned short **datasetRaw[2];
+vector<vector<Mat>> datasetSlices(2);
 
 
 double getPSNR ( const Mat& I1, const Mat& I2);
@@ -21,53 +21,64 @@ Scalar getMSSIM( const Mat& I1, const Mat& I2);
 
 void onTrackbar( int val, void* )
 {
-	imshow( "Slice Selection", datasetSlices[val]);
+	imshow( "Dataset1", datasetSlices[0][val]);
+	imshow( "Dataset2", datasetSlices[1][val]);
 }
 
 
 int main(int argc, char *argv[])
 {
-	char* originalFile=argv[1];
-	short unsigned int width = atoi(argv[2]);
-	short unsigned int height = atoi(argv[3]);
-	short unsigned int slices = atoi(argv[4]);
+	char* dataset[2];
+	dataset[0]=argv[1];
+	dataset[1]=argv[2];
+	short unsigned int width = atoi(argv[3]);
+	short unsigned int height = atoi(argv[4]);
+	short unsigned int slices = atoi(argv[5]);
 
 	FILE* inFile;
 
 	// allocate memory for the 3d dataset
-	datasetRaw = (unsigned short**)malloc(slices * sizeof(unsigned short*));
-	for (int i=0; i < slices; i++)
-		datasetRaw[i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
+	datasetRaw[0] = (unsigned short**)malloc(slices * sizeof(unsigned short*));
+	datasetRaw[1] = (unsigned short**)malloc(slices * sizeof(unsigned short*));
 
-	if( inFile = fopen( originalFile, "rb" ) )
+	for (int i=0; i < slices; i++)
 	{
-		// read file into dataset matrix
-		int rrr=height*width;
+		datasetRaw[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
+		datasetRaw[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
+	}
+	for(int k=0; k<2;k++)
+	{
+		if( inFile = fopen( dataset[k], "rb" ) )
+		{
+			// read file into dataset matrix
+			int rrr=height*width;
+			for( int i = 0; i < slices; i++ )
+			{
+				for( int j = 0; j < rrr; j++ )
+				{
+						unsigned short value;
+						fread( &value, 1, sizeof(unsigned short), inFile );
+						datasetRaw[k][i][j] = value;
+				}
+			}
+			fclose(inFile);
+		}
+		else
+		{
+			cout << "FAIL"<<endl;
+		}
+	}
+	// split the dataset into image planes for easy data access
+	for( int k = 0; k < 2; k++ )
+	{
 		for( int i = 0; i < slices; i++ )
 		{
-			for( int j = 0; j < rrr; j++ )
-			{
-					unsigned short value;
-					fread( &value, 1, sizeof(unsigned short), inFile );
-					datasetRaw[i][j] = value;
-			}
+			Mat slice(height,width,CV_16UC1,datasetRaw[k][i]);
+			Mat plane;
+			slice.convertTo(plane,CV_8UC3);
+			datasetSlices[k].push_back(plane);
 		}
-		fclose(inFile);
 	}
-	else
-	{
-		cout << "FAIL"<<endl;
-	}
-
-	// split the dataset into image planes for easy data access
-	for( int i = 0; i < slices; i++ )
-	{
-		Mat slice(height,width,CV_16UC1,datasetRaw[i]);
-		Mat plane;
-		slice.convertTo(plane,CV_8UC3);
-		datasetSlices.push_back(plane);
-	}
-
 //	int to string
 //		stringstream output;
 //		output << i;
@@ -82,9 +93,9 @@ int main(int argc, char *argv[])
 	Scalar mssimV;
 
 	float out[2]={0,0};
-	for(int i=0; i < datasetSlices.size(); i++)
+	for(int i=0; i < slices; i++)
 	{
-		mssimV = getMSSIM(datasetSlices[168],datasetSlices[i]);
+		mssimV = getMSSIM(datasetSlices[0][168],datasetSlices[1][i]);
 		if(mssimV.val[0]>out[0])
 		{
 			out[0] = mssimV.val[0];
