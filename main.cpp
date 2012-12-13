@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <sstream>
 #include <vector>
+#include <fstream>
 
 #include <opencv2/imgproc/imgproc.hpp>  // Gaussian Blur
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
@@ -12,7 +13,8 @@ using namespace std;
 using namespace cv;
 
 unsigned short **datasetRaw[2];
-vector<vector<Mat>> datasetSlices(2);
+vector<Mat> datasetSlices[2];
+
 
 
 double getPSNR ( const Mat& I1, const Mat& I2);
@@ -65,9 +67,10 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			cout << "FAIL"<<endl;
+			cout << "Fail to load dataset "<<dataset[k]<<endl;
 		}
 	}
+
 	// split the dataset into image planes for easy data access
 	for( int k = 0; k < 2; k++ )
 	{
@@ -89,13 +92,12 @@ int main(int argc, char *argv[])
 	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
 	onTrackbar(0,0);
 
-	double psnrV;
 	Scalar mssimV;
 
 	float out[2]={0,0};
 	for(int i=0; i < slices; i++)
 	{
-		mssimV = getMSSIM(datasetSlices[0][168],datasetSlices[1][i]);
+		mssimV = getMSSIM(datasetSlices[0][80],datasetSlices[1][i]);
 		if(mssimV.val[0]>out[0])
 		{
 			out[0] = mssimV.val[0];
