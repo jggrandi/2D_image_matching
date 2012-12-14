@@ -20,6 +20,11 @@ vector<Mat> datasetSlices[2];
 double getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
 
+struct sliceRank
+{
+	int sliceNumber;
+	float value;
+};
 
 void onTrackbar( int val, void* )
 {
@@ -27,6 +32,42 @@ void onTrackbar( int val, void* )
 	imshow( "Dataset2", datasetSlices[1][val]);
 }
 
+
+void rankBuilder(int slices)
+{
+	sliceRank sr[200];
+	double time;
+	Scalar mssimV;
+	time = (double)getTickCount();
+	for(int k=0; k < slices; k++)
+	{
+		for(int i=0; i < slices; i++)
+		{
+			mssimV = getMSSIM(datasetSlices[0][k],datasetSlices[1][i]);
+			sr[i].value = mssimV.val[0];
+			sr[i].sliceNumber=i;
+		}
+
+/*		for(int j=0; j<slices; j++) //buble bunda pra fazer o ranking dos 10 slices mais parecidos.
+		{
+			for(int i=0; i<slices-1; i++)
+			{
+				if(sr[i+1].value > sr[i].value)
+				  swap(sr[i+1], sr[i]);
+			}
+		}
+		cout <<"Slice de teste" <<k<<endl;
+		for(int l=0; l < 10; l++)
+		{
+			cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
+		}
+		
+*/
+		cout <<k<<endl;
+	}
+	time = ((double)getTickCount() - time)/getTickFrequency();
+	cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
+}
 
 int main(int argc, char *argv[])
 {
@@ -91,21 +132,10 @@ int main(int argc, char *argv[])
 	namedWindow("Trackbar",0);
 	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
 	onTrackbar(0,0);
+	
+	rankBuilder(slices);
 
-	Scalar mssimV;
-
-	float out[2]={0,0};
-	for(int i=0; i < slices; i++)
-	{
-		mssimV = getMSSIM(datasetSlices[0][80],datasetSlices[1][i]);
-		if(mssimV.val[0]>out[0])
-		{
-			out[0] = mssimV.val[0];
-			out[1] = i;
-		}		
-	}
-
-	cout << "Slice mais parecido:"<<out[1] << " "<< setprecision(3)<<out[0]*100<<"%"<<endl;
+//	cout << "Slice mais parecido:"<<out[1] << " "<< setprecision(3)<<out[0]*100<<"%"<<endl;
 
 	waitKey(0);
 	destroyAllWindows();
