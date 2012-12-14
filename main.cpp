@@ -39,11 +39,11 @@ void rankBuilder(int slices)
 	double time;
 	Scalar mssimV;
 	time = (double)getTickCount();
-	for(int k=0; k < slices; k++)
-	{
+	//for(int k=0; k < slices; k++)
+	//{
 		for(int i=0; i < slices; i++)
 		{
-			mssimV = getMSSIM(datasetSlices[0][k],datasetSlices[1][i]);
+			mssimV = getMSSIM(datasetSlices[0][100],datasetSlices[1][i]);
 			sr[i].value = mssimV.val[0];
 			sr[i].sliceNumber=i;
 		}
@@ -63,8 +63,8 @@ void rankBuilder(int slices)
 		}
 		
 */
-		cout <<k<<endl;
-	}
+	//	cout <<k<<endl;
+	//}
 	time = ((double)getTickCount() - time)/getTickFrequency();
 	cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
 }
@@ -79,31 +79,49 @@ int main(int argc, char *argv[])
 	short unsigned int slices = atoi(argv[5]);
 
 	FILE* inFile;
+	fpos_t position;
 
 	// allocate memory for the 3d dataset
-	datasetRaw[0] = (unsigned short**)malloc(slices * sizeof(unsigned short*));
-	datasetRaw[1] = (unsigned short**)malloc(slices * sizeof(unsigned short*));
+	datasetRaw[0] = (unsigned short**)malloc(height * sizeof(unsigned short*));
+	datasetRaw[1] = (unsigned short**)malloc(height * sizeof(unsigned short*));
 
-	for (int i=0; i < slices; i++)
+	for (int i=0; i < height; i++)
 	{
-		datasetRaw[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
-		datasetRaw[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
+		datasetRaw[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (slices*width));
+		datasetRaw[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (slices*width));
 	}
+	cout << sizeof(unsigned int)<<endl;
 	for(int k=0; k<2;k++)
 	{
 		if( inFile = fopen( dataset[k], "rb" ) )
 		{
 			// read file into dataset matrix
-			int rrr=height*width;
-			for( int i = 0; i < slices; i++ )
+			int rrr=width*height;
+			for( int index=0; index<slices*rrr; index++) 
 			{
-				for( int j = 0; j < rrr; j++ )
-				{
-						unsigned short value;
-						fread( &value, 1, sizeof(unsigned short), inFile );
-						datasetRaw[k][i][j] = value;
-				}
+				unsigned short value;
+				fread( &value, 1, sizeof(unsigned short), inFile );
+				int n_slice = (index%(rrr))/width;
+				int n_j = index%width + (int)index/rrr;
+				datasetRaw[k][n_slice][n_j] = value;
+				if (index%rrr==0)
+					printf("ALOHA PLAYBOY    %d  %d     %d\n",index,n_slice,n_j);
 			}
+			//for( int i = 0; i < slices; i++ )
+			//{
+			//	for( int j = 0; j < rrr; j++ )
+			//	{
+
+			//		unsigned short value;
+			//		int n_slice = j/width;
+			//		int n_j = j%width+i*slices;
+			//		fread( &value, 1, sizeof(unsigned short), inFile );
+			//		datasetRaw[k][n_slice][n_j] = value;
+			//		//fgetpos(inFile, &position);					
+			//	}
+			//	//position=width*height-position;
+			//	//fsetpos(inFile, &position);
+			//}
 			fclose(inFile);
 		}
 		else
@@ -112,12 +130,13 @@ int main(int argc, char *argv[])
 		}
 	}
 
+
 	// split the dataset into image planes for easy data access
 	for( int k = 0; k < 2; k++ )
 	{
-		for( int i = 0; i < slices; i++ )
+		for( int i = 0; i < height; i++ )
 		{
-			Mat slice(height,width,CV_16UC1,datasetRaw[k][i]);
+			Mat slice(slices,width,CV_16UC1,datasetRaw[k][i]);
 			Mat plane;
 			slice.convertTo(plane,CV_8UC3);
 			datasetSlices[k].push_back(plane);
