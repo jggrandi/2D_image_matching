@@ -9,7 +9,7 @@
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
 #include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O
 
-//Test and logs
+//Test and logs v2
 
 using namespace std;
 using namespace cv;
@@ -17,7 +17,8 @@ using namespace cv;
 unsigned short **datasetRaw[2];
 vector<Mat> datasetSlices[2];
 
-
+FILE* inFile;
+ofstream outFile;
 
 double getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
@@ -37,35 +38,56 @@ void onTrackbar( int val, void* )
 
 void rankBuilder(int slices)
 {
-	sliceRank sr[200];
+	sliceRank *sr;
+	sr = (sliceRank*) calloc (slices,sizeof(sliceRank));
 	double time;
+	double time2;
 	Scalar mssimV;
 	time = (double)getTickCount();
-	for(int k=0; k < slices; k++)
+	char nFile[20];
+	strcpy(nFile,"log.csv");
+	outFile.open(nFile, ios::out);
+	if(outFile.fail())
 	{
-		for(int i=0; i < slices; i++)
-		{
-			mssimV = getMSSIM(datasetSlices[0][k],datasetSlices[1][i]);
-			sr[i].value = mssimV.val[0];
-			sr[i].sliceNumber=i;
-		}
-
-		for(int j=0; j<slices; j++) //buble bunda pra fazer o ranking dos 10 slices mais parecidos.
-		{
-			for(int i=0; i<slices-1; i++)
-			{
-				if(sr[i+1].value > sr[i].value)
-				  swap(sr[i+1], sr[i]);
-			}
-		}
-		cout <<"Slice de teste: " <<k<<endl;
-		for(int l=0; l < 10; l++)
-		{
-			cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
-		}
+		printf( "Could not open output file %s.\n", nFile );
+		exit(-1);
 	}
-	time = ((double)getTickCount() - time)/getTickFrequency();
-	cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
+	else
+	{
+		for(int k=0; k < slices; k++)
+		{
+			cout <<"Slice de teste: " <<k<<endl;
+			outFile <<k<<endl;
+			time2 = (double)getTickCount();
+			for(int i=0; i < slices; i++)
+			{
+				mssimV = getMSSIM(datasetSlices[0][k],datasetSlices[1][i]);
+				sr[i].value = mssimV.val[0];
+				sr[i].sliceNumber=i;
+			}
+			time2 = ((double)getTickCount() - time2)/getTickFrequency();
+			for(int j=0; j<slices; j++) //buble bunda pra fazer o ranking dos 10 slices mais parecidos.
+			{
+				for(int i=0; i<slices-1; i++)
+				{
+					if(sr[i+1].value > sr[i].value)
+						swap(sr[i+1], sr[i]);
+				}
+			}
+
+			for(int l=0; l < 10; l++)
+			{
+				cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
+				outFile<<sr[l].sliceNumber<<";"<<sr[l].value<<endl;
+			}
+			cout << "Time to find the slice: " << time2 << " seconds."<<endl;
+			outFile << time2 <<endl;
+
+		}
+		time = ((double)getTickCount() - time)/getTickFrequency();
+		cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
+		outFile << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
+	}
 }
 
 int main(int argc, char *argv[])
@@ -76,9 +98,6 @@ int main(int argc, char *argv[])
 	short unsigned int width = atoi(argv[3]);
 	short unsigned int height = atoi(argv[4]);
 	short unsigned int slices = atoi(argv[5]);
-
-	FILE* inFile;
-	fpos_t position;
 
 	// allocate memory for the 3d dataset
 	datasetRaw[0] = (unsigned short**)malloc(slices * sizeof(unsigned short*));
@@ -133,7 +152,7 @@ int main(int argc, char *argv[])
 	namedWindow("Trackbar",0);
 	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
 	onTrackbar(0,0);
-	
+
 	rankBuilder(slices);
 
 //	cout << "Slice mais parecido:"<<out[1] << " "<< setprecision(3)<<out[0]*100<<"%"<<endl;
