@@ -9,7 +9,7 @@
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
 #include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O
 
-//Mostra ranking com slices mais parecidos e registra tempo
+//Test and log
 
 using namespace std;
 using namespace cv;
