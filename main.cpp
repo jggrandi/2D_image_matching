@@ -44,7 +44,7 @@ void rankBuilder(int slices)
 	double time2;
 	Scalar mssimV;
 	time = (double)getTickCount();
-	char nFile[20];
+	char nFile[50];
 	strcpy(nFile,"log.csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
@@ -54,19 +54,23 @@ void rankBuilder(int slices)
 	}
 	else
 	{
+		int summ[10]={0,0,0,0,0,0,0,0,0,0};
 		for(int k=0; k < slices; k++)
 		{
-			cout <<"Slice de teste: " <<k<<endl;
-			outFile <<k<<endl;
+			outFile <<k<<";";
 			time2 = (double)getTickCount();
 			for(int i=0; i < slices; i++)
 			{
-				mssimV = getMSSIM(datasetSlices[0][k],datasetSlices[1][i]);
-				sr[i].value = mssimV.val[0];
+				//mssimV = getMSSIM(datasetSlices[0][k],datasetSlices[1][i]);
+				mssimV = getPSNR(datasetSlices[0][k],datasetSlices[1][i]);
+				if(mssimV.val[0]==0)
+					sr[i].value=100;
+				else
+					sr[i].value = mssimV.val[0];
 				sr[i].sliceNumber=i;
 			}
 			time2 = ((double)getTickCount() - time2)/getTickFrequency();
-			for(int j=0; j<slices; j++) //buble bunda pra fazer o ranking dos 10 slices mais parecidos.
+			for(int j=0; j<slices; j++) //bubble bunda pra gerar o ranking
 			{
 				for(int i=0; i<slices-1; i++)
 				{
@@ -77,16 +81,27 @@ void rankBuilder(int slices)
 
 			for(int l=0; l < 10; l++)
 			{
-				cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
-				outFile<<sr[l].sliceNumber<<";"<<sr[l].value<<endl;
-			}
-			cout << "Time to find the slice: " << time2 << " seconds."<<endl;
-			outFile << time2 <<endl;
+				//cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
+				outFile<<sr[l].sliceNumber<<endl;
+				if(l<=0)
+				{
+					outFile<<sr[0].sliceNumber<<endl;
+				}
+				if(k==sr[l].sliceNumber)
+					summ[l]++;
 
+			}
+			//cout << "Time to find the slice: " << time2 << " seconds."<<endl;
+			//outFile << time2 <<endl;
 		}
+		for(int ll=0; ll < 10; ll++)
+		{
+			outFile <<endl<< summ[ll];
+		}
+		outFile <<endl<< "Slice time: "<<time2<<endl;
 		time = ((double)getTickCount() - time)/getTickFrequency();
-		cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
-		outFile << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
+		//cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
+		outFile << "Total time: " << time <<endl;
 	}
 }
 
@@ -148,6 +163,8 @@ int main(int argc, char *argv[])
 //		output << i;
 //		string sulfix = output.str();
 //		const char * ss = sulfix.c_str();
+
+	printf("Done!");
 
 	namedWindow("Trackbar",0);
 	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
@@ -233,5 +250,5 @@ Scalar getMSSIM( const Mat& i1, const Mat& i2)
     divide(t3, t1, ssim_map);      // ssim_map =  t3./t1;
 
     Scalar mssim = mean( ssim_map ); // mssim = average of ssim map
-    return mssim;
+	return mssim;
 }
