@@ -28,7 +28,7 @@ struct sliceRank
 	int sliceNumber;
 	float value;
 };
-
+	
 void onTrackbar( int val, void* )
 {
 	imshow( "Dataset1", datasetSlices[0][val]);
