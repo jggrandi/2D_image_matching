@@ -8,7 +8,8 @@
 #include <opencv2/imgproc/imgproc.hpp>  // Gaussian Blur
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
 #include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O
-
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/nonfree/nonfree.hpp>
 //Test and logs v2
 
 using namespace std;
@@ -22,6 +23,7 @@ ofstream outFile;
 
 double getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
+double* getSURF( const Mat& I1, const Mat& I2);
 
 struct sliceRank
 {
@@ -43,9 +45,12 @@ void rankBuilder(int slices)
 	double time;
 	double time2;
 	Scalar mssimV;
+	double mpsnrV;
+	double *msurfV;
+
 	time = (double)getTickCount();
 	char nFile[50];
-	strcpy(nFile,"log.csv");
+	strcpy(nFile,"log_full.csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
 	{
@@ -54,54 +59,16 @@ void rankBuilder(int slices)
 	}
 	else
 	{
-		int summ[10]={0,0,0,0,0,0,0,0,0,0};
-		for(int k=0; k < slices; k++)
+		for(int i=0;i<slices;i++)
 		{
-			outFile <<k<<";";
-			time2 = (double)getTickCount();
-			for(int i=0; i < slices; i++)
-			{
-				//mssimV = getMSSIM(datasetSlices[0][k],datasetSlices[1][i]);
-				mssimV = getPSNR(datasetSlices[0][k],datasetSlices[1][i]);
-				if(mssimV.val[0]==0)
-					sr[i].value=100;
-				else
-					sr[i].value = mssimV.val[0];
-				sr[i].sliceNumber=i;
+			cout << i<<";"; //display slice atual a ser processado
+			for(int k=0;k<slices;k++)
+			{	
+				mpsnrV=getPSNR(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 con PSNR
+				mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][k]);//compara dataset1xdataset2 com SSIM
+				msurfV=getSURF(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 com SURF
 			}
-			time2 = ((double)getTickCount() - time2)/getTickFrequency();
-			for(int j=0; j<slices; j++) //bubble bunda pra gerar o ranking
-			{
-				for(int i=0; i<slices-1; i++)
-				{
-					if(sr[i+1].value > sr[i].value)
-						swap(sr[i+1], sr[i]);
-				}
-			}
-
-			for(int l=0; l < 10; l++)
-			{
-				//cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
-				outFile<<sr[l].sliceNumber<<endl;
-				if(l<=0)
-				{
-					outFile<<sr[0].sliceNumber<<endl;
-				}
-				if(k==sr[l].sliceNumber)
-					summ[l]++;
-
-			}
-			//cout << "Time to find the slice: " << time2 << " seconds."<<endl;
-			//outFile << time2 <<endl;
 		}
-		for(int ll=0; ll < 10; ll++)
-		{
-			outFile <<endl<< summ[ll];
-		}
-		outFile <<endl<< "Slice time: "<<time2<<endl;
-		time = ((double)getTickCount() - time)/getTickFrequency();
-		//cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
-		outFile << "Total time: " << time <<endl;
 	}
 }
 
@@ -179,12 +146,12 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-double getPSNR(const Mat& I1, const Mat& I2)
+double getPSNR(const Mat& i1, const Mat& i2)
 {
     Mat s1;
-    absdiff(I1, I2, s1);       // |I1 - I2|
+    absdiff(i1, i2, s1);       // |i1 - i2|
     s1.convertTo(s1, CV_32F);  // cannot make a square on 8 bits
-    s1 = s1.mul(s1);           // |I1 - I2|^2
+    s1 = s1.mul(s1);           // |i1 - i2|^2
 
     Scalar s = sum(s1);         // sum elements per channel
 
@@ -194,7 +161,7 @@ double getPSNR(const Mat& I1, const Mat& I2)
         return 0;
     else
     {
-        double  mse =sse /(double)(I1.channels() * I1.total());
+        double  mse =sse /(double)(i1.channels() * i1.total());
         double psnr = 10.0*log10((255*255)/mse);
         return psnr;
     }
@@ -251,4 +218,71 @@ Scalar getMSSIM( const Mat& i1, const Mat& i2)
 
     Scalar mssim = mean( ssim_map ); // mssim = average of ssim map
 	return mssim;
+}
+
+double* getSURF( const Mat& i1, const Mat& i2)
+{
+
+  //-- Step 1: Detect the keypoints using SURF Detector
+  int minHessian = 100;
+
+  SurfFeatureDetector detector( minHessian );
+
+  std::vector<KeyPoint> keypoints_1, keypoints_2;
+
+  detector.detect( i1, keypoints_1 );
+  detector.detect( i2, keypoints_2 );
+
+  //-- Step 2: Calculate descriptors (feature vectors)
+  SurfDescriptorExtractor extractor;
+
+  Mat descriptors_1, descriptors_2;
+
+  extractor.compute( i1, keypoints_1, descriptors_1 );
+  extractor.compute( i2, keypoints_2, descriptors_2 );
+
+  //-- Step 3: Matching descriptor vectors using FLANN matcher
+  FlannBasedMatcher matcher;
+  std::vector< DMatch > matches;
+  matcher.match( descriptors_1, descriptors_2, matches );
+
+  double max_dist = 0; double min_dist = 100;
+
+  //-- Quick calculation of max and min distances between keypoints
+  for( int i = 0; i < descriptors_1.rows; i++ )
+  { double dist = matches[i].distance;
+    if( dist < min_dist ) min_dist = dist;
+    if( dist > max_dist ) max_dist = dist;
+  }
+
+  //-- Draw only "good" matches (i.e. whose distance is less than 2*min_dist )
+  //-- PS.- radiusMatch can also be used here.
+  std::vector< DMatch > good_matches;
+
+  for( int i = 0; i < descriptors_1.rows; i++ )
+  { if( matches[i].distance < 2*min_dist )
+    { good_matches.push_back( matches[i]); }
+  }
+
+  //-- Draw only "good" matches
+  Mat img_matches;
+  drawMatches( i1, keypoints_1, i2, keypoints_2,
+               good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),
+               vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
+
+  //-- Show detected matches
+  imshow( "Good Matches", img_matches );
+
+  for( int i = 0; i < good_matches.size(); i++ )
+  { printf( "-- Good Match [%d] Keypoint 1: %d  -- Keypoint 2: %d  \n", i, good_matches[i].queryIdx, good_matches[i].trainIdx ); }
+
+    printf("-- Max dist : %f \n", max_dist );
+  printf("-- Min dist : %f \n", min_dist );
+
+  double distValues[2];
+  distValues[0]=min_dist;
+  distValues[1]=max_dist;
+
+  return distValues;
+
 }
