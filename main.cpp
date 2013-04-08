@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include <sstream>
+
 #include <vector>
 #include <fstream>
 
@@ -21,9 +21,9 @@ vector<Mat> datasetSlices[2];
 FILE* inFile;
 ofstream outFile;
 
-double getPSNR ( const Mat& I1, const Mat& I2);
+Scalar getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
-double* getSURF( const Mat& I1, const Mat& I2);
+Scalar getSURF( const Mat& I1, const Mat& I2);
 
 struct sliceRank
 {
@@ -37,20 +37,108 @@ void onTrackbar( int val, void* )
 	imshow( "Dataset2", datasetSlices[1][val]);
 }
 
-
-void rankBuilder(int slices)
+sliceRank* ordenaRank(int slices, sliceRank *sr,int algorithm)
 {
-	sliceRank *sr;
-	sr = (sliceRank*) calloc (slices,sizeof(sliceRank));
-	double time;
-	double time2;
-	Scalar mssimV;
-	double mpsnrV;
-	double *msurfV;
+	sliceRank *newSr = sr;
+	for(int j=0; j<slices; j++) //bubble bunda pra gerar o ranking
+	{
+		for(int i=0; i<slices-1; i++)
+		{
+			if(algorithm != 2)
+			{
+				if(newSr[i+1].value > newSr[i].value)
+					swap(newSr[i+1], newSr[i]);
+			}
+			else
+			{
+				if(newSr[i+1].value < newSr[i].value) //se o algoritmo é surf, a ordem de ordenação deve ser diferente
+					swap(newSr[i+1], newSr[i]);
 
-	time = (double)getTickCount();
+			}
+
+		}
+	}
+	return newSr;
+}
+
+void calculaSimilaridade(int algorithm, int slices)
+{
+	int summ[]={0,0,0,0,0,0,0,0,0,0};
+	
+	Scalar mssimV,msurfV,mpsnrV;
+	sliceRank *sr,*sr_ranked;
+	sr = (sliceRank*) calloc (slices,sizeof(sliceRank));
+
+	for(int i=0;i<slices;i++)
+	{
+		cout << i<<";"; //display slice atual a ser processado
+		outFile << i<<";"; 
+		for(int k=0;k<slices;k++)
+		{	
+			switch(algorithm)
+			{
+			case 0:
+				{
+					mpsnrV=getPSNR(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 con PSNR	
+					if(mpsnrV.val[0]==0) 
+						sr[k].value=100;
+					else
+						sr[k].value = mpsnrV.val[0];
+					sr[k].sliceNumber=k;
+					break;
+				}
+			case 1:
+				{
+					mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][k]);//compara dataset1xdataset2 com SSIM
+					sr[k].value = mssimV.val[0];
+					sr[k].sliceNumber=k;
+					break;
+				}
+			case 2:
+				{
+					msurfV=getSURF(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 com SURF
+					sr[k].value = msurfV.val[0];
+					sr[k].sliceNumber=k;
+					break;
+				}
+
+			default:
+				break;
+			}
+
+		}
+		sr_ranked = ordenaRank(slices,sr,algorithm);
+
+		cout<<sr_ranked[0].sliceNumber<<endl;
+		
+		for(int l=0; l < 10; l++)
+		{
+			//cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
+			outFile<<sr[l].sliceNumber<<endl;
+			cout<<sr_ranked[l].sliceNumber<<endl;
+			if(i==sr_ranked[l].sliceNumber) //verifica se o algoritmo encontrou o slice na mesma posiçao do dataset analizado  
+				summ[l]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
+		}
+		//outFile << timeAlgorithm <<endl;
+	}
+
+	for(int ll=0; ll < 10; ll++)
+	{
+		outFile <<endl<< summ[ll];
+		cout <<endl<< summ[ll];
+	}
+}
+void rankBuilder(int slices, int algorithm)
+{
+	double timeAlgorithm;
+	double timeTotal = (double)getTickCount();
 	char nFile[50];
-	strcpy(nFile,"log_full.csv");
+	stringstream output;//convert
+	output << algorithm;//int 
+	string sulfix = output.str();// to 
+	const char* ss = sulfix.c_str();// char
+	strcpy(nFile,ss);
+	strcat(nFile,".csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
 	{
@@ -59,44 +147,52 @@ void rankBuilder(int slices)
 	}
 	else
 	{
-		for(int i=0;i<slices;i++)
+		
+		if(algorithm==3)
 		{
-			cout << i<<";"; //display slice atual a ser processado
-			for(int k=0;k<slices;k++)
-			{	
-				mpsnrV=getPSNR(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 con PSNR
-				mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][k]);//compara dataset1xdataset2 com SSIM
-				msurfV=getSURF(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 com SURF
+			for(int j=0, algorithm=0;j<3;j++,algorithm++)
+			{
+				timeAlgorithm = (double)getTickCount();
+				calculaSimilaridade(algorithm,slices);
+				timeAlgorithm = ((double)getTickCount() - timeAlgorithm)/getTickFrequency();	
+				printf("\n%f\n",timeAlgorithm);
 			}
 		}
+		else
+		{
+			calculaSimilaridade(algorithm,slices);
+		}
+
+
 	}
+	//outFile <<endl<< "Slice time: "<<time2<<endl;
+//	cout <<endl<< "Slice time: "<<time2<<endl;
+	timeTotal = ((double)getTickCount() - timeTotal)/getTickFrequency();
+	//cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
+	outFile << endl<<"Total time: " << timeTotal <<endl;
+//	cout << "Total time: " << time <<endl;
 }
 
-int main(int argc, char *argv[])
+
+void loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned int l_height, short unsigned int l_slices)
 {
-	char* dataset[2];
-	dataset[0]=argv[1];
-	dataset[1]=argv[2];
-	short unsigned int width = atoi(argv[3]);
-	short unsigned int height = atoi(argv[4]);
-	short unsigned int slices = atoi(argv[5]);
 
 	// allocate memory for the 3d dataset
-	datasetRaw[0] = (unsigned short**)malloc(slices * sizeof(unsigned short*));
-	datasetRaw[1] = (unsigned short**)malloc(slices * sizeof(unsigned short*));
+	datasetRaw[0] = (unsigned short**)malloc(l_slices * sizeof(unsigned short*));
+	datasetRaw[1] = (unsigned short**)malloc(l_slices * sizeof(unsigned short*));
 
-	for (int i=0; i < slices; i++)
+	for (int i=0; i < l_slices; i++)
 	{
-		datasetRaw[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
-		datasetRaw[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (height*width));
+		datasetRaw[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (l_height*l_width));
+		datasetRaw[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (l_height*l_width));
 	}
 	for(int k=0; k<2;k++)
 	{
-		if( inFile = fopen( dataset[k], "rb" ) )
+		if( inFile = fopen( l_datasets[k], "rb" ) )
 		{
 			// read file into dataset matrix
-			int rrr=width*height;
-			for( int i = 0; i < slices; i++ )
+			int rrr=l_width*l_height;
+			for( int i = 0; i < l_slices; i++ )
 			{
 				for( int j = 0; j < rrr; j++ )
 				{
@@ -109,35 +205,47 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			cout << "Fail to load dataset "<<dataset[k]<<endl;
+			cout << "Fail to load dataset "<<l_datasets[k]<<endl;
 		}
 	}
+}
 
-
+void splitDatasets(short unsigned int s_width,short unsigned int s_height,short unsigned int s_slices)
+{
 	// split the dataset into image planes for easy data access
 	for( int k = 0; k < 2; k++ )
 	{
-		for( int i = 0; i < slices; i++ )
+		for( int i = 0; i < s_slices; i++ )
 		{
-			Mat slice(height,width,CV_16UC1,datasetRaw[k][i]);
+			Mat slice(s_height,s_width,CV_16UC1,datasetRaw[k][i]);
 			Mat plane;
 			slice.convertTo(plane,CV_8UC3);
 			datasetSlices[k].push_back(plane);
 		}
 	}
-//	int to string
-//		stringstream output;
-//		output << i;
-//		string sulfix = output.str();
-//		const char * ss = sulfix.c_str();
+}
 
-	printf("Done!");
+int main(int argc, char *argv[])
+{
+	char* dataset[2];
+	dataset[0]=argv[1];
+	dataset[1]=argv[2];
+	short unsigned int width = atoi(argv[3]);
+	short unsigned int height = atoi(argv[4]);
+	short unsigned int slices = atoi(argv[5]);
+	short unsigned int algorithm = atoi(argv[6]);
+
+	loadDatasets(dataset,width,height,slices);
+	splitDatasets(width,height,slices);
+
+
+	printf("Loading datasets done!\n");
 
 	namedWindow("Trackbar",0);
 	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
 	onTrackbar(0,0);
 
-	rankBuilder(slices);
+	rankBuilder(slices,algorithm);
 
 //	cout << "Slice mais parecido:"<<out[1] << " "<< setprecision(3)<<out[0]*100<<"%"<<endl;
 
@@ -146,7 +254,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-double getPSNR(const Mat& i1, const Mat& i2)
+Scalar getPSNR(const Mat& i1, const Mat& i2)
 {
     Mat s1;
     absdiff(i1, i2, s1);       // |i1 - i2|
@@ -162,7 +270,8 @@ double getPSNR(const Mat& i1, const Mat& i2)
     else
     {
         double  mse =sse /(double)(i1.channels() * i1.total());
-        double psnr = 10.0*log10((255*255)/mse);
+        Scalar psnr;
+		psnr.val[0]= 10.0*log10((255*255)/mse);
         return psnr;
     }
 }
@@ -220,11 +329,11 @@ Scalar getMSSIM( const Mat& i1, const Mat& i2)
 	return mssim;
 }
 
-double* getSURF( const Mat& i1, const Mat& i2)
+Scalar getSURF( const Mat& i1, const Mat& i2)
 {
 
   //-- Step 1: Detect the keypoints using SURF Detector
-  int minHessian = 100;
+  int minHessian = 5000;
 
   SurfFeatureDetector detector( minHessian );
 
@@ -233,22 +342,21 @@ double* getSURF( const Mat& i1, const Mat& i2)
   detector.detect( i1, keypoints_1 );
   detector.detect( i2, keypoints_2 );
 
-  //-- Step 2: Calculate descriptors (feature vectors)
-  SurfDescriptorExtractor extractor;
+  SurfDescriptorExtractor extractor; //Calculate descriptors (feature vectors)
 
   Mat descriptors_1, descriptors_2;
 
   extractor.compute( i1, keypoints_1, descriptors_1 );
   extractor.compute( i2, keypoints_2, descriptors_2 );
 
-  //-- Step 3: Matching descriptor vectors using FLANN matcher
-  FlannBasedMatcher matcher;
+  
+  FlannBasedMatcher matcher; //Matching descriptor vectors using FLANN matcher
   std::vector< DMatch > matches;
   matcher.match( descriptors_1, descriptors_2, matches );
 
   double max_dist = 0; double min_dist = 100;
 
-  //-- Quick calculation of max and min distances between keypoints
+  //Calculation of max and min distances between keypoints
   for( int i = 0; i < descriptors_1.rows; i++ )
   { double dist = matches[i].distance;
     if( dist < min_dist ) min_dist = dist;
@@ -259,6 +367,7 @@ double* getSURF( const Mat& i1, const Mat& i2)
   //-- PS.- radiusMatch can also be used here.
   std::vector< DMatch > good_matches;
 
+  /*
   for( int i = 0; i < descriptors_1.rows; i++ )
   { if( matches[i].distance < 2*min_dist )
     { good_matches.push_back( matches[i]); }
@@ -266,8 +375,9 @@ double* getSURF( const Mat& i1, const Mat& i2)
 
   //-- Draw only "good" matches
   Mat img_matches;
+
   drawMatches( i1, keypoints_1, i2, keypoints_2,
-               good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),
+	  good_matches, img_matches, Scalar::all(-1), Scalar::all(-1),
                vector<char>(), DrawMatchesFlags::NOT_DRAW_SINGLE_POINTS );
 
   //-- Show detected matches
@@ -275,14 +385,12 @@ double* getSURF( const Mat& i1, const Mat& i2)
 
   for( int i = 0; i < good_matches.size(); i++ )
   { printf( "-- Good Match [%d] Keypoint 1: %d  -- Keypoint 2: %d  \n", i, good_matches[i].queryIdx, good_matches[i].trainIdx ); }
-
-    printf("-- Max dist : %f \n", max_dist );
+   printf("-- Max dist : %f \n", max_dist );
   printf("-- Min dist : %f \n", min_dist );
+*/
 
-  double distValues[2];
-  distValues[0]=min_dist;
-  distValues[1]=max_dist;
-
-  return distValues;
-
+  Scalar v;
+  v.val[0]=min_dist;
+  v.val[1]=max_dist;
+  return v;
 }
