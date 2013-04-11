@@ -212,7 +212,7 @@ void rankBuilder(int slices, int algorithm)
 	}
 	else
 	{
-		sr_result=calculaSimilaridade(algorithm,slices);
+		//sr_result=calculaSimilaridade(algorithm,slices);
 	}
 
 
@@ -243,16 +243,34 @@ int loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned in
 		if( inFile = fopen( l_datasets[k], "rb" ) )
 		{
 			// read file into dataset matrix
-			int rrr=l_width*l_height;
-			for( int i = 0; i < l_slices; i++ )
+
+/*			int rrr2=l_width*l_height;
+			for(int i=0;i<l_slices;i++)
 			{
-				for( int j = 0; j < rrr; j++ )
+				for(int j=0;j<rrr2;j++)
 				{
 					unsigned short value;
 					fread( &value, 1, sizeof(unsigned short), inFile );
-					datasetRaw[k][i][j] = value;
+					datasetRaw[k][i][j]=value;
 				}
 			}
+*/
+
+			int rrr=l_width*l_height*l_slices;
+			for( int i = 0; i < rrr; i++ )
+			{
+				unsigned short value;
+				fread( &value, 1, sizeof(unsigned short), inFile );
+				int n_slice = (i%(rrr))/l_width;
+				int n_j = i%l_width + (int)i/rrr;
+				datasetRaw[k][n_slice][n_j] = value;
+				if (n_slice==l_slices-1)
+				{
+					printf(">> I:%d  S:%d  J:%d\n",i,n_slice,n_j);
+					break;
+				}				
+			}
+			
 			fclose(inFile);
 		}
 		else
@@ -274,6 +292,7 @@ void splitDatasets(short unsigned int s_width,short unsigned int s_height,short 
 			Mat plane;
 			slice.convertTo(plane,CV_8UC3);
 			datasetSlices[k].push_back(plane);
+				printf("%d\n",i );
 		}
 	}
 }
