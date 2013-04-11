@@ -12,6 +12,8 @@
 #include <opencv2/nonfree/nonfree.hpp>
 //Test and logs v2
 
+#define RANK_SIZE 10
+
 using namespace std;
 using namespace cv;
 
@@ -37,41 +39,42 @@ void onTrackbar( int val, void* )
 	imshow( "Dataset2", datasetSlices[1][val]);
 }
 
-sliceRank* ordenaRank(int slices, sliceRank *sr,int algorithm)
+void ordenaRank(int slices, vector<sliceRank> &srr,int algorithm)
 {
-	sliceRank *newSr = sr;
 	for(int j=0; j<slices; j++) //bubble bunda pra gerar o ranking
 	{
 		for(int i=0; i<slices-1; i++)
 		{
 			if(algorithm != 2)
 			{
-				if(newSr[i+1].value > newSr[i].value)
-					swap(newSr[i+1], newSr[i]);
+				if(srr[i+1].value > srr[i].value)
+					swap(srr[i+1], srr[i]);
 			}
 			else
 			{
-				if(newSr[i+1].value < newSr[i].value) //se o algoritmo é surf, a ordem de ordenação deve ser diferente
-					swap(newSr[i+1], newSr[i]);
+				if(srr[i+1].value < srr[i].value) //se o algoritmo é surf, a ordem de ordenação deve ser diferente
+					swap(srr[i+1], srr[i]);
 
 			}
 
 		}
 	}
-	return newSr;
 }
 
-void calculaSimilaridade(int algorithm, int slices)
+sliceRank* calculaSimilaridade(int algorithm, int slices)
 {
-	int summ[]={0,0,0,0,0,0,0,0,0,0};
+	int summ[10];
+
+	for(int j=0;j<10;j++)
+		summ[j]=0;
 	
 	Scalar mssimV,msurfV,mpsnrV;
-	sliceRank *sr,*sr_ranked;
-	sr = (sliceRank*) calloc (slices,sizeof(sliceRank));
+	sliceRank sr_raw;
+	vector<sliceRank> sr,sr_ranked,sr_ranked2;
 
 	for(int i=0;i<slices;i++)
 	{
-		cout << i<<";"; //display slice atual a ser processado
+		cout << i<<endl; //display slice atual a ser processado
 		outFile << i<<";"; 
 		for(int k=0;k<slices;k++)
 		{	
@@ -81,24 +84,27 @@ void calculaSimilaridade(int algorithm, int slices)
 				{
 					mpsnrV=getPSNR(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 con PSNR	
 					if(mpsnrV.val[0]==0) 
-						sr[k].value=100;
+						sr_raw.value=100;
 					else
-						sr[k].value = mpsnrV.val[0];
-					sr[k].sliceNumber=k;
+						sr_raw.value = mpsnrV.val[0];
+					sr_raw.sliceNumber=k;
+					sr.push_back(sr_raw);
 					break;
 				}
 			case 1:
 				{
 					mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][k]);//compara dataset1xdataset2 com SSIM
-					sr[k].value = mssimV.val[0];
-					sr[k].sliceNumber=k;
+					sr_raw.value = mssimV.val[0];
+					sr_raw.sliceNumber=k;
+					sr.push_back(sr_raw);
 					break;
 				}
 			case 2:
 				{
 					msurfV=getSURF(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 com SURF
-					sr[k].value = msurfV.val[0];
-					sr[k].sliceNumber=k;
+					sr_raw.value = msurfV.val[0];
+					sr_raw.sliceNumber=k;
+					sr.push_back(sr_raw);
 					break;
 				}
 
@@ -106,30 +112,78 @@ void calculaSimilaridade(int algorithm, int slices)
 				break;
 			}
 
-		}
-		sr_ranked = ordenaRank(slices,sr,algorithm);
 
-		cout<<sr_ranked[0].sliceNumber<<endl;
-		
-		for(int l=0; l < 10; l++)
-		{
-			//cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
-			outFile<<sr[l].sliceNumber<<endl;
-			cout<<sr_ranked[l].sliceNumber<<endl;
-			if(i==sr_ranked[l].sliceNumber) //verifica se o algoritmo encontrou o slice na mesma posiçao do dataset analizado  
-				summ[l]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
 		}
+		sr_ranked.clear();
+		sr_ranked=sr;
+		sr.clear();
+		
+		ordenaRank(slices,sr_ranked,algorithm);
+		sr_ranked.resize(RANK_SIZE);
+		
+		for(int k=0; k<RANK_SIZE;k++)
+		{
+			mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][sr_ranked[k].sliceNumber]);//compara dataset1xdataset2 com SSIM
+			sr_raw.value = mssimV.val[0];
+			sr_raw.sliceNumber=sr_ranked[k].sliceNumber;			
+			sr_ranked2.push_back(sr_raw);
+		}
+
+		ordenaRank(RANK_SIZE,sr_ranked2,algorithm);
+		
+
+		for(int k=0; k<RANK_SIZE;k++)
+		{
+			printf("<R1> sN:%d, v:%f - <R2> sN:%d, v:%f\n",sr_ranked[k].sliceNumber,sr_ranked[k].value,sr_ranked2[k].sliceNumber,sr_ranked2[k].value);
+		}
+
+		for (int k=0; k<RANK_SIZE; k++)
+		{
+
+			int srr1=sr_ranked[k].sliceNumber-i;
+			int srr2=sr_ranked2[k].sliceNumber-i;
+			if(srr1<0) srr1=srr1*-1; 
+			if(srr2<0) srr2=srr2*-1;
+			if(srr1<=srr2)
+			{
+				if(sr_ranked[k].sliceNumber==i) //verifica se o algoritmo encontrou o slice na mesma posiçao do dataset analizado  
+				{
+					summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
+					break;				
+				}
+			}
+			else if(srr1>srr2)
+			{
+				if(sr_ranked2[k].sliceNumber==i) //verifica se o algoritmo encontrou o slice na mesma posiçao do dataset analizado  
+				{
+					summ[k]++;
+					break;
+				}
+			}
+		}
+
+		//for(int l=0; l < RANK_SIZE; l++)
+		//{
+			//cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
+			//outFile<<sr_ranked[l].sliceNumber<<endl;
+			//cout<<sr_ranked[l].sliceNumber<<endl;
+		//}
 		//outFile << timeAlgorithm <<endl;
+		sr_ranked2.clear();
 	}
 
-	for(int ll=0; ll < 10; ll++)
+	for(int ll=0; ll < RANK_SIZE; ll++)
 	{
-		outFile <<endl<< summ[ll];
+		//outFile <<endl<< summ[ll];
 		cout <<endl<< summ[ll];
 	}
+
+	//return sr_ranked;
+	return NULL;
 }
 void rankBuilder(int slices, int algorithm)
 {
+	sliceRank *sr_result;
 	double timeAlgorithm;
 	double timeTotal = (double)getTickCount();
 	char nFile[50];
@@ -145,26 +199,24 @@ void rankBuilder(int slices, int algorithm)
 		printf( "Could not open output file %s.\n", nFile );
 		exit(-1);
 	}
+		
+	if(algorithm==3)//se algorithm == 3 os datasets são processados utilizando-se todas as técnicas 
+	{
+		for(int j=0, algorithm=0;j<3;j++,algorithm++)
+		{
+			timeAlgorithm = (double)getTickCount();
+			sr_result=calculaSimilaridade(algorithm,slices);
+			timeAlgorithm = ((double)getTickCount() - timeAlgorithm)/getTickFrequency();	
+			printf("\n%f\n",timeAlgorithm);
+		}
+	}
 	else
 	{
-		
-		if(algorithm==3)
-		{
-			for(int j=0, algorithm=0;j<3;j++,algorithm++)
-			{
-				timeAlgorithm = (double)getTickCount();
-				calculaSimilaridade(algorithm,slices);
-				timeAlgorithm = ((double)getTickCount() - timeAlgorithm)/getTickFrequency();	
-				printf("\n%f\n",timeAlgorithm);
-			}
-		}
-		else
-		{
-			calculaSimilaridade(algorithm,slices);
-		}
-
-
+		sr_result=calculaSimilaridade(algorithm,slices);
 	}
+
+
+
 	//outFile <<endl<< "Slice time: "<<time2<<endl;
 //	cout <<endl<< "Slice time: "<<time2<<endl;
 	timeTotal = ((double)getTickCount() - timeTotal)/getTickFrequency();
@@ -174,7 +226,7 @@ void rankBuilder(int slices, int algorithm)
 }
 
 
-void loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned int l_height, short unsigned int l_slices)
+int loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned int l_height, short unsigned int l_slices)
 {
 
 	// allocate memory for the 3d dataset
@@ -206,6 +258,7 @@ void loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned i
 		else
 		{
 			cout << "Fail to load dataset "<<l_datasets[k]<<endl;
+			return -1;
 		}
 	}
 }
@@ -235,7 +288,9 @@ int main(int argc, char *argv[])
 	short unsigned int slices = atoi(argv[5]);
 	short unsigned int algorithm = atoi(argv[6]);
 
-	loadDatasets(dataset,width,height,slices);
+	if(loadDatasets(dataset,width,height,slices)==-1)
+		return -1;
+
 	splitDatasets(width,height,slices);
 
 
