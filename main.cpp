@@ -271,7 +271,7 @@ int loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned in
 	return 1;
 }
 
-int changePlane(short unsigned int c_width, short unsigned int c_height, short unsigned int c_slices)
+int changePlane(short unsigned int c_width, short unsigned int c_height, short unsigned int c_slices, short unsigned int c_planeOrientation)
 {								   //slices						//height						//width
 
 	for(int k=0; k<QNT_DATASETS;k++)
@@ -295,8 +295,10 @@ int changePlane(short unsigned int c_width, short unsigned int c_height, short u
 			{
 				for(int l=0;l<c_height;l++)
 				{
-					//datasetNewPlane[k][i][j][l] = datasetRaw[k][j][l][i];
-					datasetNewPlane[k][i][j][l] = datasetRaw[k][l][j][i];
+					if(c_planeOrientation==1)
+						datasetNewPlane[k][i][j][l] = datasetRaw[k][l][i][j]; // XZ plane
+					else if(c_planeOrientation==2)
+						datasetNewPlane[k][i][j][l] = datasetRaw[k][l][j][i]; // YZ plane
 				}
 			}
 		}
@@ -306,7 +308,7 @@ int changePlane(short unsigned int c_width, short unsigned int c_height, short u
 }
 
 
-void splitDatasets(short unsigned int s_width,short unsigned int s_height,short unsigned int s_slices)
+void splitDatasets(short unsigned int s_width,short unsigned int s_height,short unsigned int s_slices,short unsigned int s_planeOrientation)
 {									 //slices					//height					//width
 	// split the dataset into image planes for easy data access
 	datasetWHShrink[0] = (unsigned short**)malloc(s_slices * sizeof(unsigned short*));
@@ -318,8 +320,6 @@ void splitDatasets(short unsigned int s_width,short unsigned int s_height,short 
 		datasetWHShrink[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (s_height*s_width));
 	}
 	
-	int rrr=s_width*s_height;
-	
 	for( int k = 0; k < QNT_DATASETS; k++ )
 	{
 		for( int i = 0; i < s_slices; i++ )
@@ -328,9 +328,10 @@ void splitDatasets(short unsigned int s_width,short unsigned int s_height,short 
 			{
 				for(int l=0; l<s_height;l++)
 				{
-					//int jj= (l+j)%s_width + (int)(l+j)/s_width;
-					datasetWHShrink[k][i][l * s_width + j]=datasetNewPlane[k][i][j][l];
-					//datasetWHShrink[k][i][j * s_width + l]=datasetRaw[k][i][j][l];
+					if(s_planeOrientation==0)
+						datasetWHShrink[k][i][l * s_width + j]=datasetRaw[k][i][l][j];	
+					else
+						datasetWHShrink[k][i][l * s_width + j]=datasetNewPlane[k][i][j][l];
 				}
 			}
 		}
@@ -358,20 +359,46 @@ int main(int argc, char *argv[])
 	short unsigned int height = atoi(argv[4]);
 	short unsigned int slices = atoi(argv[5]);
 	short unsigned int algorithm = atoi(argv[6]);
+	short unsigned int planeOrientation = atoi(argv[7]);
 
 	if(loadDatasets(dataset,width,height,slices)==-1)
-		return -1;
+		return -1;		
 	printf("Loading datasets done!\n");
-	if(changePlane(width,slices,height)==-1)
-		return -1;
-	printf("Change plane done!\n");
-	splitDatasets(width,slices,height);
+
+	switch(planeOrientation)
+	{
+		case 0:
+		{
+			splitDatasets(width,height,slices,planeOrientation);
+			break;
+
+		}
+		case 1:
+		{
+			if(changePlane(width,slices,height,planeOrientation)==-1)
+				return -1;
+			printf("Change plane done!\n");
+			splitDatasets(width,slices,height,planeOrientation);
+			break;
+		}
+		case 2:
+		{
+			if(changePlane(width,slices,height,planeOrientation)==-1)
+				return -1;
+			printf("Change plane done!\n");
+			splitDatasets(width,slices,height,planeOrientation);
+			break;			
+		}
+	}
 
 
 	
 
 	namedWindow("Trackbar",0);
-	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
+	if(planeOrientation==0)
+		createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
+	else
+		createTrackbar("TB","Trackbar",0,width-1,onTrackbar);
 	onTrackbar(0,0);
 
 	//rankBuilder(slices,algorithm);
