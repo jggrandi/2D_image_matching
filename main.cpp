@@ -329,7 +329,8 @@ void splitDatasets(short unsigned int s_width,short unsigned int s_height,short 
 				for(int l=0; l<s_height;l++)
 				{
 					//int jj= (l+j)%s_width + (int)(l+j)/s_width;
-					datasetWHShrink[k][i][l * s_width + j]=datasetNewPlane[k][i][j][l];
+					//datasetWHShrink[k][i][l * s_width + j]=datasetNewPlane[k][i][j][l];
+					datasetWHShrink[k][i][j * s_width + l]=datasetRaw[k][i][j][l];
 				}
 			}
 		}
@@ -361,10 +362,10 @@ int main(int argc, char *argv[])
 	if(loadDatasets(dataset,width,height,slices)==-1)
 		return -1;
 	printf("Loading datasets done!\n");
-	if(changePlane(slices,width,height)==-1)
-		return -1;
+	//if(changePlane(slices,width,height)==-1)
+	//	return -1;
 	printf("Change plane done!\n");
-	splitDatasets(slices,width,height);
+	splitDatasets(width,height,slices);
 
 
 	
@@ -373,7 +374,7 @@ int main(int argc, char *argv[])
 	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
 	onTrackbar(0,0);
 
-	rankBuilder(slices,algorithm);
+	//rankBuilder(slices,algorithm);
 
 //	cout << "Slice mais parecido:"<<out[1] << " "<< setprecision(3)<<out[0]*100<<"%"<<endl;
 
