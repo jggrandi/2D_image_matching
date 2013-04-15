@@ -13,11 +13,14 @@
 //Test and logs v2
 
 #define RANK_SIZE 10
+#define QNT_DATASETS 2
 
 using namespace std;
 using namespace cv;
 
-unsigned short **datasetRaw[2];
+vector <vector <vector < unsigned short> > > datasetRaw[QNT_DATASETS];
+vector <vector <vector < unsigned short> > > datasetNewPlane[QNT_DATASETS];
+unsigned short **datasetWHShrink[QNT_DATASETS];
 vector<Mat> datasetSlices[2];
 
 FILE* inFile;
@@ -212,7 +215,7 @@ void rankBuilder(int slices, int algorithm)
 	}
 	else
 	{
-		//sr_result=calculaSimilaridade(algorithm,slices);
+		sr_result=calculaSimilaridade(algorithm,slices);
 	}
 
 
@@ -230,75 +233,123 @@ int loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned in
 {
 
 	// allocate memory for the 3d dataset
-	datasetRaw[0] = (unsigned short**)malloc(l_slices * sizeof(unsigned short*));
-	datasetRaw[1] = (unsigned short**)malloc(l_slices * sizeof(unsigned short*));
-
-	for (int i=0; i < l_slices; i++)
+	for(int k=0; k<QNT_DATASETS;k++)
 	{
-		datasetRaw[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (l_height*l_width));
-		datasetRaw[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (l_height*l_width));
-	}
-	for(int k=0; k<2;k++)
-	{
-		if( inFile = fopen( l_datasets[k], "rb" ) )
+		datasetRaw[k].resize(l_slices);
+		for(int i=0;i<l_slices;i++)
 		{
-			// read file into dataset matrix
-
-/*			int rrr2=l_width*l_height;
-			for(int i=0;i<l_slices;i++)
+			datasetRaw[k][i].resize(l_width);
+			for(int j=0;j<l_width;j++)
 			{
-				for(int j=0;j<rrr2;j++)
+				datasetRaw[k][i][j].resize(l_height);
+			}
+		}
+	}
+
+	for(int k=0; k<QNT_DATASETS;k++)
+	{
+		if(!(inFile = fopen( l_datasets[k], "rb" ) ))
+		{
+			printf("Problems when tried to open the dataset %d\n",l_datasets[k]);
+			return -1;
+		}
+		for(int i=0; i<l_slices;i++)
+		{
+			for(int j=0;j<l_width;j++)
+			{
+				for(int l=0;l<l_height;l++)
 				{
 					unsigned short value;
 					fread( &value, 1, sizeof(unsigned short), inFile );
-					datasetRaw[k][i][j]=value;
+					datasetRaw[k][i][j][l] = value;
 				}
 			}
-*/
-
-			int rrr=l_width*l_height*l_slices;
-			for( int i = 0; i < rrr; i++ )
-			{
-				unsigned short value;
-				fread( &value, 1, sizeof(unsigned short), inFile );
-				int n_slice = (i%(rrr))/l_width;
-				int n_j = i%l_width + (int)i/rrr;
-				datasetRaw[k][n_slice][n_j] = value;
-				if (n_slice==l_slices-1)
-				{
-					printf(">> I:%d  S:%d  J:%d\n",i,n_slice,n_j);
-					break;
-				}				
-			}
-			
-			fclose(inFile);
 		}
-		else
-		{
-			cout << "Fail to load dataset "<<l_datasets[k]<<endl;
-			return -1;
-		}
+		fclose(inFile);
 	}
+
+	return 1;
 }
 
+int changePlane(short unsigned int c_width, short unsigned int c_height, short unsigned int c_slices)
+{								   //slices						//height						//width
+
+	for(int k=0; k<QNT_DATASETS;k++)
+	{
+		datasetNewPlane[k].resize(c_slices);
+		for(int i=0;i<c_slices;i++)
+		{
+			datasetNewPlane[k][i].resize(c_width);
+			for(int j=0;j<c_width;j++)
+			{
+				datasetNewPlane[k][i][j].resize(c_height);
+			}
+		}
+	}
+
+	for(int k=0; k<QNT_DATASETS;k++)
+	{
+		for(int i=0; i<c_slices;i++)
+		{
+			for(int j=0;j<c_width;j++)
+			{
+				for(int l=0;l<c_height;l++)
+				{
+					//datasetNewPlane[k][i][j][l] = datasetRaw[k][j][l][i];
+					datasetNewPlane[k][i][j][l] = datasetRaw[k][j][i][l];
+				}
+			}
+		}
+	}
+
+	return 1;
+}
+
+
 void splitDatasets(short unsigned int s_width,short unsigned int s_height,short unsigned int s_slices)
-{
+{									 //slices					//height					//width
 	// split the dataset into image planes for easy data access
-	for( int k = 0; k < 2; k++ )
+	datasetWHShrink[0] = (unsigned short**)malloc(s_slices * sizeof(unsigned short*));
+	datasetWHShrink[1] = (unsigned short**)malloc(s_slices * sizeof(unsigned short*));
+
+	for (int i=0; i < s_slices; i++)
+	{
+		datasetWHShrink[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (s_height*s_width));
+		datasetWHShrink[1][i] = (unsigned short*)malloc(sizeof(unsigned short) * (s_height*s_width));
+	}
+	
+	int rrr=s_width*s_height;
+	
+	for( int k = 0; k < QNT_DATASETS; k++ )
 	{
 		for( int i = 0; i < s_slices; i++ )
 		{
-			Mat slice(s_height,s_width,CV_16UC1,datasetRaw[k][i]);
+			for(int j=0; j<s_width;j++)
+			{
+				for(int l=0; l<s_height;l++)
+				{
+					//int jj= (l+j)%s_width + (int)(l+j)/s_width;
+					datasetWHShrink[k][i][l * s_width + j]=datasetNewPlane[k][i][j][l];
+				}
+			}
+		}
+	}
+	for( int k = 0; k < QNT_DATASETS; k++ )
+	{
+		for( int i = 0; i < s_slices; i++ )
+		{
+			Mat slice(s_height,s_width,CV_16UC1,datasetWHShrink[k][i]);
 			Mat plane;
 			slice.convertTo(plane,CV_8UC3);
 			datasetSlices[k].push_back(plane);
-				printf("%d\n",i );
 		}
 	}
+
 }
 
 int main(int argc, char *argv[])
 {
+	
 	char* dataset[2];
 	dataset[0]=argv[1];
 	dataset[1]=argv[2];
@@ -309,11 +360,14 @@ int main(int argc, char *argv[])
 
 	if(loadDatasets(dataset,width,height,slices)==-1)
 		return -1;
-
-	splitDatasets(width,height,slices);
-
-
 	printf("Loading datasets done!\n");
+	if(changePlane(slices,width,height)==-1)
+		return -1;
+	printf("Change plane done!\n");
+	splitDatasets(slices,width,height);
+
+
+	
 
 	namedWindow("Trackbar",0);
 	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
