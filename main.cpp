@@ -296,7 +296,7 @@ int changePlane(short unsigned int c_width, short unsigned int c_height, short u
 				for(int l=0;l<c_height;l++)
 				{
 					//datasetNewPlane[k][i][j][l] = datasetRaw[k][j][l][i];
-					datasetNewPlane[k][i][j][l] = datasetRaw[k][j][i][l];
+					datasetNewPlane[k][i][j][l] = datasetRaw[k][l][j][i];
 				}
 			}
 		}
@@ -329,8 +329,8 @@ void splitDatasets(short unsigned int s_width,short unsigned int s_height,short 
 				for(int l=0; l<s_height;l++)
 				{
 					//int jj= (l+j)%s_width + (int)(l+j)/s_width;
-					//datasetWHShrink[k][i][l * s_width + j]=datasetNewPlane[k][i][j][l];
-					datasetWHShrink[k][i][j * s_width + l]=datasetRaw[k][i][j][l];
+					datasetWHShrink[k][i][l * s_width + j]=datasetNewPlane[k][i][j][l];
+					//datasetWHShrink[k][i][j * s_width + l]=datasetRaw[k][i][j][l];
 				}
 			}
 		}
@@ -362,10 +362,10 @@ int main(int argc, char *argv[])
 	if(loadDatasets(dataset,width,height,slices)==-1)
 		return -1;
 	printf("Loading datasets done!\n");
-	//if(changePlane(slices,width,height)==-1)
-	//	return -1;
+	if(changePlane(width,slices,height)==-1)
+		return -1;
 	printf("Change plane done!\n");
-	splitDatasets(width,height,slices);
+	splitDatasets(width,slices,height);
 
 
 	
