@@ -77,8 +77,8 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 
 	for(int i=0;i<slices;i++)
 	{
-		cout << i<<endl; //display slice atual a ser processado
-		outFile << i<<";"; 
+		printf("*");
+		//cout << i<<endl; //display slice atual a ser processado
 		for(int k=0;k<slices;k++)
 		{	
 			switch(algorithm)
@@ -96,13 +96,25 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 				}
 			case 1:
 				{
+					mpsnrV=getPSNR(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 con PSNR	
+					if(mpsnrV.val[0]==0) 
+						sr_raw.value=100;
+					else
+						sr_raw.value = mpsnrV.val[0];
+					sr_raw.sliceNumber=k;
+					sr.push_back(sr_raw);
+					break;
+				}
+
+			case 2:
+				{
 					mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][k]);//compara dataset1xdataset2 com SSIM
 					sr_raw.value = mssimV.val[0];
 					sr_raw.sliceNumber=k;
 					sr.push_back(sr_raw);
 					break;
 				}
-			case 2:
+			case 3:
 				{
 					msurfV=getSURF(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 com SURF
 					sr_raw.value = msurfV.val[0];
@@ -123,78 +135,98 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 		
 		ordenaRank(slices,sr_ranked,algorithm);
 		sr_ranked.resize(RANK_SIZE);
-		
-		for(int k=0; k<RANK_SIZE;k++)
+
+		if(algorithm==0) //se o algoritmo é o 0 faz o 2step verification com o SSIM
 		{
-			mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][sr_ranked[k].sliceNumber]);//compara dataset1xdataset2 com SSIM
-			sr_raw.value = mssimV.val[0];
-			sr_raw.sliceNumber=sr_ranked[k].sliceNumber;			
-			sr_ranked2.push_back(sr_raw);
-		}
-
-		ordenaRank(RANK_SIZE,sr_ranked2,algorithm);
-		
-
-		for(int k=0; k<RANK_SIZE;k++)
-		{
-			printf("<R1> sN:%d, v:%f - <R2> sN:%d, v:%f\n",sr_ranked[k].sliceNumber,sr_ranked[k].value,sr_ranked2[k].sliceNumber,sr_ranked2[k].value);
-		}
-
-		for (int k=0; k<RANK_SIZE; k++)
-		{
-
-			int srr1=sr_ranked[k].sliceNumber-i;
-			int srr2=sr_ranked2[k].sliceNumber-i;
-			if(srr1<0) srr1=srr1*-1; 
-			if(srr2<0) srr2=srr2*-1;
-			if(srr1<=srr2)
+			for(int k=0; k<RANK_SIZE;k++)
 			{
-				if(sr_ranked[k].sliceNumber==i) //verifica se o algoritmo encontrou o slice na mesma posiçao do dataset analizado  
+				mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][sr_ranked[k].sliceNumber]);//compara dataset1xdataset2 com SSIM
+				sr_raw.value = mssimV.val[0];
+				sr_raw.sliceNumber=sr_ranked[k].sliceNumber;			
+				sr_ranked2.push_back(sr_raw);
+			}
+
+			ordenaRank(RANK_SIZE,sr_ranked2,algorithm);
+			
+
+//			for(int k=0; k<RANK_SIZE;k++)
+//			{
+//				//printf("<R1> sN:%d, v:%f - <R2> sN:%d, v:%f\n",sr_ranked[k].sliceNumber,sr_ranked[k].value,sr_ranked2[k].sliceNumber,sr_ranked2[k].value);
+//				outFile<<sr_ranked[k].sliceNumber<<";"<<sr_ranked2[k].sliceNumber<<endl;
+//			}
+			outFile << i<<endl; 
+			for (int k=0; k<RANK_SIZE; k++)
+			{
+				int srr1=sr_ranked[k].sliceNumber-i;
+				int srr2=sr_ranked2[k].sliceNumber-i;
+				if(srr1<0) srr1=srr1*-1; 
+				if(srr2<0) srr2=srr2*-1;
+				if(k==0) outFile<<srr1<<";"<<srr2<<endl;
+				if(srr1<=srr2)
+				{
+					if(sr_ranked[k].sliceNumber==i) //verifica se o PSNR encontrou o slice na mesma posiçao do dataset analizado  
+					{
+						summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
+						break;				
+					}
+				}
+				else if(srr1>srr2)
+				{
+					if(sr_ranked2[k].sliceNumber==i) //verifica se o SSIM encontrou o slice na mesma posiçao do dataset analizado  
+					{
+						summ[k]++;
+						break;
+					}
+				}
+			}
+
+			//for(int l=0; l < RANK_SIZE; l++)
+			//{
+				//cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
+				//outFile<<sr_ranked[l].sliceNumber<<endl;
+				//cout<<sr_ranked[l].sliceNumber<<endl;
+			//}
+			//outFile << timeAlgorithm <<endl;
+			sr_ranked2.clear();
+		}
+		else // se o algoritmo != 0 monta ranking comum
+		{	
+			for (int k=0; k<RANK_SIZE; k++)
+			{
+				int srr1=sr_ranked[k].sliceNumber-i;
+				if(srr1<0) srr1=srr1*-1; 
+				if(k==0) outFile<< i<<";"<<srr1<<endl;							
+				if(sr_ranked[k].sliceNumber==i) //verifica se encontrou o slice na mesma posiçao do dataset analizado  
 				{
 					summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
 					break;				
 				}
-			}
-			else if(srr1>srr2)
-			{
-				if(sr_ranked2[k].sliceNumber==i) //verifica se o algoritmo encontrou o slice na mesma posiçao do dataset analizado  
-				{
-					summ[k]++;
-					break;
-				}
-			}
+			}			
 		}
-
-		//for(int l=0; l < RANK_SIZE; l++)
-		//{
-			//cout<<"Slice:"<<sr[l].sliceNumber<<" Rank:"<<sr[l].value<<endl;
-			//outFile<<sr_ranked[l].sliceNumber<<endl;
-			//cout<<sr_ranked[l].sliceNumber<<endl;
-		//}
-		//outFile << timeAlgorithm <<endl;
-		sr_ranked2.clear();
 	}
 
 	for(int ll=0; ll < RANK_SIZE; ll++)
 	{
-		//outFile <<endl<< summ[ll];
-		cout <<endl<< summ[ll];
+		outFile <<endl<< summ[ll];
+		//cout <<endl<< summ[ll];
 	}
 
 	//return sr_ranked;
 	return NULL;
 }
-void rankBuilder(int slices, int algorithm)
+void rankBuilder(char* dataset0, char* dataset1, int width, int height,int slices, int algorithm, int planeOrientation)
 {
 	sliceRank *sr_result;
 	double timeAlgorithm;
-	double timeTotal = (double)getTickCount();
-	char nFile[50];
-	stringstream output;//convert
-	output << algorithm;//int 
-	string sulfix = output.str();// to 
-	const char* ss = sulfix.c_str();// char
-	strcpy(nFile,ss);
+	//monta nome do arquivo de log
+	char nFile[200];
+	stringstream output;
+	output << dataset0<<"_"<<dataset1<<"_"<<slices<<"_"<<algorithm<<"_"<<planeOrientation;
+	string sulfix = output.str();
+	const char* ss = sulfix.c_str();
+	strcpy(nFile,"Logs/");
+	strcat(nFile,ss);
+	//strcpy(nFile,"a");
 	strcat(nFile,".csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
@@ -202,15 +234,16 @@ void rankBuilder(int slices, int algorithm)
 		printf( "Could not open output file %s.\n", nFile );
 		exit(-1);
 	}
-		
-	if(algorithm==3)//se algorithm == 3 os datasets são processados utilizando-se todas as técnicas 
+	//escreve cabeçalho do arquivo de log
+	outFile<<"Dataset1;"<<"Dataset2;"<<"width;"<<"height;"<<"slices;"<<"algorithm;"<<"planeOrientation"<<endl;
+	outFile<<dataset0<<";"<<dataset1<<";"<<width<<";"<<height<<";"<<slices<<";"<<algorithm<<";"<<planeOrientation<<endl;
+
+	double timeTotal = (double)getTickCount();		
+	if(algorithm==4)//se algorithm == 3 os datasets são processados utilizando-se todas as técnicas 
 	{
-		for(int j=0, algorithm=0;j<3;j++,algorithm++)
+		for(int j=0, algorithm=0;j<4;j++,algorithm++)
 		{
-			timeAlgorithm = (double)getTickCount();
-			sr_result=calculaSimilaridade(algorithm,slices);
-			timeAlgorithm = ((double)getTickCount() - timeAlgorithm)/getTickFrequency();	
-			printf("\n%f\n",timeAlgorithm);
+			sr_result=calculaSimilaridade(j,slices);
 		}
 	}
 	else
@@ -218,14 +251,8 @@ void rankBuilder(int slices, int algorithm)
 		sr_result=calculaSimilaridade(algorithm,slices);
 	}
 
-
-
-	//outFile <<endl<< "Slice time: "<<time2<<endl;
-//	cout <<endl<< "Slice time: "<<time2<<endl;
 	timeTotal = ((double)getTickCount() - timeTotal)/getTickFrequency();
-	//cout << "Time of MSSIM CPU (averaged for " << slices << " runs): " << time << " seconds."<<endl;
 	outFile << endl<<"Total time: " << timeTotal <<endl;
-//	cout << "Total time: " << time <<endl;
 }
 
 
@@ -250,7 +277,7 @@ int loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned in
 	{
 		if(!(inFile = fopen( l_datasets[k], "rb" ) ))
 		{
-			printf("Problems when tried to open the dataset %d\n",l_datasets[k]);
+			printf("Problems when tried to open the dataset %d\n",k);
 			return -1;
 		}
 		for(int i=0; i<l_slices;i++)
@@ -401,7 +428,7 @@ int main(int argc, char *argv[])
 		createTrackbar("TB","Trackbar",0,width-1,onTrackbar);
 	onTrackbar(0,0);
 
-	//rankBuilder(slices,algorithm);
+	rankBuilder(dataset[0],dataset[1],width,height,slices,algorithm,planeOrientation);
 
 //	cout << "Slice mais parecido:"<<out[1] << " "<< setprecision(3)<<out[0]*100<<"%"<<endl;
 
