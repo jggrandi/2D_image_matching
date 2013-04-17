@@ -366,8 +366,9 @@ void splitDatasets(short unsigned int s_width,short unsigned int s_height,short 
 	short unsigned int s_sliceF = s_sliceRange[1];
 	if(s_planeOrientation!=0)
 	{
-		swap(s_height,s_slices);
-		s_slices-=s_sliceRange[0];
+		//swap(s_height,s_slices);
+		//s_slices-=s_sliceRange[0];
+		s_height=s_sliceF;
 	}
 
 	// split the dataset into image planes for easy data access
