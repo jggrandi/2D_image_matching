@@ -77,8 +77,6 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 
 	for(int i=0;i<slices;i++)
 	{
-		printf("*");
-		//cout << i<<endl; //display slice atual a ser processado
 		for(int k=0;k<slices;k++)
 		{	
 			switch(algorithm)
@@ -148,12 +146,12 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 
 			ordenaRank(RANK_SIZE,sr_ranked2,algorithm);
 			
-
-//			for(int k=0; k<RANK_SIZE;k++)
-//			{
-//				//printf("<R1> sN:%d, v:%f - <R2> sN:%d, v:%f\n",sr_ranked[k].sliceNumber,sr_ranked[k].value,sr_ranked2[k].sliceNumber,sr_ranked2[k].value);
-//				outFile<<sr_ranked[k].sliceNumber<<";"<<sr_ranked2[k].sliceNumber<<endl;
-//			}
+			printf("%d\n",i);
+			for(int k=0; k<RANK_SIZE;k++)
+			{
+				printf("<R1> sN:%d, v:%f - <R2> sN:%d, v:%f\n",sr_ranked[k].sliceNumber,sr_ranked[k].value,sr_ranked2[k].sliceNumber,sr_ranked2[k].value);
+				//outFile<<sr_ranked[k].sliceNumber<<";"<<sr_ranked2[k].sliceNumber<<endl;
+			}
 			outFile << i<<endl; 
 			for (int k=0; k<RANK_SIZE; k++)
 			{
@@ -204,12 +202,15 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 			}			
 		}
 	}
-
+	int sumTotal=0;
 	for(int ll=0; ll < RANK_SIZE; ll++)
 	{
 		outFile <<endl<< summ[ll];
-		//cout <<endl<< summ[ll];
+		cout <<endl<< summ[ll];
+		sumTotal+=summ[ll];
 	}
+	printf("\n%d\n",sumTotal);
+	outFile << endl<<sumTotal<<endl;
 
 	//return sr_ranked;
 	return NULL;
@@ -322,10 +323,28 @@ int changePlane(short unsigned int c_width, short unsigned int c_height, short u
 			{
 				for(int l=0;l<c_height;l++)
 				{
-					if(c_planeOrientation==1)
-						datasetNewPlane[k][i][j][l] = datasetRaw[k][l][i][j]; // XZ plane
+					if(c_planeOrientation==0)
+					{
+						if(k==0 && i>=10) //offset para a combinacao tardia x venosa e arterial
+							datasetNewPlane[k][i-9][j][l] = datasetRaw[k][i][j][l]; // XZ plane
+						else if(k==1)
+							datasetNewPlane[k][i][j][l] = datasetRaw[k][i][j][l]; // XZ plane
+
+					}
+					else if(c_planeOrientation==1)
+					{
+						if(k==1 && i>=5) //offset para a combinacao tardia x venosa e arterial
+							datasetNewPlane[k][i-2][j][l] = datasetRaw[k][l][i][j]; // XZ plane
+						else if(k==0)
+							datasetNewPlane[k][i][j][l] = datasetRaw[k][l][i][j]; // XZ plane
+					}
 					else if(c_planeOrientation==2)
-						datasetNewPlane[k][i][j][l] = datasetRaw[k][l][j][i]; // YZ plane
+					{
+						if(k==0 && i>=6) //offset para a combinacao tardia x venosa e arterial
+							datasetNewPlane[k][i-3][j][l] = datasetRaw[k][l][j][i]; // YZ plane
+						else if(k==1)
+							datasetNewPlane[k][i][j][l] = datasetRaw[k][l][j][i]; // YZ plane
+					}
 				}
 			}
 		}
@@ -396,6 +415,9 @@ int main(int argc, char *argv[])
 	{
 		case 0:
 		{
+			if(changePlane(width,height,slices,planeOrientation)==-1)
+				return -1;
+			printf("Change plane done!\n");			
 			splitDatasets(width,height,slices,planeOrientation);
 			break;
 
@@ -420,7 +442,6 @@ int main(int argc, char *argv[])
 
 
 	
-
 	namedWindow("Trackbar",0);
 	if(planeOrientation==0)
 		createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
