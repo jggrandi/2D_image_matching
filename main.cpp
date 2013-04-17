@@ -48,7 +48,7 @@ void ordenaRank(int slices, vector<sliceRank> &srr,int algorithm)
 	{
 		for(int i=0; i<slices-1; i++)
 		{
-			if(algorithm != 2)
+			if(algorithm != 3)
 			{
 				if(srr[i+1].value > srr[i].value)
 					swap(srr[i+1], srr[i]);
@@ -132,7 +132,7 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 		sr.clear();
 		
 		ordenaRank(slices,sr_ranked,algorithm);
-		sr_ranked.resize(RANK_SIZE);
+		//sr_ranked.resize(RANK_SIZE);
 
 		if(algorithm==0) //se o algoritmo é o 0 faz o 2step verification com o SSIM
 		{
@@ -160,22 +160,22 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 				if(srr1<0) srr1=srr1*-1; 
 				if(srr2<0) srr2=srr2*-1;
 				if(k==0) outFile<<srr1<<";"<<srr2<<endl;
-				if(srr1<=srr2)
-				{
-					if(sr_ranked[k].sliceNumber==i) //verifica se o PSNR encontrou o slice na mesma posiçao do dataset analizado  
-					{
-						summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
-						break;				
-					}
-				}
-				else if(srr1>srr2)
-				{
+//				if(srr1<=srr2)
+//				{
+//					if(sr_ranked[k].sliceNumber==i) //verifica se o PSNR encontrou o slice na mesma posiçao do dataset analizado  
+//					{
+//						summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
+//						break;				
+//					}
+//				}
+//				else if(srr1>srr2)
+//				{
 					if(sr_ranked2[k].sliceNumber==i) //verifica se o SSIM encontrou o slice na mesma posiçao do dataset analizado  
 					{
 						summ[k]++;
 						break;
 					}
-				}
+//				}
 			}
 
 			//for(int l=0; l < RANK_SIZE; l++)
@@ -189,8 +189,11 @@ sliceRank* calculaSimilaridade(int algorithm, int slices)
 		}
 		else // se o algoritmo != 0 monta ranking comum
 		{	
+			printf("%d\n",i);
 			for (int k=0; k<RANK_SIZE; k++)
 			{
+				printf("<%d> sN:%d, v:%f\n",k,sr_ranked[k].sliceNumber,sr_ranked[k].value);
+
 				int srr1=sr_ranked[k].sliceNumber-i;
 				if(srr1<0) srr1=srr1*-1; 
 				if(k==0) outFile<< i<<";"<<srr1<<endl;							
@@ -225,9 +228,9 @@ void rankBuilder(char* dataset0, char* dataset1, int width, int height,int slice
 	output << dataset0<<"_"<<dataset1<<"_"<<slices<<"_"<<algorithm<<"_"<<planeOrientation;
 	string sulfix = output.str();
 	const char* ss = sulfix.c_str();
-	strcpy(nFile,"Logs/");
-	strcat(nFile,ss);
-	//strcpy(nFile,"a");
+	//strcpy(nFile,"Logs/");
+	//strcat(nFile,ss);
+	strcpy(nFile,"a");
 	strcat(nFile,".csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
@@ -325,10 +328,7 @@ int changePlane(short unsigned int c_width, short unsigned int c_height, short u
 				{
 					if(c_planeOrientation==0)
 					{
-						if(k==0 && i>=10) //offset para a combinacao tardia x venosa e arterial
-							datasetNewPlane[k][i-9][j][l] = datasetRaw[k][i][j][l]; // XZ plane
-						else if(k==1)
-							datasetNewPlane[k][i][j][l] = datasetRaw[k][i][j][l]; // XZ plane
+						datasetNewPlane[k][i][j][l] = datasetRaw[k][i][j][l]; // XZ plane
 
 					}
 					else if(c_planeOrientation==1)
@@ -479,7 +479,8 @@ Scalar getPSNR(const Mat& i1, const Mat& i2)
         return psnr;
     }
 }
-
+#define GB_R 10.5
+#define GB_S 111
 Scalar getMSSIM( const Mat& i1, const Mat& i2)
 {
     const double C1 = 6.5025, C2 = 58.5225;
@@ -497,8 +498,8 @@ Scalar getMSSIM( const Mat& i1, const Mat& i2)
     /*************************** END INITS **********************************/
 
     Mat mu1, mu2;   // PRELIMINARY COMPUTING
-    GaussianBlur(I1, mu1, Size(11, 11), 1.5);
-    GaussianBlur(I2, mu2, Size(11, 11), 1.5);
+    GaussianBlur(I1, mu1, Size(GB_S, GB_S), GB_R);
+    GaussianBlur(I2, mu2, Size(GB_S, GB_S), GB_R);
 
     Mat mu1_2   =   mu1.mul(mu1);
     Mat mu2_2   =   mu2.mul(mu2);
@@ -506,13 +507,13 @@ Scalar getMSSIM( const Mat& i1, const Mat& i2)
 
     Mat sigma1_2, sigma2_2, sigma12;
 
-    GaussianBlur(I1_2, sigma1_2, Size(11, 11), 1.5);
+    GaussianBlur(I1_2, sigma1_2, Size(GB_S, GB_S), GB_R);
     sigma1_2 -= mu1_2;
 
-    GaussianBlur(I2_2, sigma2_2, Size(11, 11), 1.5);
+    GaussianBlur(I2_2, sigma2_2, Size(GB_S, GB_S), GB_R);
     sigma2_2 -= mu2_2;
 
-    GaussianBlur(I1_I2, sigma12, Size(11, 11), 1.5);
+    GaussianBlur(I1_I2, sigma12, Size(GB_S, GB_S), GB_R);
     sigma12 -= mu1_mu2;
 
     ///////////////////////////////// FORMULA ////////////////////////////////
