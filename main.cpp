@@ -464,9 +464,9 @@ int main(int argc, char *argv[])
 	
 	namedWindow("Trackbar",0);
 	if(planeOrientation==0)
-		createTrackbar("TB","Trackbar",0,sliceRange[1]-1,onTrackbar);
+		createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
 	else
-		createTrackbar("TB","Trackbar",0,width-1,onTrackbar);
+		createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
 	onTrackbar(0,0);
 
 	rankBuilder(dataset[0],dataset[1],width,height,slices,algorithm,planeOrientation);
