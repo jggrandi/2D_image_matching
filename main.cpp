@@ -23,15 +23,22 @@ vector <vector <vector < unsigned short> > > datasetNewPlane[QNT_DATASETS];
 unsigned short **datasetWHShrink[QNT_DATASETS];
 vector<Mat> datasetSlices[2];
 
+struct twoInts
+{
+	int sliceNumber;
+	int distanceToOptimal;
+};
+
 FILE* inFile;
 ofstream outFile;
-vector<int> sliceAndDistance[3][3];
+twoInts sliceAndDistance[3][3][250];
 vector<int> rankSumm[3];
 
 
 Scalar getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
 Scalar getSURF( const Mat& I1, const Mat& I2);
+
 
 struct sliceRank
 {
@@ -73,32 +80,19 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 	for(int j=0;j<10;j++)
 		summ[j]=-1;
 
-//	for(int i=0;i<4;i++)
-//	{
-		//sliceAndDistance.resize(4);
-		//rankSumm[i].resize(
-	//}
+	int jjj=0;
+
 	Scalar mssimV,msurfV,mpsnrV;
 	sliceRank sr_raw;
 	vector<sliceRank> sr,sr_ranked,sr_ranked2;
-
-	for(int i=0;i<slices;i++)
+	int ii;
+	for(int i=0, ii=0;i<slices;i++,ii+=2)
 	{
 		for(int k=0;k<slices;k++)
 		{	
 			switch(algorithm)
 			{
 			case 0:
-				{
-					mpsnrV=getPSNR(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 con PSNR	
-					if(mpsnrV.val[0]==0) 
-						sr_raw.value=100;
-					else
-						sr_raw.value = mpsnrV.val[0];
-					sr_raw.sliceNumber=k;
-					sr.push_back(sr_raw);
-					break;
-				}
 			case 1:
 				{
 					mpsnrV=getPSNR(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 con PSNR	
@@ -110,7 +104,6 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 					sr.push_back(sr_raw);
 					break;
 				}
-
 			case 2:
 				{
 					mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][k]);//compara dataset1xdataset2 com SSIM
@@ -162,11 +155,14 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 			//outFile << i<<endl; 
 			for (int k=0; k<RANK_SIZE; k++)
 			{
+
 				int srr2=sr_ranked2[k].sliceNumber-i;
 				if(srr2<0) srr2=srr2*-1;
-				if(k==0)
+				if(k==0) // só guarda o melhor matching
 				{
-					sliceAndDistance[planeOrientation][algorithm].push_back(i); sliceAndDistance[planeOrientation][algorithm].push_back(srr2);
+					sliceAndDistance[algorithm][planeOrientation][i].sliceNumber=i;
+					sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal=srr2;
+					//sliceAndDistance[planeOrientation][algorithm].push_back(i); sliceAndDistance[planeOrientation][algorithm].push_back(srr2);
 				} 
 				//outFile<<i<<";"<<srr2<<endl;
 				if(sr_ranked2[k].sliceNumber==i) //verifica se o SSIM encontrou o slice na mesma posiçao do dataset analizado  
@@ -186,14 +182,14 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 			for (int k=0; k<RANK_SIZE; k++)
 			{
 				//printf("<%d> sN:%d, v:%f\n",k,sr_ranked[k].sliceNumber,sr_ranked[k].value);
-
 				int srr1=sr_ranked[k].sliceNumber-i;
 				if(srr1<0) srr1=srr1*-1; 
-				if(k==0)
+				if(k==0) // só guarda o melhor matching
 				{
-					sliceAndDistance[planeOrientation][algorithm].push_back(i); sliceAndDistance[planeOrientation][algorithm].push_back(srr1);
+					sliceAndDistance[algorithm][planeOrientation][i].sliceNumber=i;
+					sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal=srr1;
 				} 
-					//outFile<< i<<";"<<srr1<<endl;							
+					
 				if(sr_ranked[k].sliceNumber==i) //verifica se encontrou o slice na mesma posiçao do dataset analizado  
 				{
 					if(summ[k]==-1) summ[k]*=-1;
@@ -203,8 +199,7 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 			}			
 		}
 	}
-	for(int i=0;i<slices;i+=2)
-		cout << sliceAndDistance[planeOrientation][algorithm][i]<<" "<< sliceAndDistance[planeOrientation][algorithm][i+1];
+
 	
 	for(int i=0;i<RANK_SIZE;i++)
 		rankSumm[algorithm].push_back(summ[i]);
@@ -407,21 +402,34 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 		return -1;		
 	printf("DONE!\n");
 
+	for(int i=0;i<3;i++)
+	{
+		for(int j=0;j<3;j++)
+		{
+			for(int k=0;k<250;k++)
+			{
+				sliceAndDistance[i][j][k].sliceNumber=-1;
+				sliceAndDistance[i][j][k].distanceToOptimal=-1;
+			}
+		}
+	}
+
+
 	if(algorithm==4)//se algorithm == 3 os datasets são processados utilizando-se todas as técnicas 
 	{
 		for(int i=0;i<3;i++)
 		{
+			printf("Changing plane...  ");
+			if(changePlane(width,height,sliceRange,i)==-1)
+				return -1;
+			printf("DONE!\n");
+
+			printf("Spliting datasets...  ");
+			splitDatasets(width,height,sliceRange,i);
+			printf("DONE!\n");	
 			for(int j=0;j<3;j++)
 			{
-				printf("Changing plane...  ");
-				if(changePlane(width,height,sliceRange,j)==-1)
-					return -1;
-				printf("DONE!\n");
-
-				printf("Spliting datasets...  ");
-				splitDatasets(width,height,sliceRange,j);
-				printf("DONE!\n");	
-				calculaSimilaridade(j,i,slices);		
+				calculaSimilaridade(i,j,slices);		
 			}
 		}
 	}
@@ -442,20 +450,30 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 	timeTotal = ((double)getTickCount() - timeTotal)/getTickFrequency();
 	
 	//build the csv formated
-
-	for(int i=0;i<slices;i+=2)
+	
+	if(algorithm==4)
 	{
-		for(int j=0;j<3;j++)
+		for(int i=0;i<slices;i++)
 		{
-			for(int k=0;k<3;k++)
+			for(int j=0;j<3;j++)
 			{
-				cout<<sliceAndDistance[k][j][i]<<" "<<sliceAndDistance[k][j][i+1]<<endl;
-				outFile<<sliceAndDistance[k][j][i]<<";"<<sliceAndDistance[k][j][i+1]<<";;";
+				for(int k=0;k<3;k++)
+				{
+					cout << sliceAndDistance[k][j][i].sliceNumber<<"&&"<<sliceAndDistance[k][j][i].distanceToOptimal;
+					outFile<<sliceAndDistance[k][j][i].sliceNumber<<";"<<sliceAndDistance[k][j][i].distanceToOptimal<<";;";
+				}
 			}
+			outFile<<endl;
 		}
-		outFile<<endl;
 	}
-
+	else
+	{
+		for(int i=0;i<slices;i++)
+		{
+			cout << sliceAndDistance[algorithm][planeOrientation][i].sliceNumber<<" "<<sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal<<endl;
+			outFile << sliceAndDistance[algorithm][planeOrientation][i].sliceNumber<<";"<<sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal<<endl;
+		}
+	}
 
 	outFile << endl<<"Total time: " << timeTotal <<endl;
 	return 0;
