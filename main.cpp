@@ -12,7 +12,7 @@
 #include <opencv2/nonfree/nonfree.hpp>
 //Test and logs v2
 
-#define RANK_SIZE 10
+#define RANK_SIZE 20
 #define QNT_DATASETS 2
 
 using namespace std;
@@ -75,9 +75,9 @@ void ordenaRank(int slices, vector<sliceRank> &srr,int algorithm)
 
 void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 {
-	int summ[10];
+	int summ[RANK_SIZE];
 
-	for(int j=0;j<10;j++)
+	for(int j=0;j<RANK_SIZE;j++)
 		summ[j]=-1;
 
 	int jjj=0;
@@ -85,8 +85,8 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 	Scalar mssimV,msurfV,mpsnrV;
 	sliceRank sr_raw;
 	vector<sliceRank> sr,sr_ranked,sr_ranked2;
-	int ii;
-	for(int i=0, ii=0;i<slices;i++,ii+=2)
+
+	for(int i=0;i<slices;i++)
 	{
 		for(int k=0;k<slices;k++)
 		{	
@@ -157,7 +157,7 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 			{
 
 				int srr2=sr_ranked2[k].sliceNumber-i;
-				if(srr2<0) srr2=srr2*-1;
+				//if(srr2<0) srr2=srr2*-1;
 				if(k==0) // só guarda o melhor matching
 				{
 					sliceAndDistance[algorithm][planeOrientation][i].sliceNumber=i;
@@ -183,7 +183,7 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 			{
 				//printf("<%d> sN:%d, v:%f\n",k,sr_ranked[k].sliceNumber,sr_ranked[k].value);
 				int srr1=sr_ranked[k].sliceNumber-i;
-				if(srr1<0) srr1=srr1*-1; 
+				//if(srr1<0) srr1=srr1*-1; 
 				if(k==0) // só guarda o melhor matching
 				{
 					sliceAndDistance[algorithm][planeOrientation][i].sliceNumber=i;
@@ -196,7 +196,8 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 					else			summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
 					break;				
 				}
-			}			
+			}
+			sr_ranked.clear();			
 		}
 	}
 
@@ -239,7 +240,7 @@ int loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned in
 	{
 		if(!(inFile = fopen( l_datasets[k], "rb" ) ))
 		{
-			printf("Problems when tried to open the dataset %d\n",k);
+			printf("Problems when tried to open the dataset %s\n",l_datasets[k]);
 			return -1;
 		}
 		for(int i=0; i<l_sliceRange[1];i++)
@@ -260,7 +261,7 @@ int loadDatasets(char** l_datasets,short unsigned int l_width, short unsigned in
 	return 1;
 }
 
-int changePlane(short unsigned int c_width, short unsigned int c_height, short unsigned int c_sliceRange[], short unsigned int c_planeOrientation)
+int changePlane(short unsigned int c_width, short unsigned int c_height, short unsigned int c_sliceRange[], short unsigned int c_planeOrientation,int c_offset,int c_kkk)
 {						
 //	short unsigned int c_slices=c_sliceRange[1]-c_sliceRange[0];		  
 	short unsigned int c_sliceF = c_sliceRange[1];
@@ -279,7 +280,11 @@ int changePlane(short unsigned int c_width, short unsigned int c_height, short u
 			}
 		}
 	}
-
+	int c_kkk2=-1;
+	if(c_kkk==0)
+		c_kkk2=1;
+	else if(c_kkk==1)
+		c_kkk2=0;
 	for(int k=0; k<QNT_DATASETS;k++)
 	{
 		for(int i=0; i<c_sliceF;i++)
@@ -290,21 +295,23 @@ int changePlane(short unsigned int c_width, short unsigned int c_height, short u
 				{
 					if(c_planeOrientation==0)
 					{
-						datasetNewPlane[k][i][j][l] = datasetRaw[k][i][j][l]; // XZ plane						
-
+						if(k==c_kkk && i>=c_offset) //offset para a combinacao tardia x venosa e arterial
+							datasetNewPlane[k][i-c_offset][j][l] = datasetRaw[k][i][j][l]; // XZ plane						
+						else if(k==c_kkk2)
+							datasetNewPlane[k][i][j][l] = datasetRaw[k][i][j][l]; // XZ plane													
 					}
 					else if(c_planeOrientation==1)
 					{
-						if(k==1 && i>=8) //offset para a combinacao tardia x venosa e arterial
-							datasetNewPlane[k][i-2][j][l] = datasetRaw[k][l][i][j]; // XZ plane
-						else if(k==0)
+						if(k==c_kkk && i>=c_offset) //offset para a combinacao tardia x venosa e arterial
+							datasetNewPlane[k][i-c_offset][j][l] = datasetRaw[k][l][i][j]; // XZ plane
+						else if(k==c_kkk2)
 							datasetNewPlane[k][i][j][l] = datasetRaw[k][l][i][j]; // XZ plane
 					}
 					else if(c_planeOrientation==2)
 					{
-						if(k==0 && i>=8) //offset para a combinacao tardia x venosa e arterial
-							datasetNewPlane[k][i-2][j][l] = datasetRaw[k][l][j][i]; // YZ plane
-						else if(k==1)
+						if(k==0 && i>=c_offset) //offset para a combinacao tardia x venosa e arterial
+							datasetNewPlane[k][i-c_offset][j][l] = datasetRaw[k][l][j][i]; // YZ plane
+						else if(k==c_kkk2)
 							datasetNewPlane[k][i][j][l] = datasetRaw[k][l][j][i]; // YZ plane
 					}
 				}
@@ -369,20 +376,37 @@ void splitDatasets(short unsigned int s_width,short unsigned int s_height,short 
 }
 
 
-int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceRange[], int algorithm, int planeOrientation)
+int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceRange[], int algorithm, int planeOrientation,int offset, int kkk)
 {
 
 	int slices=sliceRange[1]-sliceRange[0];
 
 	//monta nome do arquivo de log
+	double timeTotal;
 	char nFile[200];
-	stringstream output;
-	output << dataset[0]<<"_"<<dataset[1]<<"_"<<slices<<"_combined";
+	char auxDs1[30]="";
+	strcat(auxDs1,dataset[0]);
+	char auxDs2[30]="";
+	strcat(auxDs2, dataset[1]);
+	const char* ds1=strtok(auxDs1,"_ .");
+	const char* ds2=strtok(auxDs2,"_ .");
+	stringstream output,output2;
+	output2 <<width<<"x"<<height<<"x"<<slices;
+	string sulfix2=output2.str();
+	const char* ss2 = sulfix2.c_str();
+	output << ds1<<"X"<<ds2<<"["<<ss2<<"]_"<<algorithm<<"_"<<planeOrientation;
 	string sulfix = output.str();
 	const char* ss = sulfix.c_str();
-	//strcpy(nFile,"Logs/");
-	//strcat(nFile,ss);
-	strcpy(nFile,"a");
+	strcpy(nFile,"Logs/");
+	strcat(nFile,ds1);
+	strcat(nFile,"X");
+	strcat(nFile,ds2);
+	strcat(nFile,"/");
+	strcat(nFile,ss2);
+	strcat(nFile,"/");
+	strcat(nFile,ss);
+
+	//strcpy(nFile,"a");
 	strcat(nFile,".csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
@@ -392,11 +416,8 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 	}
 	//escreve cabeçalho do arquivo de log
 	//outFile<<"Dataset1;"<<"Dataset2;"<<"width;"<<"height;"<<"slices;"<<"algorithm;"<<"planeOrientation"<<endl;
-	outFile<<width<<"x"<<height<<"x"<<slices<<";["<<sliceRange[0]<<"-"<<sliceRange[1]<<"]; Plane:"<<planeOrientation<<endl;
-	outFile<<"Plane:0;;;;;;;;;Plane:1;;;;;;;;;Plane:2"<<endl;
-	outFile<<"PSNR+SSIM;;;PSNR;;;SSIM;;;PSNR+SSIM;;;PSNR;;;SSIM;;;PSNR+SSIM;;;PSNR;;;SSIM"<<endl;
-	double timeTotal = (double)getTickCount();		
-
+	outFile<<ds1<<"X"<<ds2<<";"<<ss2<<";["<<sliceRange[0]<<"-"<<sliceRange[1]<<"];Algorithm:"<<algorithm<< ";Plane:"<<planeOrientation<<endl;		
+	outFile<<"slices;distance"<<endl;
 	printf("Loading datasets...  ");
 	if(loadDatasets(dataset,width,height,sliceRange)==-1)
 		return -1;		
@@ -408,8 +429,8 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 		{
 			for(int k=0;k<250;k++)
 			{
-				sliceAndDistance[i][j][k].sliceNumber=-1;
-				sliceAndDistance[i][j][k].distanceToOptimal=-1;
+				sliceAndDistance[i][j][k].sliceNumber=999;
+				sliceAndDistance[i][j][k].distanceToOptimal=999;
 			}
 		}
 	}
@@ -420,7 +441,7 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 		for(int i=0;i<3;i++)
 		{
 			printf("Changing plane...  ");
-			if(changePlane(width,height,sliceRange,i)==-1)
+			if(changePlane(width,height,sliceRange,i,offset,kkk)==-1)
 				return -1;
 			printf("DONE!\n");
 
@@ -436,18 +457,18 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 	else
 	{
 		printf("Changing plane...  ");
-		if(changePlane(width,height,sliceRange,planeOrientation)==-1)
+		if(changePlane(width,height,sliceRange,planeOrientation,offset,kkk)==-1)
 			return -1;
 		printf("DONE!\n");
 
 		printf("Spliting datasets...  ");
 		splitDatasets(width,height,sliceRange,planeOrientation);
 		printf("DONE!\n");		
-	
+		timeTotal = (double)getTickCount();	
 		calculaSimilaridade(planeOrientation,algorithm,slices);
+		timeTotal = ((double)getTickCount() - timeTotal)/getTickFrequency();
 	}
 
-	timeTotal = ((double)getTickCount() - timeTotal)/getTickFrequency();
 	
 	//build the csv formated
 	
@@ -468,14 +489,27 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 	}
 	else
 	{
+		int sumTotal=0;
 		for(int i=0;i<slices;i++)
 		{
-			cout << sliceAndDistance[algorithm][planeOrientation][i].sliceNumber<<" "<<sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal<<endl;
+			//cout << sliceAndDistance[algorithm][planeOrientation][i].sliceNumber<<" "<<sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal<<endl;
 			outFile << sliceAndDistance[algorithm][planeOrientation][i].sliceNumber<<";"<<sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal<<endl;
 		}
+		//outFile<<endl;
+//		for(int i=0;i<RANK_SIZE;i++)
+//		{
+//			outFile <<rankSumm[algorithm][i]<<endl;
+//			if(rankSumm[algorithm][i]!=-1)
+//				sumTotal+=rankSumm[algorithm][i];
+//		}
+//		outFile<<sumTotal<<endl;
 	}
 
-	outFile << endl<<"Total time: " << timeTotal <<endl;
+
+
+	outFile <<"Total time: ;" << timeTotal <<endl;
+	outFile.close();
+
 	return 0;
 }
 
@@ -493,21 +527,23 @@ int main(int argc, char *argv[])
 	sliceRange[1] = atoi(argv[6]);
 	short unsigned int algorithm = atoi(argv[7]);
 	short unsigned int planeOrientation = atoi(argv[8]);
+	int offset = atoi(argv[9]);
+	int kkk = atoi(argv[10]);
 
 	short unsigned int slices = sliceRange[1]-sliceRange[0];
 
 	printf("Building ranking...  ");	
-	if(rankBuilder(dataset,width,height,sliceRange,algorithm,planeOrientation)==-1)
+	if(rankBuilder(dataset,width,height,sliceRange,algorithm,planeOrientation,offset,kkk)==-1)
 		return -1;
 
 	printf("DONE!\n");
 
-	namedWindow("Trackbar",0);
-	if(planeOrientation==0)
-		createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
-	else
-		createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
-	onTrackbar(0,0);
+	//namedWindow("Trackbar",0);
+	//if(planeOrientation==0)
+	//	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
+	//else
+	//	createTrackbar("TB","Trackbar",0,slices-1,onTrackbar);
+	//onTrackbar(0,0);
 
 	waitKey(0);
 	destroyAllWindows();
@@ -523,7 +559,7 @@ Scalar getPSNR(const Mat& i1, const Mat& i2)
 
     Scalar s = sum(s1);         // sum elements per channel
 
-    double sse = s.val[0] + s.val[1] + s.val[2]; // sum channels
+    double sse = s.val[0];// + s.val[1] + s.val[2]; // sum channels
 
     if( sse <= 1e-10) // for small values return zero
         return 0;
@@ -535,8 +571,11 @@ Scalar getPSNR(const Mat& i1, const Mat& i2)
         return psnr;
     }
 }
-#define GB_R 10.5
-#define GB_S 111
+//#define GB_R 0.5
+//#define GB_S 1
+#define GB_R 10.5 //used in tests
+#define GB_S 111  //used in tests
+
 Scalar getMSSIM( const Mat& i1, const Mat& i2)
 {
     const double C1 = 6.5025, C2 = 58.5225;
