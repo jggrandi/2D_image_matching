@@ -10,6 +10,17 @@
 #include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O
 #include <opencv2/features2d/features2d.hpp>
 #include <opencv2/nonfree/nonfree.hpp>
+#include <opencv2/gpu/gpu.hpp> 
+
+//#include </home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/imgproc/include/opencv2/imgproc/imgproc.hpp>  // Gaussian Blur
+//#include </home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/core/include/opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
+//#include </home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/highgui/include/opencv2/highgui/highgui.hpp>  // OpenCV window I/O
+//#include </home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/features2d/include/opencv2/features2d/features2d.hpp>
+//#include </home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/nonfree/include/opencv2/nonfree/nonfree.hpp>
+//#include </home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/include/opencv2/gpu/gpu.hpp> 
+
+
+
 //Test and logs v2
 
 #define RANK_SIZE 20
@@ -22,6 +33,34 @@ vector <vector <vector < unsigned short> > > datasetRaw[QNT_DATASETS];
 vector <vector <vector < unsigned short> > > datasetNewPlane[QNT_DATASETS];
 unsigned short **datasetWHShrink[QNT_DATASETS];
 vector<Mat> datasetSlices[2];
+
+struct BufferPSNR                                     // Optimized GPU versions
+{   // Data allocations are very expensive on GPU. Use a buffer to solve: allocate once reuse later.
+    gpu::GpuMat gI1, gI2, gs, t1,t2;
+
+    gpu::GpuMat buf;
+};
+
+
+struct BufferMSSIM                                     // Optimized GPU versions
+{   // Data allocations are very expensive on GPU. Use a buffer to solve: allocate once reuse later.
+    gpu::GpuMat gI1, gI2, gs, t1,t2;
+
+    gpu::GpuMat I1_2, I2_2, I1_I2;
+    vector<gpu::GpuMat> vI1, vI2;
+
+    gpu::GpuMat mu1, mu2;
+    gpu::GpuMat mu1_2, mu2_2, mu1_mu2;
+
+    gpu::GpuMat sigma1_2, sigma2_2, sigma12;
+    gpu::GpuMat t3;
+
+    gpu::GpuMat ssim_map;
+
+    gpu::GpuMat buf;
+};
+
+
 
 struct twoInts
 {
@@ -38,6 +77,8 @@ vector<int> rankSumm[3];
 Scalar getPSNR ( const Mat& I1, const Mat& I2);
 Scalar getMSSIM( const Mat& I1, const Mat& I2);
 Scalar getSURF( const Mat& I1, const Mat& I2);
+Scalar getPSNR_GPU_optimized(const Mat& I1, const Mat& I2, BufferPSNR& b);
+Scalar getMSSIM_GPU_optimized( const Mat& i1, const Mat& i2, BufferMSSIM& b);
 
 
 struct sliceRank
@@ -86,6 +127,9 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 	sliceRank sr_raw;
 	vector<sliceRank> sr,sr_ranked,sr_ranked2;
 
+    BufferPSNR bufferPSNR;
+    BufferMSSIM bufferMSSIM;
+
 	for(int i=0;i<slices;i++)
 	{
 		for(int k=0;k<slices;k++)
@@ -104,6 +148,18 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 					sr.push_back(sr_raw);
 					break;
 				}
+			case 10:
+			case 11:
+				{
+					mpsnrV=getPSNR_GPU_optimized(datasetSlices[0][i],datasetSlices[1][k],bufferPSNR); //compara dataset1xdataset2 con PSNR	
+					if(mpsnrV.val[0]==0) 
+						sr_raw.value=100;
+					else
+						sr_raw.value = mpsnrV.val[0];
+					sr_raw.sliceNumber=k;
+					sr.push_back(sr_raw);
+					break;
+				}				
 			case 2:
 				{
 					mssimV=getMSSIM(datasetSlices[0][i],datasetSlices[1][k]);//compara dataset1xdataset2 com SSIM
@@ -112,6 +168,14 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 					sr.push_back(sr_raw);
 					break;
 				}
+			case 22:
+				{
+					mssimV=getMSSIM_GPU_optimized(datasetSlices[0][i],datasetSlices[1][k],bufferMSSIM);//compara dataset1xdataset2 com SSIM
+					sr_raw.value = mssimV.val[0];
+					sr_raw.sliceNumber=k;
+					sr.push_back(sr_raw);
+					break;
+				}				
 			case 3:
 				{
 					msurfV=getSURF(datasetSlices[0][i],datasetSlices[1][k]); //compara dataset1xdataset2 com SURF
@@ -124,12 +188,11 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 			default:
 				break;
 			}
-
-
 		}
+
 		sr_ranked.clear();
 		sr_ranked=sr;
-		sr.clear();
+		
 		
 		ordenaRank(slices,sr_ranked,algorithm);
 		//sr_ranked.resize(RANK_SIZE);
@@ -153,6 +216,7 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 				//outFile<<sr_ranked[k].sliceNumber<<";"<<sr_ranked2[k].sliceNumber<<endl;
 			//}
 			//outFile << i<<endl; 
+
 			for (int k=0; k<RANK_SIZE; k++)
 			{
 
@@ -176,6 +240,52 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 
 			sr_ranked2.clear();
 		}
+		else if(algorithm==10)
+		{
+
+			for(int k=0; k<RANK_SIZE;k++)
+			{
+				mssimV=getMSSIM_GPU_optimized(datasetSlices[0][i],datasetSlices[1][k],bufferMSSIM);//compara dataset1xdataset2 com SSIM
+				sr_raw.value = mssimV.val[0];
+				sr_raw.sliceNumber=k;
+				sr.push_back(sr_raw);
+				break;
+
+			}
+			
+			ordenaRank(RANK_SIZE,sr_ranked2,algorithm);
+			
+			//printf("%d\n",i);
+			//for(int k=0; k<RANK_SIZE;k++)
+			//{
+				//printf("<R1> sN:%d, v:%f - <R2> sN:%d, v:%f\n",sr_ranked[k].sliceNumber,sr_ranked[k].value,sr_ranked2[k].sliceNumber,sr_ranked2[k].value);
+				//outFile<<sr_ranked[k].sliceNumber<<";"<<sr_ranked2[k].sliceNumber<<endl;
+			//}
+			//outFile << i<<endl; 
+			for (int k=0; k<RANK_SIZE; k++)
+			{
+
+				int srr2=sr_ranked2[k].sliceNumber-i;
+				//if(srr2<0) srr2=srr2*-1;
+				if(k==0) // só guarda o melhor matching
+				{	
+					sliceAndDistance[0][planeOrientation][i].sliceNumber=i;
+					sliceAndDistance[0][planeOrientation][i].distanceToOptimal=srr2;
+					//sliceAndDistance[planeOrientation][algorithm].push_back(i); sliceAndDistance[planeOrientation][algorithm].push_back(srr2);
+				} 
+				//outFile<<i<<";"<<srr2<<endl;
+				//if(sr_ranked2[k].sliceNumber==i) //verifica se o SSIM encontrou o slice na mesma posiçao do dataset analizado  
+				//{
+				//	if(summ[k]==-1) summ[k]*=-1;
+				//	else			summ[k]++;
+				//	break;
+				//}
+
+			}
+			cout <<"saiu"<<endl;
+			sr_ranked2.clear();
+
+		}
 		else // se o algoritmo != 0 monta ranking comum
 		{	
 			//printf("%d\n",i);
@@ -186,24 +296,26 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 				//if(srr1<0) srr1=srr1*-1; 
 				if(k==0) // só guarda o melhor matching
 				{
-					sliceAndDistance[algorithm][planeOrientation][i].sliceNumber=i;
-					sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal=srr1;
+					sliceAndDistance[0][planeOrientation][i].sliceNumber=i;
+					sliceAndDistance[0][planeOrientation][i].distanceToOptimal=srr1;
 				} 
 					
-				if(sr_ranked[k].sliceNumber==i) //verifica se encontrou o slice na mesma posiçao do dataset analizado  
-				{
-					if(summ[k]==-1) summ[k]*=-1;
-					else			summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
-					break;				
-				}
+				//if(sr_ranked[k].sliceNumber==i) //verifica se encontrou o slice na mesma posiçao do dataset analizado  
+				//{
+				//	if(summ[k]==-1) summ[k]*=-1;
+				//	else			summ[k]++;	//incrementa summ para exibir qntos slices foram exatamente encontrados na mesma posiçao do dataset analizado
+				//	break;				
+				//}
 			}
 			sr_ranked.clear();			
 		}
 	}
-
+	sr.clear();
 	
-	for(int i=0;i<RANK_SIZE;i++)
-		rankSumm[algorithm].push_back(summ[i]);
+//	for(int i=0;i<RANK_SIZE;i++)
+//		rankSumm[0].push_back(summ[i]);
+
+
 //	int sumTotal=0;
 //	for(int ll=0; ll < RANK_SIZE; ll++)
 //	{
@@ -397,16 +509,16 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 	output << ds1<<"X"<<ds2<<"["<<ss2<<"]_"<<algorithm<<"_"<<planeOrientation;
 	string sulfix = output.str();
 	const char* ss = sulfix.c_str();
-	strcpy(nFile,"Logs/");
-	strcat(nFile,ds1);
-	strcat(nFile,"X");
-	strcat(nFile,ds2);
-	strcat(nFile,"/");
-	strcat(nFile,ss2);
-	strcat(nFile,"/");
-	strcat(nFile,ss);
+//	strcpy(nFile,"Logs/");
+//	strcat(nFile,ds1);
+//	strcat(nFile,"X");
+//	strcat(nFile,ds2);
+//	strcat(nFile,"/");
+//	strcat(nFile,ss2);
+//	strcat(nFile,"/");
+//	strcat(nFile,ss);
 
-	//strcpy(nFile,"a");
+	strcpy(nFile,"a");
 	strcat(nFile,".csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
@@ -489,11 +601,11 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 	}
 	else
 	{
-		int sumTotal=0;
+		//int sumTotal=0;
 		for(int i=0;i<slices;i++)
 		{
 			//cout << sliceAndDistance[algorithm][planeOrientation][i].sliceNumber<<" "<<sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal<<endl;
-			outFile << sliceAndDistance[algorithm][planeOrientation][i].sliceNumber<<";"<<sliceAndDistance[algorithm][planeOrientation][i].distanceToOptimal<<endl;
+			outFile << sliceAndDistance[0][planeOrientation][i].sliceNumber<<";"<<sliceAndDistance[0][planeOrientation][i].distanceToOptimal<<endl;
 		}
 		//outFile<<endl;
 //		for(int i=0;i<RANK_SIZE;i++)
@@ -531,6 +643,8 @@ int main(int argc, char *argv[])
 	int kkk = atoi(argv[10]);
 
 	short unsigned int slices = sliceRange[1]-sliceRange[0];
+
+
 
 	printf("Building ranking...  ");	
 	if(rankBuilder(dataset,width,height,sliceRange,algorithm,planeOrientation,offset,kkk)==-1)
@@ -693,4 +807,104 @@ Scalar getSURF( const Mat& i1, const Mat& i2)
   v.val[0]=min_dist;
   v.val[1]=max_dist;
   return v;
+}
+
+
+Scalar getPSNR_GPU_optimized(const Mat& I1, const Mat& I2, BufferPSNR& b)
+{
+    b.gI1.upload(I1);
+    b.gI2.upload(I2);
+
+    b.gI1.convertTo(b.t1, CV_32F);
+    b.gI2.convertTo(b.t2, CV_32F);
+
+    gpu::absdiff(b.t1.reshape(1), b.t2.reshape(1), b.gs);
+    gpu::multiply(b.gs, b.gs, b.gs);
+
+    double sse = gpu::sum(b.gs, b.buf)[0];
+
+    if( sse <= 1e-10) // for small values return zero
+        return 0;
+    else
+    {
+        double mse = sse /(double)(I1.channels() * I1.total());
+        //double psnr = 10.0*log10((255*255)/mse);
+
+        Scalar psnr;
+		psnr.val[0]= 10.0*log10((255*255)/mse);
+        return psnr;
+
+    }
+}
+
+
+Scalar getMSSIM_GPU_optimized( const Mat& i1, const Mat& i2, BufferMSSIM& b)
+{
+    const float C1 = 6.5025f, C2 = 58.5225f;
+    /***************************** INITS **********************************/
+
+    b.gI1.upload(i1);
+    b.gI2.upload(i2);
+
+    gpu::Stream stream;
+
+    stream.enqueueConvert(b.gI1, b.t1, CV_32F);
+    stream.enqueueConvert(b.gI2, b.t2, CV_32F);
+
+    gpu::split(b.t1, b.vI1, stream);
+    gpu::split(b.t2, b.vI2, stream);
+    Scalar mssim;
+
+    gpu::GpuMat buf;
+
+    for( int i = 0; i < b.gI1.channels(); ++i )
+    {
+        gpu::multiply(b.vI2[i], b.vI2[i], b.I2_2, stream);        // I2^2
+        gpu::multiply(b.vI1[i], b.vI1[i], b.I1_2, stream);        // I1^2
+        gpu::multiply(b.vI1[i], b.vI2[i], b.I1_I2, stream);       // I1 * I2
+
+        gpu::GaussianBlur(b.vI1[i], b.mu1, Size(11, 11), buf, 1.5, 0, BORDER_DEFAULT, -1, stream);
+        gpu::GaussianBlur(b.vI2[i], b.mu2, Size(11, 11), buf, 1.5, 0, BORDER_DEFAULT, -1, stream);
+
+        gpu::multiply(b.mu1, b.mu1, b.mu1_2, stream);
+        gpu::multiply(b.mu2, b.mu2, b.mu2_2, stream);
+        gpu::multiply(b.mu1, b.mu2, b.mu1_mu2, stream);
+
+        gpu::GaussianBlur(b.I1_2, b.sigma1_2, Size(11, 11), buf, 1.5, 0, BORDER_DEFAULT, -1, stream);
+        gpu::subtract(b.sigma1_2, b.mu1_2, b.sigma1_2, gpu::GpuMat(), -1, stream);
+        //b.sigma1_2 -= b.mu1_2;  - This would result in an extra data transfer operation
+
+        gpu::GaussianBlur(b.I2_2, b.sigma2_2, Size(11, 11), buf, 1.5, 0, BORDER_DEFAULT, -1, stream);
+        gpu::subtract(b.sigma2_2, b.mu2_2, b.sigma2_2, gpu::GpuMat(), -1, stream);
+        //b.sigma2_2 -= b.mu2_2;
+
+        gpu::GaussianBlur(b.I1_I2, b.sigma12, Size(11, 11), buf, 1.5, 0, BORDER_DEFAULT, -1, stream);
+        gpu::subtract(b.sigma12, b.mu1_mu2, b.sigma12, gpu::GpuMat(), -1, stream);
+        //b.sigma12 -= b.mu1_mu2;
+
+        //here too it would be an extra data transfer due to call of operator*(Scalar, Mat)
+        gpu::multiply(b.mu1_mu2, 2, b.t1, 1, -1, stream); //b.t1 = 2 * b.mu1_mu2 + C1;
+        gpu::add(b.t1, C1, b.t1, gpu::GpuMat(), -1, stream);
+        gpu::multiply(b.sigma12, 2, b.t2, 1, -1, stream); //b.t2 = 2 * b.sigma12 + C2;
+        gpu::add(b.t2, C2, b.t2, gpu::GpuMat(), -12, stream);
+
+        gpu::multiply(b.t1, b.t2, b.t3, 1, -1, stream);     // t3 = ((2*mu1_mu2 + C1).*(2*sigma12 + C2))
+
+        gpu::add(b.mu1_2, b.mu2_2, b.t1, gpu::GpuMat(), -1, stream);
+        gpu::add(b.t1, C1, b.t1, gpu::GpuMat(), -1, stream);
+
+        gpu::add(b.sigma1_2, b.sigma2_2, b.t2, gpu::GpuMat(), -1, stream);
+        gpu::add(b.t2, C2, b.t2, gpu::GpuMat(), -1, stream);
+
+
+        gpu::multiply(b.t1, b.t2, b.t1, 1, -1, stream);     // t1 =((mu1_2 + mu2_2 + C1).*(sigma1_2 + sigma2_2 + C2))
+        gpu::divide(b.t3, b.t1, b.ssim_map, 1, -1, stream);      // ssim_map =  t3./t1;
+
+        stream.waitForCompletion();
+
+        Scalar s = gpu::sum(b.ssim_map, b.buf);
+        mssim.val[i] = s.val[0] / (b.ssim_map.rows * b.ssim_map.cols);
+
+    }
+    return mssim;
 }
