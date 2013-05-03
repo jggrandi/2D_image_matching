@@ -23,7 +23,7 @@
 
 //Test and logs v2
 
-#define RANK_SIZE 20
+#define RANK_SIZE 200
 #define QNT_DATASETS 2
 
 using namespace std;
@@ -120,8 +120,6 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 
 	for(int j=0;j<RANK_SIZE;j++)
 		summ[j]=-1;
-
-	int jjj=0;
 
 	Scalar mssimV,msurfV,mpsnrV;
 	sliceRank sr_raw;
@@ -248,7 +246,7 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 				mssimV=getMSSIM_GPU_optimized(datasetSlices[0][i],datasetSlices[1][k],bufferMSSIM);//compara dataset1xdataset2 com SSIM
 				sr_raw.value = mssimV.val[0];
 				sr_raw.sliceNumber=k;
-				sr.push_back(sr_raw);
+				sr_ranked2.push_back(sr_raw);
 				break;
 
 			}
@@ -282,7 +280,6 @@ void calculaSimilaridade(int planeOrientation, int algorithm, int slices)
 				//}
 
 			}
-			cout <<"saiu"<<endl;
 			sr_ranked2.clear();
 
 		}
@@ -508,7 +505,7 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 	const char* ss2 = sulfix2.c_str();
 	output << ds1<<"X"<<ds2<<"["<<ss2<<"]_"<<algorithm<<"_"<<planeOrientation;
 	string sulfix = output.str();
-	const char* ss = sulfix.c_str();
+//	const char* ss = sulfix.c_str();
 //	strcpy(nFile,"Logs/");
 //	strcat(nFile,ds1);
 //	strcat(nFile,"X");
@@ -518,7 +515,7 @@ int rankBuilder(char* dataset[], int width, int height,short unsigned int sliceR
 //	strcat(nFile,"/");
 //	strcat(nFile,ss);
 
-	strcpy(nFile,"a");
+	strcpy(nFile,"b");
 	strcat(nFile,".csv");
 	outFile.open(nFile, ios::out);
 	if(outFile.fail())
@@ -642,7 +639,7 @@ int main(int argc, char *argv[])
 	int offset = atoi(argv[9]);
 	int kkk = atoi(argv[10]);
 
-	short unsigned int slices = sliceRange[1]-sliceRange[0];
+	//short unsigned int slices = sliceRange[1]-sliceRange[0];
 
 
 
