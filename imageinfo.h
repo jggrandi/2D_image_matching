@@ -7,6 +7,8 @@ struct ImageInfo
 	short resWidth;
 	short resHeight;
 	short resDepth;
-}
+	short initStack;
+	short endStack;
+};
 
 #endif // IMAGE_INFO
