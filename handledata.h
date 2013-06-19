@@ -27,7 +27,7 @@ class HandleData
 {
 public:
 	HandleData();
-	HandleData(ImageInfo img1, ImageInfo img2);
+	HandleData(ImageInfo i_img1, ImageInfo i_img2);
 	~HandleData();
 	void similarityCheck();
 private:

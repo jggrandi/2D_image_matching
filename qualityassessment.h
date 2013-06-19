@@ -18,9 +18,10 @@
 #include <opencv2/nonfree/nonfree.hpp>
 #include <opencv2/gpu/gpu.hpp> 
 
-
+#include "systemmessages.h"
 #include "imageinfo.h"
 #include "loaddata.h"
+
 
 using namespace cv;
 
@@ -45,6 +46,20 @@ struct BufferMSSIM                                     // Optimized GPU versions
     gpu::GpuMat buf;
 };
 
+struct sliceRank
+{
+    int sliceNumber;
+    float value;
+};
+
+struct twoInts
+{
+    int sliceNumber;
+    int distanceToOptimal;
+};
+
+inline bool operator<(const sliceRank &i, const sliceRank &j){return i.value < j.value;}
+
 class QualityAssessment
 {
 public:
@@ -56,7 +71,9 @@ public:
 	Scalar getPSNR_GPU_optimized(const gpu::GpuMat& I1, const gpu::GpuMat& I2, BufferPSNR& b);	
 	Scalar getMSSIM_GPU_optimized( const gpu::GpuMat& i1, const gpu::GpuMat& i2, BufferMSSIM& b);	
 	void checkSimilarity(LoadData dataset1, LoadData dataset2);	
-	void splitDatasets(LoadData dataset);	
+    vector<gpu::GpuMat> splitDataset(LoadData dataset);
+    void ordenaRank(vector<sliceRank> &srr);
+    friend bool operator<(const sliceRank &, const sliceRank &);
 private:
     BufferPSNR bufferPSNR;
     BufferMSSIM bufferMSSIM;
@@ -64,7 +81,14 @@ private:
     unsigned short **datasetWHShrink;
     vector<Mat> datasetSlices;
 	vector<gpu::GpuMat> datasetSlicesGPU;
+    sliceRank sr_raw;
+    std::vector<sliceRank> sr,sr_ranked,sr_ranked2;
+    int rank_size;
+    twoInts *sliceAndDistance;
 };
+
+
+
 
 
 #endif // QUALITY_ASSESSMENT

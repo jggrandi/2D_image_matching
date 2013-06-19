@@ -2,33 +2,27 @@
 
 LoadData::LoadData(){}
 
-/*
-LoadData::LoadData(ImageInfo img)
-{
-	if(!loadFile(img)) printf("Fail to load %s",img.fileName);
-	else printf("%s loaded!\n",img.fileName );
-}
-*/
 LoadData::~LoadData()
 {
 	free (datasetRaw);
 }
 
-bool LoadData::loadFile(ImageInfo img)
+bool LoadData::loadFile(ImageInfo l_img)
 {
+	imgInfo = l_img;
 
 	FILE* inFile;
 
 	// allocate memory for the 3d dataset
-	datasetRaw = (unsigned short**)malloc(img.resDepth * sizeof(unsigned short*));
-	for (int i=0; i < img.resDepth; i++)
-		datasetRaw[i] = (unsigned short*)malloc(sizeof(unsigned short) * (img.resHeight*img.resWidth));
+	datasetRaw = (unsigned short**)malloc(l_img.resDepth * sizeof(unsigned short*));
+	for (int i=0; i < l_img.resDepth; i++)
+		datasetRaw[i] = (unsigned short*)malloc(sizeof(unsigned short) * (l_img.resHeight*l_img.resWidth));
 
-	if( inFile = fopen( img.fileName, "rb"))
+	if( inFile = fopen( l_img.fileName, "rb"))
 	{
 		// read file into dataset matrix
-		int hXw=img.resHeight*img.resWidth;
-		for( int i = 0; i < img.resDepth; i++ )
+		int hXw=l_img.resHeight*l_img.resWidth;
+		for( int i = 0; i < l_img.resDepth; i++ )
 		{
 			for( int j = 0; j < hXw; j++ )
 			{
@@ -52,7 +46,7 @@ unsigned short** LoadData::getDataset()
 	return datasetRaw;
 }
 
-ImageInfo getImageInfo()
+ImageInfo LoadData::getImageInfo()
 {
-	return img;
+	return imgInfo;
 }

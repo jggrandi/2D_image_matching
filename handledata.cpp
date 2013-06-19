@@ -2,20 +2,20 @@
 
 HandleData::HandleData(){}
 
-HandleData::HandleData(ImageInfo img1, ImageInfo img2)
+HandleData::HandleData(ImageInfo i_img1, ImageInfo i_img2)
 {
-	if(!dataset1.loadFile(img1)) printf("Fail to load %s",img1.fileName);
-	else printf("%s loaded!\n",img1.fileName );
+	if(!dataset1.loadFile(i_img1)) printf("Fail to load %s",i_img1.fileName);
+	else printf("%s loaded!\n",i_img1.fileName );
 
-	if(!dataset2.loadFile(img2)) printf("Fail to load %s",img2.fileName);
-	else printf("%s loaded!\n",img2.fileName );
+	if(!dataset2.loadFile(i_img2)) printf("Fail to load %s",i_img2.fileName);
+	else printf("%s loaded!\n",i_img2.fileName );
 }
 
 HandleData::~HandleData(){}
 
 void HandleData::similarityCheck()
 {
-	q.checkSimilarity();
+	q.checkSimilarity(dataset1,dataset2);
 }
 
 

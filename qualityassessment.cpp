@@ -1,6 +1,11 @@
 #include "qualityassessment.h"
 
-QualityAssessment::QualityAssessment(){}
+
+
+QualityAssessment::QualityAssessment()
+{
+    rank_size=10;
+}
 
 QualityAssessment::~QualityAssessment(){}
 
@@ -10,41 +15,67 @@ void QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
 
 	vector<gpu::GpuMat> d1 = splitDataset(dataset1);
 	vector<gpu::GpuMat> d2 = splitDataset(dataset2);
-	
 
+    ImageInfo imgInfoDataset1 = dataset1.getImageInfo();
+    ImageInfo imgInfoDataset2 = dataset2.getImageInfo();
 
+    for(int i=0; i<imgInfoDataset1.resDepth; i++)
+    {
+        for(int j=0; j<imgInfoDataset2.resDepth; j++)
+        {
+            mpsnrV = getPSNR_GPU_optimized(d1[i],d2[j],bufferPSNR);    
+            if(mpsnrV.val[0]==0) 
+                sr_raw.value=100;
+            else
+                sr_raw.value = mpsnrV.val[0];
+            sr_raw.sliceNumber=j;
+            sr.push_back(sr_raw);
+        }
+        ordenaRank(sr);
+        for(int j=0; j<rank_size; j++)
+        {
+            mssimV=getMSSIM_GPU_optimized(d1[i],d2[sr[j].sliceNumber],bufferMSSIM);//compara dataset1xdataset2 com SSIM
+            sr_raw.value = mssimV.val[0];
+            sr_raw.sliceNumber=sr[j].sliceNumber;            
+            sr_ranked.push_back(sr_raw);
+        }
+       // ordenaRank(sr_ranked);
+        /*
+        for (int j=0; j<rank_size; j++)
+        {
+            int srr=sr_ranked[j].sliceNumber-i;
+           
+            if(j==0) // só guarda o melhor matching
+            {
+                sliceAndDistance[i].sliceNumber=i;
+                sliceAndDistance[i].distanceToOptimal=srr;
+            } 
+        }
+        */                
+        sr_ranked.clear();
+    }
 }
 
 vector<gpu::GpuMat> QualityAssessment::splitDataset(LoadData dataset)
 {
-	ImageInfo imgInfo = dataset.getImageInfo();
+	
+    ImageInfo imgInfo = dataset.getImageInfo();
 
-	datasetWHShrink[0] = (unsigned short**)malloc(imgInfo.resDepth * sizeof(unsigned short*));
+    datasetWHShrink = (unsigned short**)malloc(imgInfo.resDepth * sizeof(unsigned short*));
 
 	for (int i=0; i < imgInfo.resDepth; i++)
 	{
-		datasetWHShrink[0][i] = (unsigned short*)malloc(sizeof(unsigned short) * (imgInfo.resHeight*imgInfo.resWidth));
+		datasetWHShrink[i] = (unsigned short*)malloc(sizeof(unsigned short) * (imgInfo.resHeight*imgInfo.resWidth));
 	}
 	
+
 	for( int i = 0; i < imgInfo.resDepth; i++ )
 	{
-		for(int j=0; j< imgInfo.resWidth;j++)
-		{
-			for(int l=0; l< imgInfo.resHeight;l++)
-			{
-				
-				datasetWHShrink[i][l * s_width + j]=dataset[i][l][j];	
-			}
-		}
-	}
-
-
-	for( int i = 0; i < s_slices; i++ )
-	{
-		Mat slice(imgInfo.resHeight,imgInfo.resWidth,CV_16UC1,datasetWHShrink[i]);
-		//Mat plane;
+        unsigned short** d = dataset.getDataset();
+		Mat slice(imgInfo.resHeight,imgInfo.resWidth,CV_16UC1,d[i]);
+		Mat plane;
 		gpu::GpuMat planeGPU;
-		//slice.convertTo(plane,CV_8UC3);
+		slice.convertTo(plane,CV_8UC3);
 		//datasetSlices.push_back(plane);
 		planeGPU.upload(plane);
 		datasetSlicesGPU.push_back(planeGPU);
@@ -52,6 +83,12 @@ vector<gpu::GpuMat> QualityAssessment::splitDataset(LoadData dataset)
 	return datasetSlicesGPU;
 
 }
+
+void QualityAssessment::ordenaRank(vector<sliceRank> &srr)
+{
+    std::sort(srr.begin(),srr.end());
+}
+
 
 Scalar QualityAssessment::getPSNR(const Mat& i1, const Mat& i2)
 {

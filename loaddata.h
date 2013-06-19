@@ -15,13 +15,12 @@ class LoadData
 {
 public:
 	LoadData();
-	//LoadData(ImageInfo img);
 	~LoadData();
-	bool loadFile(ImageInfo img);
+	bool loadFile(ImageInfo l_img);
 	unsigned short** getDataset();
 	ImageInfo getImageInfo();
 private:
-	ImageInfo *img;
+	ImageInfo imgInfo;
 	unsigned short** datasetRaw;
 
 };
