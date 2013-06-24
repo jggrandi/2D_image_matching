@@ -7,7 +7,9 @@ QualityAssessment::QualityAssessment()
     rank_size=10;
 }
 
-QualityAssessment::~QualityAssessment(){}
+QualityAssessment::~QualityAssessment()
+{
+}
 
 
 void QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
@@ -15,7 +17,6 @@ void QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
 
 	vector<gpu::GpuMat> d1 = splitDataset(dataset1);
 	vector<gpu::GpuMat> d2 = splitDataset(dataset2);
-
     ImageInfo imgInfoDataset1 = dataset1.getImageInfo();
     ImageInfo imgInfoDataset2 = dataset2.getImageInfo();
 
@@ -31,7 +32,11 @@ void QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
             sr_raw.sliceNumber=j;
             sr.push_back(sr_raw);
         }
+
         ordenaRank(sr);
+        sr.clear();
+        sr_ranked.clear();
+        
         for(int j=0; j<rank_size; j++)
         {
             mssimV=getMSSIM_GPU_optimized(d1[i],d2[sr[j].sliceNumber],bufferMSSIM);//compara dataset1xdataset2 com SSIM
@@ -39,35 +44,31 @@ void QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
             sr_raw.sliceNumber=sr[j].sliceNumber;            
             sr_ranked.push_back(sr_raw);
         }
-       // ordenaRank(sr_ranked);
-        /*
+        
+        ordenaRank(sr_ranked);
+
         for (int j=0; j<rank_size; j++)
         {
             int srr=sr_ranked[j].sliceNumber-i;
-           
+            
             if(j==0) // só guarda o melhor matching
             {
                 sliceAndDistance[i].sliceNumber=i;
                 sliceAndDistance[i].distanceToOptimal=srr;
+                printVar(i);
+                printVar(srr);
+                //printVar(sliceAndDistance[i].sliceNumber);
+                //printVar(sliceAndDistance[i].distanceToOptimal);
+
             } 
         }
-        */                
-        sr_ranked.clear();
     }
 }
 
 vector<gpu::GpuMat> QualityAssessment::splitDataset(LoadData dataset)
 {
 	
-    ImageInfo imgInfo = dataset.getImageInfo();
-
-    datasetWHShrink = (unsigned short**)malloc(imgInfo.resDepth * sizeof(unsigned short*));
-
-	for (int i=0; i < imgInfo.resDepth; i++)
-	{
-		datasetWHShrink[i] = (unsigned short*)malloc(sizeof(unsigned short) * (imgInfo.resHeight*imgInfo.resWidth));
-	}
-	
+    ImageInfo imgInfo = dataset.getImageInfo();	
 
 	for( int i = 0; i < imgInfo.resDepth; i++ )
 	{

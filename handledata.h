@@ -16,24 +16,35 @@
 #include <opencv2/nonfree/nonfree.hpp>
 #include <opencv2/gpu/gpu.hpp> 
 
-	
 #include "imageinfo.h"
 #include "loaddata.h"
 #include "qualityassessment.h"
+#include "utils.h"
+//#include "logdata.h"
 
-#define QNT_DATASETS 2
+using namespace cv;
+ 
+/* 
+void onTrackbar( int val, void* )
+{
+	imshow( "Dataset1", dataset1 );
+}
+*/
 
 class HandleData
 {
 public:
 	HandleData();
-	HandleData(ImageInfo i_img1, ImageInfo i_img2);
+	HandleData(ImageInfo h_img1, ImageInfo h_img2, OPT h_options);
 	~HandleData();
 	void similarityCheck();
+	void showData();
+	//friend void onTrackbar( int, void* );
 private:
 	ImageInfo *img1,*img2;
 	LoadData dataset1,dataset2;
 	QualityAssessment q;
+	OPT oopt;
 
 };
 

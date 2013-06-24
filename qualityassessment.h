@@ -21,44 +21,10 @@
 #include "systemmessages.h"
 #include "imageinfo.h"
 #include "loaddata.h"
-
+#include "utils.h"
 
 using namespace cv;
 
-
-struct BufferPSNR                                     // Optimized GPU versions
-{   // Data allocations are very expensive on GPU. Use a buffer to solve: allocate once reuse later.
-    gpu::GpuMat gI1, gI2, gs, t1,t2;
-    gpu::GpuMat buf;
-};
-
-
-struct BufferMSSIM                                     // Optimized GPU versions
-{   // Data allocations are very expensive on GPU. Use a buffer to solve: allocate once reuse later.
-    gpu::GpuMat gI1, gI2, gs, t1,t2;
-    gpu::GpuMat I1_2, I2_2, I1_I2;
-    vector<gpu::GpuMat> vI1, vI2;
-    gpu::GpuMat mu1, mu2;
-    gpu::GpuMat mu1_2, mu2_2, mu1_mu2;
-    gpu::GpuMat sigma1_2, sigma2_2, sigma12;
-    gpu::GpuMat t3;
-    gpu::GpuMat ssim_map;
-    gpu::GpuMat buf;
-};
-
-struct sliceRank
-{
-    int sliceNumber;
-    float value;
-};
-
-struct twoInts
-{
-    int sliceNumber;
-    int distanceToOptimal;
-};
-
-inline bool operator<(const sliceRank &i, const sliceRank &j){return i.value < j.value;}
 
 class QualityAssessment
 {
@@ -78,13 +44,12 @@ private:
     BufferPSNR bufferPSNR;
     BufferMSSIM bufferMSSIM;
     Scalar mssimV,msurfV,mpsnrV;
-    unsigned short **datasetWHShrink;
     vector<Mat> datasetSlices;
 	vector<gpu::GpuMat> datasetSlicesGPU;
     sliceRank sr_raw;
-    std::vector<sliceRank> sr,sr_ranked,sr_ranked2;
+    std::vector<sliceRank> sr,sr_ranked;
     int rank_size;
-    twoInts *sliceAndDistance;
+    twoInts sliceAndDistance[10];
 };
 
 

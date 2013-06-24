@@ -1,0 +1,1240 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"log",
+				"logfilename"
+			],
+			[
+				"h",
+				"h_options"
+			],
+			[
+				"dataset",
+				"dataset1"
+			],
+			[
+				"hande",
+				"handleData"
+			],
+			[
+				"img",
+				"img1Info"
+			],
+			[
+				"prin",
+				"printf	printf …"
+			],
+			[
+				"print",
+				"printVar"
+			],
+			[
+				"slic",
+				"sliceAndDistance"
+			],
+			[
+				"sl",
+				"sliceRank"
+			],
+			[
+				"slice",
+				"sliceRank"
+			],
+			[
+				"ima",
+				"imgInfoDataset1"
+			],
+			[
+				"datase",
+				"dataset1"
+			],
+			[
+				"get",
+				"getPSNR"
+			],
+			[
+				"data",
+				"datasetSlicesGPU"
+			],
+			[
+				"spl",
+				"splitDataset"
+			],
+			[
+				"spli",
+				"splitDatasets"
+			],
+			[
+				"im",
+				"imgInfo"
+			],
+			[
+				"Datase",
+				"dataset1"
+			],
+			[
+				"q",
+				"QualityAssessment"
+			],
+			[
+				"Qualit",
+				"QualityAssessment"
+			],
+			[
+				"han",
+				"handleData"
+			],
+			[
+				"load",
+				"loadFile"
+			],
+			[
+				"datas",
+				"datasetRaw"
+			],
+			[
+				"e",
+				"endStack"
+			],
+			[
+				"pri",
+				"printMatriz"
+			],
+			[
+				"file",
+				"fileName"
+			],
+			[
+				"res",
+				"resDepth"
+			],
+			[
+				"image",
+				"ImageInfo"
+			],
+			[
+				"c_s",
+				"c_sliceF"
+			],
+			[
+				"va",
+				"val3"
+			],
+			[
+				"val",
+				"val2"
+			],
+			[
+				"gp",
+				"GpuMat"
+			],
+			[
+				"sr_ra",
+				"sr_ranked"
+			],
+			[
+				"sr_ranked",
+				"sr_ranked2"
+			],
+			[
+				"GB",
+				"GB_S"
+			],
+			[
+				"offset",
+				"c_offset"
+			],
+			[
+				"out",
+				"outFile"
+			],
+			[
+				"c_kkk",
+				"c_kkk2"
+			],
+			[
+				"c_kk",
+				"c_kkk2"
+			],
+			[
+				"k",
+				"b_k"
+			],
+			[
+				"outp",
+				"output2"
+			],
+			[
+				"sum",
+				"sumTotal"
+			],
+			[
+				"Ra",
+				"RANK_SIZE"
+			],
+			[
+				"op",
+				"distanceToOptimal"
+			],
+			[
+				"dista",
+				"distanceToOptimal"
+			],
+			[
+				"V",
+				"VALOR_MAXIMO-1"
+			],
+			[
+				"count",
+				"countInf"
+			],
+			[
+				"alg",
+				"alg"
+			],
+			[
+				"R",
+				"RANK_SIZE"
+			],
+			[
+				"rs",
+				"rs"
+			],
+			[
+				"ran",
+				"rankSumm"
+			],
+			[
+				"sli",
+				"sliceRange"
+			],
+			[
+				"Qn",
+				"QNT_DATASETS"
+			],
+			[
+				"s_s",
+				"s_sliceF"
+			],
+			[
+				"c_",
+				"c_sliceRange"
+			],
+			[
+				"s_",
+				"s_height"
+			],
+			[
+				"l_s",
+				"l_sliceRange"
+			],
+			[
+				"slice_",
+				"slice_I"
+			],
+			[
+				"sr_ran",
+				"sr_ranked2"
+			],
+			[
+				"plane",
+				"planeOrientation"
+			],
+			[
+				"in",
+				"inFile"
+			],
+			[
+				"l_",
+				"l_slices"
+			],
+			[
+				"gr",
+				"gremistasSalario"
+			],
+			[
+				"co",
+				"coloradosSalario"
+			],
+			[
+				"outr",
+				"outroclube"
+			],
+			[
+				"entre",
+				"entrevistados"
+			],
+			[
+				"med",
+				"mediaSColorados"
+			],
+			[
+				"me",
+				"mediaSGremistas"
+			],
+			[
+				"col",
+				"colorados"
+			],
+			[
+				"sala",
+				"salarial"
+			],
+			[
+				"gre",
+				"gremistas"
+			],
+			[
+				"cl",
+				"clube"
+			],
+			[
+				"colo",
+				"coloradosSalario"
+			],
+			[
+				"c",
+				"clube"
+			],
+			[
+				"massa",
+				"massaF"
+			],
+			[
+				"re",
+				"result"
+			],
+			[
+				"li",
+				"limS"
+			],
+			[
+				"lim",
+				"limAux"
+			],
+			[
+				"l",
+				"limI"
+			],
+			[
+				"n_",
+				"n_slice"
+			],
+			[
+				"sr_",
+				"sr_ranked2"
+			],
+			[
+				"f",
+				"for	For Loop"
+			],
+			[
+				"sr",
+				"sr_ranked"
+			],
+			[
+				"beg",
+				"begin"
+			],
+			[
+				"Slice",
+				"sliceRank"
+			],
+			[
+				"time",
+				"timeAlgorithm"
+			],
+			[
+				"a",
+				"algorithm"
+			],
+			[
+				"timeS",
+				"timeSurf"
+			],
+			[
+				"algori",
+				"algorithm"
+			],
+			[
+				"mss",
+				"mssimV"
+			],
+			[
+				"o",
+				"opencv2"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"ar",
+				"argv"
+			],
+			[
+				"ch",
+				"char"
+			],
+			[
+				"dist",
+				"distValues"
+			],
+			[
+				"max",
+				"max_dist"
+			],
+			[
+				"min",
+				"min_dist"
+			],
+			[
+				"fo",
+				"font-weight"
+			],
+			[
+				"font",
+				"font-style"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "systemmessages.h",
+			"settings":
+			{
+				"buffer_size": 684,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "qualityassessment.h",
+			"settings":
+			{
+				"buffer_size": 1553,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "utils.h",
+			"settings":
+			{
+				"buffer_size": 1136,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "handledata.h",
+			"settings":
+			{
+				"buffer_size": 1016,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "loaddata.h",
+			"settings":
+			{
+				"buffer_size": 417,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "qualityassessment.cpp",
+			"settings":
+			{
+				"buffer_size": 9666,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "handledata.cpp",
+			"settings":
+			{
+				"buffer_size": 801,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main2.cpp",
+			"settings":
+			{
+				"buffer_size": 1331,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 319,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "loaddata.cpp",
+			"settings":
+			{
+				"buffer_size": 949,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "runSingleTest.sh",
+			"settings":
+			{
+				"buffer_size": 125,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/Xmo_Make.sublime-build",
+	"command_palette":
+	{
+		"height": 375.0,
+		"selected_items":
+		[
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Pac",
+				"Package Control: Add Repository"
+			]
+		],
+		"width": 435.0
+	},
+	"console":
+	{
+		"height": 127.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2.h",
+		"/home/jeronimo/.cache/.fr-PN5Wqx/aircrack-ng-1.2-beta1/src/version.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/qualityassessment.cpp",
+		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/mandel.c",
+		"/home/jeronimo/.conkyrc",
+		"/home/jeronimo/.cache/.fr-2eCfGu/conky-1.9.0/data/conky.conf",
+		"/home/jeronimo/.config/sublime-text-2/Packages/User/Xmo_Make.sublime-build",
+		"/home/jeronimo/.config/sublime-text-2/Packages/C++/C++.sublime-build",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/Texture.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/Texture.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/_ORIGINAL_SimplePreIntegratedVolumeRenderer/SimplePreIntegratedVolumeRenderer/main.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/Cronograma[Jun-Ago].txt",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.h",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/runSingleTest.sh",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo.h",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.h",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.h",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/ContourArray.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/ContourArray.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Missao_exterior/draft.txt",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Missao_exterior/draft.txt",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Missao_exterior/tex/ref.bib",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Missao_exterior/tex/jggrandiPEP.tex",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/PEP/tex/iiufrgs.cls",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Missao_exterior/tex/pep.def",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/PEP/tex/iidefs.sty",
+		"/home/jeronimo/Downloads/draft.txt",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/MyGLH.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SimplePreIntegratedVolumeRenderer/SimplePreIntegratedVolumeRenderer/main.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata (Jeronimo Grandi's conflicted copy 2013-06-03).cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo (lanier's conflicted copy 2013-06-03).h",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2 (Jeronimo Grandi's conflicted copy 2013-06-03).cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata (Jeronimo Grandi's conflicted copy 2013-06-03).h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/MyMath.h",
+		"/home/jeronimo/Documents/PACKAGES.TXT",
+		"/home/jeronimo/Downloads/ex1.c",
+		"/home/jeronimo/Downloads/ex2.c",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/ponteiros1.cpp",
+		"/home/jeronimo/Downloads/moveShip.c",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/build_opencv2",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/new_main.txt",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/load_datasets_raw.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/runPartial.sh",
+		"/home/jeronimo/.cache/.fr-XD8U20/LiverSegments/vc8/SimplePreIntegratedVolumeRenderer/preIntegrationPixelShader.glsl",
+		"/home/jeronimo/.cache/.fr-u9MyZN/LiverSegments/vc8/SimplePreIntegratedVolumeRenderer/preIntegrationVertexShader.glsl",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/sem_contraste/DICOMDIR34",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/sem_contraste/DICOMDIR33",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/arterial/DICOMDIR33",
+		"/home/jeronimo/vboxbridge",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/MRI_datasets/173120/study2/serie18/mri1.nhdr",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/MRI_datasets/173120/study2/serie18/serie18.nhdr",
+		"/run/media/jeronimo/Data/Dropbox/stuff/make_learning/arrayTests/main.cpp",
+		"/run/media/jeronimo/Data/Downloads/opencv-2.4.5-cuda/PKGBUILD",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/funcoes1.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/ClubesFutebol.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/estado_civil.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/MaterialRadioativo.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/IPVA.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/imc.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/MaiorNumero.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXslicePlane0.dat",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/temp_data.csv",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/resolutionXAlgorithmsRuntime.perf",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/resolutionXCPUandGPU.perf",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXslicePlane0.pg",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXalgorithms1.pg",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXresolution0.pg",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/gpu.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/run_512.sh",
+		"/home/jeronimo/Downloads/opencv-cuda-all_BKP/src/opencv-2.4.4/doc/tutorials/core/adding_images/adding_images.rst",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/E3/Devel/Apps/UDP_Python/test.py",
+		"/home/jeronimo/missfont.log",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/SemAc/latex/sbc-template.bib",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXresolution0.dat",
+		"/home/jeronimo/Downloads/opencv-cuda-all/pkgconfig.patch",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/cluster.perf",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/force.dat",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/plot",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/performanceXdevices.perf",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/bargraph.pl",
+		"/home/jeronimo/less",
+		"/home/jeronimo/goto_UFRGS_Mestrado_Devel.sh",
+		"/home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/src/cuda/row_filter.h",
+		"/home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/src/filtering.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/relatedwork.tex",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/RiverRaid_MapaExemplo.c",
+		"/home/jeronimo/.cache/.fr-MAFaOk/river.c",
+		"/home/jeronimo/.cache/.fr-yOac9B/map.txt",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/river",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/river.c",
+		"/home/jeronimo/Downloads/opencv-cuda-all/PKGBUILD",
+		"/home/jeronimo/.cache/.fr-TFrJz0/opencv-cuda-all/PKGBUILD",
+		"/home/jeronimo/.cache/.fr-rIDuN4/opencv-2.4.4/README",
+		"/home/jeronimo/Downloads/README.rst",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Logs/tardiaXarterial/256x256x140/tardiaXarterial[256x256x140]Alg0_Plane0",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/arterial/arterial.nhdr",
+		"/home/jeronimo/rnd",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/ref/2d_3d_matching/pegar.txt",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/template_latex_sibgrapi_ieee/example.bib",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/sib2013.tex",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Logs/tardia.rawXarterial.raw/256x256/tardiaXarterial_256_combined.csv",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/acceptedCode0172.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/arranjo1.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/gnuplot.cmd",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/Trabalho Final/implementação/UbiVoroGame/main.cpp",
+		"/usr/share/opencv/samples/cpp/descriptor_extractor_matcher.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/sift_only/src/main.cpp",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Logs/tardia_256.raw_venosa_256.raw_240_0_0.csv__",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/venosa/venosa.nhdr",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/tardia/tardia.nhdr",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/sem_contraste/sem_contraste.nhdr",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/TI/tiRef.bib",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/sib2013.bib",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/TI/ti.aux",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/Makefile",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/venosa/DICOMDIR33",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/scale3dImage/linux/src/README.txt",
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/scale3dImage/linux/src/main.cpp",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/Makefile",
+		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/Divisivelpor5.cpp"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"i_img2",
+			"i_img1",
+			";\n",
+			" [stack",
+			"[",
+			"stack",
+			" [stack",
+			"[",
+			"opt",
+			"argc",
+			"getVersion",
+			"argc",
+			"main",
+			"operator",
+			"img2",
+			"img1",
+			"img2",
+			"img1",
+			"img",
+			"k",
+			"SetImage",
+			"SetSubImage",
+			"3d",
+			"LoadData",
+			"LOAD_DATA",
+			"LoadData",
+			"/*",
+			"LoadData",
+			"plano",
+			"pep",
+			"LoadImage",
+			"LoadData",
+			"OnDestroy",
+			"\n	",
+			"colMatriz",
+			"10",
+			"float",
+			"maior",
+			"menor",
+			"666666",
+			"calculaSimilaridade",
+			"datasetSlices",
+			"06",
+			"32",
+			"33",
+			"43",
+			"ksize <=",
+			"ksize",
+			"32",
+			"ksize <= 32",
+			"31",
+			"311",
+			"33",
+			"25",
+			"1.5",
+			"22",
+			"11",
+			"32",
+			"11.5",
+			"21",
+			"20",
+			"11.5",
+			"111",
+			"1.5",
+			"ss",
+			"GB_S",
+			"GB_R",
+			"1.5",
+			"//",
+			"arterial_128",
+			"256",
+			"arterial_256",
+			"venosa_256",
+			"tardia_256",
+			"200",
+			"60",
+			"offset",
+			"sumTotal",
+			"256",
+			"arterial_256",
+			"tardia_256",
+			"venosa_512",
+			"256",
+			"arterial_256",
+			"tardia_256",
+			"arterial_256",
+			"sort",
+			"sr_ranked2",
+			"ordenaRank",
+			"ss",
+			"s_sliceF",
+			"c_sliceRange[1]",
+			"11",
+			"10.5",
+			"sr",
+			"sr[k]",
+			"sr",
+			"k",
+			"sr[k]",
+			"sr",
+			"newSr",
+			"i",
+			"j",
+			"k",
+			");\n",
+			"sr",
+			"k",
+			"i",
+			"width",
+			"height",
+			"slices",
+			"timePsnr",
+			"mssimV",
+			"I2",
+			"i2",
+			"I2",
+			"I1",
+			"i1",
+			"I1",
+			"i1",
+			"descriptors_1",
+			"keypoints_1",
+			"img_2",
+			"img_1",
+			"100",
+			"50",
+			"dat",
+			"WINNER"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "systemmessages.h",
+					"settings":
+					{
+						"buffer_size": 684,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								508,
+								508
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 90.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "qualityassessment.h",
+					"settings":
+					{
+						"buffer_size": 1553,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1462,
+								1462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "utils.h",
+					"settings":
+					{
+						"buffer_size": 1136,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								181,
+								181
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "handledata.h",
+					"settings":
+					{
+						"buffer_size": 1016,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								512,
+								512
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "loaddata.h",
+					"settings":
+					{
+						"buffer_size": 417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 6,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "qualityassessment.cpp",
+					"settings":
+					{
+						"buffer_size": 9666,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								919,
+								919
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "handledata.cpp",
+					"settings":
+					{
+						"buffer_size": 801,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								462,
+								462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "main2.cpp",
+					"settings":
+					{
+						"buffer_size": 1331,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								683,
+								683
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 319,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "loaddata.cpp",
+					"settings":
+					{
+						"buffer_size": 949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "runSingleTest.sh",
+					"settings":
+					{
+						"buffer_size": 125,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								124,
+								124
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 345.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 109.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 143.0,
+	"status_bar_visible": true
+}
