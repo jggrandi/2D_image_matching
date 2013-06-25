@@ -4,7 +4,7 @@ LoadData::LoadData(){}
 
 LoadData::~LoadData()
 {
-	free (datasetRaw);
+	//free (datasetRaw);
 }
 
 bool LoadData::loadFile(ImageInfo l_img)

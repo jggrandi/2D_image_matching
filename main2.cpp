@@ -1,18 +1,12 @@
-#include <iostream>
+
 #include <string>
 #include <cstdlib>
 #include <unistd.h>
-
 #include <vector>
-#include <fstream>
 
 #include "handledata.h"
-#include "imageinfo.h"
 #include "systemmessages.h"
 #include "utils.h"
-
-using namespace std;
-
 
 
 int main(int argc, char *argv[])
@@ -67,10 +61,9 @@ int main(int argc, char *argv[])
 
 	handleData.similarityCheck();
 
-
-
 	//handleData.showData();
 
 	printf("TCHAU\n"); 
+
     return 0;
 }

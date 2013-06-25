@@ -1,9 +1,9 @@
 CC = g++
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -O0
 WARNINGOFF = -w
 PROG = imageMatch
 
-SRC = main2.cpp handledata.cpp loaddata.cpp qualityassessment.cpp systemmessages.cpp
+SRC = main2.cpp handledata.cpp loaddata.cpp qualityassessment.cpp systemmessages.cpp logdata.cpp
 LIBS = -lglut
 OPENCV = `pkg-config opencv --libs --cflags`
 

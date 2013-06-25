@@ -6,11 +6,6 @@
 #ifndef QUALITY_ASSESSMENT
 #define QUALITY_ASSESSMENT
 
-
-
-#include <fstream>
-#include <cstdlib>
-
 #include <opencv2/imgproc/imgproc.hpp>  // Gaussian Blur
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
 #include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O
@@ -19,7 +14,6 @@
 #include <opencv2/gpu/gpu.hpp> 
 
 #include "systemmessages.h"
-#include "imageinfo.h"
 #include "loaddata.h"
 #include "utils.h"
 
@@ -36,7 +30,7 @@ public:
 	Scalar getSURF( const Mat& i1, const Mat& i2);
 	Scalar getPSNR_GPU_optimized(const gpu::GpuMat& I1, const gpu::GpuMat& I2, BufferPSNR& b);	
 	Scalar getMSSIM_GPU_optimized( const gpu::GpuMat& i1, const gpu::GpuMat& i2, BufferMSSIM& b);	
-	void checkSimilarity(LoadData dataset1, LoadData dataset2);	
+	vector<twoInts> checkSimilarity(LoadData dataset1, LoadData dataset2);	
     vector<gpu::GpuMat> splitDataset(LoadData dataset);
     void ordenaRank(vector<sliceRank> &srr);
     friend bool operator<(const sliceRank &, const sliceRank &);
@@ -47,9 +41,10 @@ private:
     vector<Mat> datasetSlices;
 	vector<gpu::GpuMat> datasetSlicesGPU;
     sliceRank sr_raw;
-    std::vector<sliceRank> sr,sr_ranked;
+    vector<sliceRank> sr,sr_ranked;
     int rank_size;
-    twoInts sliceAndDistance[10];
+    twoInts sliceAndDistance;
+    vector<twoInts> bestMatches;
 };
 
 

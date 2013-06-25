@@ -8,6 +8,8 @@
 
 #include <fstream>
 #include <cstdlib>
+#include <cstdio>
+
 
 #include <opencv2/imgproc/imgproc.hpp>  // Gaussian Blur
 #include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)
@@ -16,11 +18,10 @@
 #include <opencv2/nonfree/nonfree.hpp>
 #include <opencv2/gpu/gpu.hpp> 
 
-#include "imageinfo.h"
 #include "loaddata.h"
 #include "qualityassessment.h"
 #include "utils.h"
-//#include "logdata.h"
+#include "logdata.h"
 
 using namespace cv;
  
@@ -45,7 +46,8 @@ private:
 	LoadData dataset1,dataset2;
 	QualityAssessment q;
 	OPT oopt;
-
+	LogData logData;
+	vector<twoInts> similarityResults;
 };
 
 

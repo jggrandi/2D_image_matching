@@ -14,6 +14,16 @@ typedef struct options
 	char *logfilename;
 }OPT;
 
+struct ImageInfo
+{
+    char* fileName;
+    short resWidth;
+    short resHeight;
+    short resDepth;
+    short initStack;
+    short endStack;
+};
+
 
 struct sliceRank
 {

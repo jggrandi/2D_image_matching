@@ -12,7 +12,7 @@ QualityAssessment::~QualityAssessment()
 }
 
 
-void QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
+vector<twoInts> QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
 {
 
 	vector<gpu::GpuMat> d1 = splitDataset(dataset1);
@@ -47,22 +47,11 @@ void QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
         
         ordenaRank(sr_ranked);
 
-        for (int j=0; j<rank_size; j++)
-        {
-            int srr=sr_ranked[j].sliceNumber-i;
-            
-            if(j==0) // só guarda o melhor matching
-            {
-                sliceAndDistance[i].sliceNumber=i;
-                sliceAndDistance[i].distanceToOptimal=srr;
-                printVar(i);
-                printVar(srr);
-                //printVar(sliceAndDistance[i].sliceNumber);
-                //printVar(sliceAndDistance[i].distanceToOptimal);
-
-            } 
-        }
+        sliceAndDistance.sliceNumber=i;
+        sliceAndDistance.distanceToOptimal=sr_ranked[0].sliceNumber-i;
+        bestMatches.push_back(sliceAndDistance);
     }
+    return bestMatches;
 }
 
 vector<gpu::GpuMat> QualityAssessment::splitDataset(LoadData dataset)

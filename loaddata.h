@@ -8,7 +8,7 @@
 
 #include <fstream>
 #include <cstdlib>
-#include "imageinfo.h"
+#include "utils.h"
 
 
 class LoadData

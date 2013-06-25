@@ -17,7 +17,12 @@ HandleData::~HandleData(){}
 
 void HandleData::similarityCheck()
 {
-	q.checkSimilarity(dataset1,dataset2);
+	similarityResults = q.checkSimilarity(dataset1,dataset2);
+
+	if(oopt.logdata)
+	{
+		logData.handleLog(oopt.logfilename, similarityResults, img1, img2);
+	}
 }
 /*
 void HandleData::showData()
