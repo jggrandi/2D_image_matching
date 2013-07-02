@@ -9,20 +9,10 @@ using namespace cv;
 
 typedef struct options
 {
-	int verbose;
-	int logdata;
+	bool verbose;
+	bool logdata;
 	char *logfilename;
 }OPT;
-
-struct ImageInfo
-{
-    char* fileName;
-    short resWidth;
-    short resHeight;
-    short resDepth;
-    short initStack;
-    short endStack;
-};
 
 
 struct sliceRank
@@ -60,6 +50,18 @@ struct BufferMSSIM                                     // Optimized GPU versions
 
 
 inline bool operator<(const sliceRank &i, const sliceRank &j){return i.value < j.value;}
+
+static char usage[] =
+"\n"
+"  (C) 2013 Image Matching\n"
+"\n"
+"  usage: ./imageMatch [options] <imagedata1> <width> <height> <stack init> <stack end> <imagedata2> <widht> <height> <stack init> <stack end>\n"
+"\n"
+"  Common options:\n"
+"\n"
+"      -l <file>    : log data to a file\n"
+"      -v   : verbose mode\n"
+"\n";
 
 
 #endif // UTILS

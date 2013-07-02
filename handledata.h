@@ -18,32 +18,26 @@
 #include <opencv2/nonfree/nonfree.hpp>
 #include <opencv2/gpu/gpu.hpp> 
 
-#include "loaddata.h"
+#include <handle3ddataset.h>
 #include "qualityassessment.h"
 #include "utils.h"
 #include "logdata.h"
 
 using namespace cv;
- 
-/* 
-void onTrackbar( int val, void* )
-{
-	imshow( "Dataset1", dataset1 );
-}
-*/
+
 
 class HandleData
 {
 public:
 	HandleData();
-	HandleData(ImageInfo h_img1, ImageInfo h_img2, OPT h_options);
+	HandleData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options);
 	~HandleData();
 	void similarityCheck();
 	void showData();
 	//friend void onTrackbar( int, void* );
 private:
-	ImageInfo *img1,*img2;
-	LoadData dataset1,dataset2;
+	DATAINFO *img1,*img2;
+	Handle3DDataset dataset1,dataset2;
 	QualityAssessment q;
 	OPT oopt;
 	LogData logData;

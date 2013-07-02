@@ -12,13 +12,12 @@ QualityAssessment::~QualityAssessment()
 }
 
 
-vector<twoInts> QualityAssessment::checkSimilarity(LoadData dataset1, LoadData dataset2)
+vector<twoInts> QualityAssessment::checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2)
 {
-
 	vector<gpu::GpuMat> d1 = splitDataset(dataset1);
 	vector<gpu::GpuMat> d2 = splitDataset(dataset2);
-    ImageInfo imgInfoDataset1 = dataset1.getImageInfo();
-    ImageInfo imgInfoDataset2 = dataset2.getImageInfo();
+    DATAINFO imgInfoDataset1 = dataset1.getImageInfo();
+    DATAINFO imgInfoDataset2 = dataset2.getImageInfo();
 
     for(int i=0; i<imgInfoDataset1.resDepth; i++)
     {
@@ -54,10 +53,10 @@ vector<twoInts> QualityAssessment::checkSimilarity(LoadData dataset1, LoadData d
     return bestMatches;
 }
 
-vector<gpu::GpuMat> QualityAssessment::splitDataset(LoadData dataset)
+vector<gpu::GpuMat> QualityAssessment::splitDataset(Handle3DDataset dataset)
 {
 	
-    ImageInfo imgInfo = dataset.getImageInfo();	
+    DATAINFO imgInfo = dataset.getImageInfo();	
 
 	for( int i = 0; i < imgInfo.resDepth; i++ )
 	{

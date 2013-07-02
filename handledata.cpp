@@ -2,14 +2,17 @@
 
 HandleData::HandleData(){}
 
-HandleData::HandleData(ImageInfo h_img1, ImageInfo h_img2, OPT h_options)
+HandleData::HandleData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options)
 {
 	oopt = h_options;
 
-	if(!dataset1.loadFile(h_img1)) printf("Fail to load %s",h_img1.fileName);
+	dataset1(h_img1);
+	dataset2(h_img2);
+
+	if(!dataset1.loadFile()) {printf("Fail to load %s\n",h_img1.fileName);return;}
 	else printf("%s loaded!\n",h_img1.fileName );
 
-	if(!dataset2.loadFile(h_img2)) printf("Fail to load %s",h_img2.fileName);
+	if(!dataset2.loadFile()){printf("Fail to load %s\n",h_img2.fileName);return;}
 	else printf("%s loaded!\n",h_img2.fileName );
 }
 

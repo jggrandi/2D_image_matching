@@ -13,8 +13,7 @@
 #include <opencv2/nonfree/nonfree.hpp>
 #include <opencv2/gpu/gpu.hpp> 
 
-#include "systemmessages.h"
-#include "loaddata.h"
+#include <handle3ddataset.h>
 #include "utils.h"
 
 using namespace cv;
@@ -30,8 +29,8 @@ public:
 	Scalar getSURF( const Mat& i1, const Mat& i2);
 	Scalar getPSNR_GPU_optimized(const gpu::GpuMat& I1, const gpu::GpuMat& I2, BufferPSNR& b);	
 	Scalar getMSSIM_GPU_optimized( const gpu::GpuMat& i1, const gpu::GpuMat& i2, BufferMSSIM& b);	
-	vector<twoInts> checkSimilarity(LoadData dataset1, LoadData dataset2);	
-    vector<gpu::GpuMat> splitDataset(LoadData dataset);
+	vector<twoInts> checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2);	
+    vector<gpu::GpuMat> splitDataset(Handle3DDataset dataset);
     void ordenaRank(vector<sliceRank> &srr);
     friend bool operator<(const sliceRank &, const sliceRank &);
 private:

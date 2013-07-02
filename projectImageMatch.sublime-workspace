@@ -4,12 +4,16 @@
 		"selected_items":
 		[
 			[
-				"slice",
-				"sliceAndDistance"
+				"log",
+				"logFile"
 			],
 			[
-				"log",
-				"logfilename"
+				"l",
+				"l_similarityResults"
+			],
+			[
+				"slice",
+				"sliceAndDistance"
 			],
 			[
 				"h",
@@ -316,10 +320,6 @@
 				"limAux"
 			],
 			[
-				"l",
-				"limI"
-			],
-			[
 				"n_",
 				"n_slice"
 			],
@@ -412,10 +412,18 @@
 			}
 		},
 		{
+			"file": "main.cpp",
+			"settings":
+			{
+				"buffer_size": 25132,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "qualityassessment.h",
 			"settings":
 			{
-				"buffer_size": 1547,
+				"buffer_size": 1496,
 				"line_ending": "Unix"
 			}
 		},
@@ -423,7 +431,7 @@
 			"file": "utils.h",
 			"settings":
 			{
-				"buffer_size": 1136,
+				"buffer_size": 1602,
 				"line_ending": "Unix"
 			}
 		},
@@ -431,7 +439,7 @@
 			"file": "handledata.h",
 			"settings":
 			{
-				"buffer_size": 1086,
+				"buffer_size": 1063,
 				"line_ending": "Unix"
 			}
 		},
@@ -439,7 +447,7 @@
 			"file": "loaddata.h",
 			"settings":
 			{
-				"buffer_size": 417,
+				"buffer_size": 428,
 				"line_ending": "Unix"
 			}
 		},
@@ -447,7 +455,15 @@
 			"file": "logdata.h",
 			"settings":
 			{
-				"buffer_size": 420,
+				"buffer_size": 443,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "handledata.cpp",
+			"settings":
+			{
+				"buffer_size": 937,
 				"line_ending": "Unix"
 			}
 		},
@@ -455,7 +471,7 @@
 			"file": "logdata.cpp",
 			"settings":
 			{
-				"buffer_size": 615,
+				"buffer_size": 951,
 				"line_ending": "Unix",
 				"name": "#include \"logdata.h\""
 			}
@@ -464,15 +480,7 @@
 			"file": "qualityassessment.cpp",
 			"settings":
 			{
-				"buffer_size": 9466,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "handledata.cpp",
-			"settings":
-			{
-				"buffer_size": 927,
+				"buffer_size": 9360,
 				"line_ending": "Unix"
 			}
 		},
@@ -480,7 +488,7 @@
 			"file": "main2.cpp",
 			"settings":
 			{
-				"buffer_size": 1267,
+				"buffer_size": 1215,
 				"line_ending": "Unix"
 			}
 		},
@@ -488,7 +496,7 @@
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 361,
+				"buffer_size": 365,
 				"line_ending": "Unix"
 			}
 		},
@@ -496,7 +504,7 @@
 			"file": "loaddata.cpp",
 			"settings":
 			{
-				"buffer_size": 949,
+				"buffer_size": 914,
 				"line_ending": "Unix"
 			}
 		},
@@ -504,7 +512,23 @@
 			"file": "runSingleTest.sh",
 			"settings":
 			{
-				"buffer_size": 129,
+				"buffer_size": 137,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "loaddata.h",
+			"settings":
+			{
+				"buffer_size": 428,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "loaddata.cpp",
+			"settings":
+			{
+				"buffer_size": 914,
 				"line_ending": "Unix"
 			}
 		}
@@ -557,6 +581,10 @@
 	},
 	"file_history":
 	[
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
+		"/mnt/truecrypt1/Dropbox/eclipse_workspace/aulaspraticas_sources/arqBinario.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo.h",
 		"/home/jeronimo/Documents/minc-2.0.18/libsrc/voxel_loop.h",
 		"/home/jeronimo/Documents/minc-2.0.18/libsrc/voxel_loop.c",
 		"/home/jeronimo/Documents/minc-2.0.18/libtool",
@@ -680,15 +708,11 @@
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/venosa/venosa.nhdr",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/tardia/tardia.nhdr",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/sem_contraste/sem_contraste.nhdr",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/TI/tiRef.bib",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/sib2013.bib",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/TI/ti.aux",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/Makefile",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/venosa/DICOMDIR33"
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/TI/tiRef.bib"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 36.0
 	},
 	"find_in_files":
 	{
@@ -847,7 +871,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -862,8 +886,8 @@
 						"selection":
 						[
 							[
-								136,
-								136
+								549,
+								549
 							]
 						],
 						"settings":
@@ -878,46 +902,45 @@
 				},
 				{
 					"buffer": 1,
-					"file": "qualityassessment.h",
+					"file": "main.cpp",
 					"settings":
 					{
-						"buffer_size": 1547,
+						"buffer_size": 25132,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								116,
-								116
+								9797,
+								9797
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": 102.0,
+						"translation.y": 5013.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "utils.h",
+					"file": "qualityassessment.h",
 					"settings":
 					{
-						"buffer_size": 1136,
+						"buffer_size": 1496,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								181,
-								181
+								0,
+								0
 							]
 						],
 						"settings":
@@ -934,130 +957,18 @@
 				},
 				{
 					"buffer": 3,
-					"file": "handledata.h",
+					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 1086,
+						"buffer_size": 1602,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1039,
-								1039
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "loaddata.h",
-					"settings":
-					{
-						"buffer_size": 417,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								124,
-								124
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "logdata.h",
-					"settings":
-					{
-						"buffer_size": 420,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								71,
-								71
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
-				{
-					"buffer": 6,
-					"file": "logdata.cpp",
-					"settings":
-					{
-						"buffer_size": 615,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								198,
-								198
-							]
-						],
-						"settings":
-						{
-							"auto_name": "#include \"logdata.h\"",
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "qualityassessment.cpp",
-					"settings":
-					{
-						"buffer_size": 9466,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1591,
-								1591
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1073,19 +984,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "handledata.cpp",
+					"buffer": 4,
+					"file": "handledata.h",
 					"settings":
 					{
-						"buffer_size": 927,
+						"buffer_size": 1063,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								271,
-								271
+								1063,
+								1063
 							]
 						],
 						"settings":
@@ -1100,64 +1011,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "main2.cpp",
+					"buffer": 5,
+					"file": "loaddata.h",
 					"settings":
 					{
-						"buffer_size": 1267,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1170,
-								1170
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 135.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "Makefile",
-					"settings":
-					{
-						"buffer_size": 361,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								219,
-								219
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Makefile/Makefile.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "loaddata.cpp",
-					"settings":
-					{
-						"buffer_size": 949,
+						"buffer_size": 428,
 						"regions":
 						{
 						},
@@ -1180,26 +1038,275 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "runSingleTest.sh",
+					"buffer": 6,
+					"file": "logdata.h",
 					"settings":
 					{
-						"buffer_size": 129,
+						"buffer_size": 443,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								124,
-								124
+								86,
+								86
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 7,
+					"file": "handledata.cpp",
+					"settings":
+					{
+						"buffer_size": 937,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								283,
+								283
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "logdata.cpp",
+					"settings":
+					{
+						"buffer_size": 951,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								535,
+								535
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#include \"logdata.h\"",
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "qualityassessment.cpp",
+					"settings":
+					{
+						"buffer_size": 9360,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1484,
+								1484
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 45.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "main2.cpp",
+					"settings":
+					{
+						"buffer_size": 1215,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 365,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								323,
+								323
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "loaddata.cpp",
+					"settings":
+					{
+						"buffer_size": 914,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "runSingleTest.sh",
+					"settings":
+					{
+						"buffer_size": 137,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								137,
+								137
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
-						"translation.x": 345.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "loaddata.h",
+					"settings":
+					{
+						"buffer_size": 428,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								350,
+								350
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "loaddata.cpp",
+					"settings":
+					{
+						"buffer_size": 914,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								214,
+								214
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
