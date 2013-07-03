@@ -19,7 +19,7 @@
 #include <opencv2/gpu/gpu.hpp> 
 
 #include <handle3ddataset.h>
-#include "qualityassessment.h"
+#include "similarityassessment.h"
 #include "utils.h"
 #include "logdata.h"
 
@@ -38,7 +38,7 @@ public:
 private:
 	DATAINFO *img1,*img2;
 	Handle3DDataset *dataset1,*dataset2;
-	QualityAssessment q;
+	SimilarityAssessment q;
 	OPT oopt;
 	LogData logData;
 	vector<twoInts> similarityResults;
