@@ -49,8 +49,6 @@ struct BufferMSSIM                                     // Optimized GPU versions
 
 
 
-inline bool operator<(const sliceRank &i, const sliceRank &j){return i.value < j.value;}
-
 static char usage[] =
 "\n"
 "  (C) 2013 Image Matching\n"

@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <handle3ddataset.h>
+#include "handledata.h"
 #include "utils.h"
 
 

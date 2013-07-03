@@ -16,7 +16,7 @@ MY_R_PATCH = -Wl,-R/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DD
 
 
 $(PROG): $(SRC)
-	 $(CC) $(CFLAGS) $(COPTIMIZATION) $(WARNINGOFF) -o $(PROG) $(SRC) $(OPENGL) $(OPENCV) $(MY_INCLUDE) $(MY_LIB) $(MY_LIB_PATCH) $(MY_R_PATCH)
+	 $(CC) $(CFLAGS) $(WARNINGOFF) -o $(PROG) $(SRC) $(OPENGL) $(OPENCV) $(MY_INCLUDE) $(MY_LIB) $(MY_LIB_PATCH) $(MY_R_PATCH)
 
 
 clean:

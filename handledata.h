@@ -37,7 +37,7 @@ public:
 	//friend void onTrackbar( int, void* );
 private:
 	DATAINFO *img1,*img2;
-	Handle3DDataset dataset1,dataset2;
+	Handle3DDataset *dataset1,*dataset2;
 	QualityAssessment q;
 	OPT oopt;
 	LogData logData;

@@ -15,7 +15,7 @@
 
 #include <handle3ddataset.h>
 #include "utils.h"
-
+using namespace std;
 using namespace cv;
 
 
@@ -29,10 +29,9 @@ public:
 	Scalar getSURF( const Mat& i1, const Mat& i2);
 	Scalar getPSNR_GPU_optimized(const gpu::GpuMat& I1, const gpu::GpuMat& I2, BufferPSNR& b);	
 	Scalar getMSSIM_GPU_optimized( const gpu::GpuMat& i1, const gpu::GpuMat& i2, BufferMSSIM& b);	
-	vector<twoInts> checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2);	
-    vector<gpu::GpuMat> splitDataset(Handle3DDataset dataset);
-    void ordenaRank(vector<sliceRank> &srr);
-    friend bool operator<(const sliceRank &, const sliceRank &);
+	vector<twoInts> checkSimilarity(Handle3DDataset *dataset1, Handle3DDataset *dataset2);	
+    vector<gpu::GpuMat> splitDataset(Handle3DDataset *dataset);
+    void ordenaRank(vector<sliceRank> *srr);
 private:
     BufferPSNR bufferPSNR;
     BufferMSSIM bufferMSSIM;

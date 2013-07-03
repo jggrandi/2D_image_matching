@@ -12,13 +12,16 @@ QualityAssessment::~QualityAssessment()
 }
 
 
-vector<twoInts> QualityAssessment::checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2)
+vector<twoInts> QualityAssessment::checkSimilarity(Handle3DDataset *dataset1, Handle3DDataset *dataset2)
 {
 	vector<gpu::GpuMat> d1 = splitDataset(dataset1);
 	vector<gpu::GpuMat> d2 = splitDataset(dataset2);
-    DATAINFO imgInfoDataset1 = dataset1.getImageInfo();
-    DATAINFO imgInfoDataset2 = dataset2.getImageInfo();
-
+    DATAINFO imgInfoDataset1 = dataset1->getImageInfo();
+    DATAINFO imgInfoDataset2 = dataset2->getImageInfo();
+    
+//    vector<sliceRank> & ref_sr = *sr;
+//    vector<sliceRank> & ref_sr_ranked = *sr_ranked;
+    
     for(int i=0; i<imgInfoDataset1.resDepth; i++)
     {
         for(int j=0; j<imgInfoDataset2.resDepth; j++)
@@ -32,7 +35,8 @@ vector<twoInts> QualityAssessment::checkSimilarity(Handle3DDataset dataset1, Han
             sr.push_back(sr_raw);
         }
 
-        ordenaRank(sr);
+        ordenaRank(&sr);
+
         sr.clear();
         sr_ranked.clear();
         
@@ -44,7 +48,7 @@ vector<twoInts> QualityAssessment::checkSimilarity(Handle3DDataset dataset1, Han
             sr_ranked.push_back(sr_raw);
         }
         
-        ordenaRank(sr_ranked);
+        ordenaRank(&sr_ranked);
 
         sliceAndDistance.sliceNumber=i;
         sliceAndDistance.distanceToOptimal=sr_ranked[0].sliceNumber-i;
@@ -53,14 +57,14 @@ vector<twoInts> QualityAssessment::checkSimilarity(Handle3DDataset dataset1, Han
     return bestMatches;
 }
 
-vector<gpu::GpuMat> QualityAssessment::splitDataset(Handle3DDataset dataset)
+vector<gpu::GpuMat> QualityAssessment::splitDataset(Handle3DDataset *dataset)
 {
 	
-    DATAINFO imgInfo = dataset.getImageInfo();	
-
+    DATAINFO imgInfo = dataset->getImageInfo();	
+    
 	for( int i = 0; i < imgInfo.resDepth; i++ )
 	{
-        unsigned short** d = dataset.getDataset();
+        unsigned short** d = dataset->getDataset();
 		Mat slice(imgInfo.resHeight,imgInfo.resWidth,CV_16UC1,d[i]);
 		Mat plane;
 		gpu::GpuMat planeGPU;
@@ -73,9 +77,14 @@ vector<gpu::GpuMat> QualityAssessment::splitDataset(Handle3DDataset dataset)
 
 }
 
-void QualityAssessment::ordenaRank(vector<sliceRank> &srr)
+void QualityAssessment::ordenaRank(vector<sliceRank> *srr)
 {
-    std::sort(srr.begin(),srr.end());
+//  std::sort(srr.begin(),srr.end());
+//  bubble bunda pra gerar o ranking
+    for(unsigned int j=0; j<srr->size(); j++) 
+        for(unsigned int i=0; i<srr->size()-1; i++)
+            if((*srr)[i+1].value > (*srr)[i].value)
+                std::swap((*srr)[i+1], (*srr)[i]);
 }
 
 
