@@ -31,7 +31,7 @@ class HandleData
 {
 public:
 	HandleData();
-	HandleData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options);
+	HandleData(DATAINFO *h_img1, DATAINFO *h_img2, OPT h_options);
 	~HandleData();
 	void similarityCheck();
 	void showData();

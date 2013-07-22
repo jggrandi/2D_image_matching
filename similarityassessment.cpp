@@ -34,9 +34,6 @@ vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset *dataset1,
         }
 
         ordenaRank(&sr);
-
-        sr.clear();
-        sr_ranked.clear();
         
         for(int j=0; j<rank_size; j++)
         {
@@ -51,6 +48,9 @@ vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset *dataset1,
         sliceAndDistance.sliceNumber=i;
         sliceAndDistance.distanceToOptimal=sr_ranked[0].sliceNumber-i;
         bestMatches.push_back(sliceAndDistance);
+
+        sr.clear();
+        sr_ranked.clear();
     }
     return bestMatches;
 }

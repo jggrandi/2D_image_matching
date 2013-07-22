@@ -2,18 +2,18 @@
 
 HandleData::HandleData(){}
 
-HandleData::HandleData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options)
+HandleData::HandleData(DATAINFO *h_img1, DATAINFO *h_img2, OPT h_options)
 {
 	oopt = h_options;
 	
-	dataset1 = new Handle3DDataset(h_img1);
-	dataset2 = new Handle3DDataset(h_img2);
+	dataset1 = new Handle3DDataset(*h_img1);
+	dataset2 = new Handle3DDataset(*h_img2);
 
-	if(!dataset1->loadFile()) {printf("Fail to load %s\n",h_img1.inputFileName);return;}
-	else printf("%s loaded!\n",h_img1.inputFileName );
+	if(!dataset1->loadFile()) {printf("Fail to load %s\n",h_img1->inputFileName);return;}
+	else printf("%s loaded!\n",h_img1->inputFileName );
 
-	if(!dataset2->loadFile()){printf("Fail to load %s\n",h_img2.inputFileName);return;}
-	else printf("%s loaded!\n",h_img2.inputFileName );
+	if(!dataset2->loadFile()){printf("Fail to load %s\n",h_img2->inputFileName);return;}
+	else printf("%s loaded!\n",h_img2->inputFileName );
 }
 
 HandleData::~HandleData(){}

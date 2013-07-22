@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"MY_R_PATCH_",
+				"MY_R_PATCH_HANDLE3DDATASETS"
+			],
+			[
+				"MY_LIB_PATCH_",
+				"MY_LIB_PATCH_QUALITYASSESSMENT"
+			],
+			[
+				"MY_LIB_",
+				"MY_LIB_QUALITYASSESSMENT"
+			],
+			[
+				"MY_INCLUDE_",
+				"MY_INCLUDE_HANDLE3DDATASETS"
+			],
+			[
+				"quA",
+				"QualityAssessment"
+			],
+			[
 				"time",
 				"timeVisitante"
 			],
@@ -452,21 +472,10 @@
 	"buffers":
 	[
 		{
-			"file": "main.cpp",
+			"file": "similarityassessment.h",
 			"settings":
 			{
-				"buffer_size": 25132,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "",
-			"file": "qualityassessment.h",
-			"file_size": -1,
-			"file_write_time": -1,
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 1152,
 				"line_ending": "Unix"
 			}
 		},
@@ -482,15 +491,7 @@
 			"file": "handledata.h",
 			"settings":
 			{
-				"buffer_size": 1003,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "loaddata.h",
-			"settings":
-			{
-				"buffer_size": 428,
+				"buffer_size": 1006,
 				"line_ending": "Unix"
 			}
 		},
@@ -503,10 +504,18 @@
 			}
 		},
 		{
+			"file": "similarityassessment.cpp",
+			"settings":
+			{
+				"buffer_size": 2480,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "handledata.cpp",
 			"settings":
 			{
-				"buffer_size": 1029,
+				"buffer_size": 1037,
 				"line_ending": "Unix"
 			}
 		},
@@ -520,18 +529,10 @@
 			}
 		},
 		{
-			"file": "qualityassessment.cpp",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "main2.cpp",
 			"settings":
 			{
-				"buffer_size": 1304,
+				"buffer_size": 1316,
 				"line_ending": "Unix"
 			}
 		},
@@ -539,42 +540,7 @@
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 713,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "loaddata.cpp",
-			"settings":
-			{
-				"buffer_size": 914,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "runSingleTest.sh",
-			"settings":
-			{
-				"buffer_size": 134,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "loaddata.h",
-			"settings":
-			{
-				"buffer_size": 428,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "",
-			"file": "loaddata.cpp",
-			"file_size": 914,
-			"file_write_time": 1372217231000000,
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 1358,
 				"line_ending": "Unix"
 			}
 		}
@@ -627,6 +593,16 @@
 	},
 	"file_history":
 	[
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/run2.sh",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Makefile2",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/runSingleTest2.sh",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/runSingleTest.sh",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/build_project",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.h",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata.cpp",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/qualityassessment.cpp",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/qualityassessment.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Hepatec/VolumeRendering/android_sources/ar/ImageTargets/jni/ImageTargets.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202 (1)/Projeto/sources_alunos/Souces/Caio_Lunardi- Guilherme_Cunha/fase1.txt",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202 (1)/Projeto/sources_alunos/Souces/Caio_Lunardi- Guilherme_Cunha/GAME_OVER.txt",
@@ -648,7 +624,6 @@
 		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/partida.bin",
 		"/mnt/truecrypt1/Dropbox/eclipse_workspace/aulaspraticas_sources/partidas.txt",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.h",
-		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
 		"/mnt/truecrypt1/Dropbox/eclipse_workspace/aulaspraticas_sources/arqBinario.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo.h",
@@ -745,16 +720,7 @@
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/bargraph.pl",
 		"/home/jeronimo/less",
 		"/home/jeronimo/goto_UFRGS_Mestrado_Devel.sh",
-		"/home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/src/cuda/row_filter.h",
-		"/home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/src/filtering.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/relatedwork.tex",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/RiverRaid_MapaExemplo.c",
-		"/home/jeronimo/.cache/.fr-MAFaOk/river.c",
-		"/home/jeronimo/.cache/.fr-yOac9B/map.txt",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/river",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/river.c",
-		"/home/jeronimo/Downloads/opencv-cuda-all/PKGBUILD",
-		"/home/jeronimo/.cache/.fr-TFrJz0/opencv-cuda-all/PKGBUILD"
+		"/home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/src/cuda/row_filter.h"
 	],
 	"find":
 	{
@@ -772,6 +738,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			".",
 			"jogos[index]",
 			"jogos",
 			"arq",
@@ -898,8 +865,7 @@
 			"i1",
 			"I1",
 			"i1",
-			"descriptors_1",
-			"keypoints_1"
+			"descriptors_1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -917,50 +883,23 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "main.cpp",
+					"file": "similarityassessment.h",
 					"settings":
 					{
-						"buffer_size": 25132,
+						"buffer_size": 1152,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5013.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "qualityassessment.h",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								500,
+								500
 							]
 						],
 						"settings":
@@ -976,7 +915,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 1,
 					"file": "utils.h",
 					"settings":
 					{
@@ -1004,19 +943,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 2,
 					"file": "handledata.h",
 					"settings":
 					{
-						"buffer_size": 1003,
+						"buffer_size": 1006,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3,
+								3
 							]
 						],
 						"settings":
@@ -1031,34 +970,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "loaddata.h",
-					"settings":
-					{
-						"buffer_size": 428,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "logdata.h",
 					"settings":
 					{
@@ -1069,8 +981,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								469,
+								469
 							]
 						],
 						"settings":
@@ -1086,23 +998,51 @@
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 4,
 			"sheets":
 			[
 				{
-					"buffer": 6,
-					"file": "handledata.cpp",
+					"buffer": 4,
+					"file": "similarityassessment.cpp",
 					"settings":
 					{
-						"buffer_size": 1029,
+						"buffer_size": 2480,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								983,
+								983
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "handledata.cpp",
+					"settings":
+					{
+						"buffer_size": 1037,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								581,
+								581
 							]
 						],
 						"settings":
@@ -1117,7 +1057,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "logdata.cpp",
 					"settings":
 					{
@@ -1145,47 +1085,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "qualityassessment.cpp",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
+					"buffer": 7,
 					"file": "main2.cpp",
 					"settings":
 					{
-						"buffer_size": 1304,
+						"buffer_size": 1316,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1203,
+								1203
 							]
 						],
 						"settings":
@@ -1200,131 +1112,24 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 8,
 					"file": "Makefile",
 					"settings":
 					{
-						"buffer_size": 713,
+						"buffer_size": 1358,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								87,
+								87
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Makefile/Makefile.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "loaddata.cpp",
-					"settings":
-					{
-						"buffer_size": 914,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "runSingleTest.sh",
-					"settings":
-					{
-						"buffer_size": 134,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "loaddata.h",
-					"settings":
-					{
-						"buffer_size": 428,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "loaddata.cpp",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
