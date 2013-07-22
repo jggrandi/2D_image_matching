@@ -15,6 +15,7 @@
 
 #include <handle3ddataset.h>
 #include <qualityassessment.h>
+#include <qualityassessment_utils.h>
     
 #include "utils.h"
 

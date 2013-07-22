@@ -24,7 +24,7 @@ vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset *dataset1,
     {
         for(int j=0; j<imgInfoDataset2.resDepth; j++)
         {
-            mpsnrV = qualAssess.getPSNR_GPU_optimized(d1[i],d2[j],bufferPSNR);    
+            mpsnrV = qualAssess.getPSNR_GPU_optimized(d1[i],d2[j]);    
             if(mpsnrV.val[0]==0) 
                 sr_raw.value=100;
             else
@@ -40,7 +40,7 @@ vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset *dataset1,
         
         for(int j=0; j<rank_size; j++)
         {
-            mssimV = qualAssess.getMSSIM_GPU_optimized(d1[i],d2[sr[j].sliceNumber],bufferMSSIM);//compara dataset1xdataset2 com SSIM
+            mssimV = qualAssess.getMSSIM_GPU_optimized(d1[i],d2[sr[j].sliceNumber]);//compara dataset1xdataset2 com SSIM
             sr_raw.value = mssimV.val[0];
             sr_raw.sliceNumber=sr[j].sliceNumber;            
             sr_ranked.push_back(sr_raw);

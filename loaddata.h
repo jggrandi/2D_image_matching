@@ -20,6 +20,7 @@ public:
 	unsigned short** getDataset();
 	ImageInfo getImageInfo();
 private:
+	FILE* inFile;
 	ImageInfo imgInfo;
 	unsigned short** datasetRaw;
 

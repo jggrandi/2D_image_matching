@@ -4,6 +4,70 @@
 		"selected_items":
 		[
 			[
+				"time",
+				"timeVisitante"
+			],
+			[
+				"arq",
+				"arqSaida"
+			],
+			[
+				"me",
+				"mediaDeGols"
+			],
+			[
+				"go",
+				"golsT2"
+			],
+			[
+				"gos",
+				"golsT1"
+			],
+			[
+				"partida",
+				"partidaMaiorDiff"
+			],
+			[
+				"ind",
+				"indMaiorDiff"
+			],
+			[
+				"mai",
+				"maiorDiff"
+			],
+			[
+				"gol",
+				"golsDiff"
+			],
+			[
+				"ar",
+				"arqSaida"
+			],
+			[
+				"ti",
+				"timeMandante"
+			],
+			[
+				"g",
+				"golsT2"
+			],
+			[
+				"gl",
+				"golsT2"
+			],
+			[
+				"pla",
+				"placarPartida"
+			],
+			[
+				"cont",
+				"cont_x"
+			],
+			[
+				"data",
+				"dataPartida"
+			],
+			[
 				"log",
 				"logFile"
 			],
@@ -58,10 +122,6 @@
 			[
 				"get",
 				"getPSNR"
-			],
-			[
-				"data",
-				"datasetSlicesGPU"
 			],
 			[
 				"spl",
@@ -276,10 +336,6 @@
 				"mediaSColorados"
 			],
 			[
-				"me",
-				"mediaSGremistas"
-			],
-			[
 				"col",
 				"colorados"
 			],
@@ -344,10 +400,6 @@
 				"sliceRank"
 			],
 			[
-				"time",
-				"timeAlgorithm"
-			],
-			[
 				"a",
 				"algorithm"
 			],
@@ -370,10 +422,6 @@
 			[
 				"inc",
 				"include"
-			],
-			[
-				"ar",
-				"argv"
 			],
 			[
 				"ch",
@@ -412,10 +460,13 @@
 			}
 		},
 		{
+			"contents": "",
 			"file": "qualityassessment.h",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
-				"buffer_size": 1502,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -423,7 +474,7 @@
 			"file": "utils.h",
 			"settings":
 			{
-				"buffer_size": 1369,
+				"buffer_size": 655,
 				"line_ending": "Unix"
 			}
 		},
@@ -431,7 +482,7 @@
 			"file": "handledata.h",
 			"settings":
 			{
-				"buffer_size": 997,
+				"buffer_size": 1003,
 				"line_ending": "Unix"
 			}
 		},
@@ -472,7 +523,7 @@
 			"file": "qualityassessment.cpp",
 			"settings":
 			{
-				"buffer_size": 9827,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -488,7 +539,7 @@
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 700,
+				"buffer_size": 713,
 				"line_ending": "Unix"
 			}
 		},
@@ -517,10 +568,13 @@
 			}
 		},
 		{
+			"contents": "",
 			"file": "loaddata.cpp",
+			"file_size": 914,
+			"file_write_time": 1372217231000000,
 			"settings":
 			{
-				"buffer_size": 914,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		}
@@ -573,6 +627,26 @@
 	},
 	"file_history":
 	[
+		"/mnt/truecrypt1/Dropbox/UFRGS/Hepatec/VolumeRendering/android_sources/ar/ImageTargets/jni/ImageTargets.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202 (1)/Projeto/sources_alunos/Souces/Caio_Lunardi- Guilherme_Cunha/fase1.txt",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202 (1)/Projeto/sources_alunos/Souces/Caio_Lunardi- Guilherme_Cunha/GAME_OVER.txt",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202 (1)/Projeto/sources_alunos/Souces/Augusto_Delavald - Leonardo_Barlette-Leonardo_Blender/descrição.txt",
+		"/run/user/1000/gvfs/sftp:host=xmohouse.redirectme.net,port=2222,user=jeronimo/mnt/Data/UsersHome/AdvancedUsers/Jeronimo/Android/qcar-sdk-1-0-0/samples/ImageTargets/jni/ImageTargets - Copy.cpp",
+		"/run/user/1000/gvfs/sftp:host=xmohouse.redirectme.net,port=2222,user=jeronimo/mnt/Data/UsersHome/AdvancedUsers/Jeronimo/Android/qcar-sdk-1-0-0/samples/ImageTargets/jni/ImageTargets.cpp",
+		"/run/user/1000/gvfs/sftp:host=xmohouse.redirectme.net,port=2222,user=jeronimo/mnt/Data/UsersHome/AdvancedUsers/Jeronimo/Android/android-ndk-r7c/samples/hello-gl2/jni/gl_code.cpp",
+		"/run/user/1000/gvfs/sftp:host=xmohouse.redirectme.net,port=2222,user=jeronimo/mnt/Data/UsersHome/AdvancedUsers/Jeronimo/Android/qcar-android-1-5-4-beta1/samples/ImageTargets/jni/ImageTargets.cpp",
+		"/run/user/1000/gvfs/sftp:host=xmohouse.redirectme.net,port=2222,user=jeronimo/mnt/Data/UsersHome/AdvancedUsers/Jeronimo/Android/vuforia-sdk-android-1-5-9/samples/ImageTargets/jni/ImageTargets.cpp",
+		"/run/user/1000/gvfs/sftp:host=xmohouse.redirectme.net,port=2222,user=jeronimo/mnt/Data/UsersHome/AdvancedUsers/Jeronimo/Android/vuforia-sdk-android-1-5-9_bkp/samples/ImageTargets/jni/ImageTargets.cpp",
+		"/home/jeronimo/.conkyrc",
+		"/mnt/truecrypt1/Dropbox/desktop.ini",
+		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/partidas.txt",
+		"/mnt/truecrypt1/Dropbox/inf01202 (1)/src/Provas2013/Prova2_questoes.cpp",
+		"/mnt/truecrypt1/Dropbox/eclipse_workspace/aulaspraticas_sources/exerciciosProva.cpp",
+		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/arqBinario.cpp",
+		"/mnt/truecrypt1/Dropbox/inf01202 (1)/src/Provas2013/questao4.c",
+		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/ponteiros1.cpp",
+		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/partida.bin",
+		"/mnt/truecrypt1/Dropbox/eclipse_workspace/aulaspraticas_sources/partidas.txt",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.h",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
@@ -589,7 +663,6 @@
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/qualityassessment.cpp",
 		"/home/jeronimo/Dropbox/eclipse_workspace/aulaspraticas_sources/mandel.c",
-		"/home/jeronimo/.conkyrc",
 		"/home/jeronimo/.cache/.fr-2eCfGu/conky-1.9.0/data/conky.conf",
 		"/home/jeronimo/.config/sublime-text-2/Packages/User/Xmo_Make.sublime-build",
 		"/home/jeronimo/.config/sublime-text-2/Packages/C++/C++.sublime-build",
@@ -681,26 +754,7 @@
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/river",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/Atividade_Didática/inf01202/Projeto/river.c",
 		"/home/jeronimo/Downloads/opencv-cuda-all/PKGBUILD",
-		"/home/jeronimo/.cache/.fr-TFrJz0/opencv-cuda-all/PKGBUILD",
-		"/home/jeronimo/.cache/.fr-rIDuN4/opencv-2.4.4/README",
-		"/home/jeronimo/Downloads/README.rst",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Logs/tardiaXarterial/256x256x140/tardiaXarterial[256x256x140]Alg0_Plane0",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/arterial/arterial.nhdr",
-		"/home/jeronimo/rnd",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/ref/2d_3d_matching/pegar.txt",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/template_latex_sibgrapi_ieee/example.bib",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Sibigrapi2013/latex/sib2013.tex",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Logs/tardia.rawXarterial.raw/256x256/tardiaXarterial_256_combined.csv",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/acceptedCode0172.cpp",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/arranjo1.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/gnuplot.cmd",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/Trabalho Final/implementação/UbiVoroGame/main.cpp",
-		"/usr/share/opencv/samples/cpp/descriptor_extractor_matcher.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/sift_only/src/main.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Logs/tardia_256.raw_venosa_256.raw_240_0_0.csv__",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/venosa/venosa.nhdr",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/tardia/tardia.nhdr",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/sem_contraste/sem_contraste.nhdr"
+		"/home/jeronimo/.cache/.fr-TFrJz0/opencv-cuda-all/PKGBUILD"
 	],
 	"find":
 	{
@@ -718,6 +772,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"jogos[index]",
+			"jogos",
+			"arq",
+			"cont_ast",
 			"MAX_NC_OPEN",
 			"miicv_create",
 			"i_img2",
@@ -841,11 +899,7 @@
 			"I1",
 			"i1",
 			"descriptors_1",
-			"keypoints_1",
-			"img_2",
-			"img_1",
-			"100",
-			"50"
+			"keypoints_1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -863,7 +917,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -878,8 +932,8 @@
 						"selection":
 						[
 							[
-								9797,
-								9797
+								0,
+								0
 							]
 						],
 						"settings":
@@ -898,7 +952,7 @@
 					"file": "qualityassessment.h",
 					"settings":
 					{
-						"buffer_size": 1502,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -926,7 +980,7 @@
 					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 1369,
+						"buffer_size": 655,
 						"regions":
 						{
 						},
@@ -954,7 +1008,7 @@
 					"file": "handledata.h",
 					"settings":
 					{
-						"buffer_size": 997,
+						"buffer_size": 1003,
 						"regions":
 						{
 						},
@@ -1032,7 +1086,7 @@
 			]
 		},
 		{
-			"selected": 8,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -1095,7 +1149,7 @@
 					"file": "qualityassessment.cpp",
 					"settings":
 					{
-						"buffer_size": 9827,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
@@ -1150,7 +1204,7 @@
 					"file": "Makefile",
 					"settings":
 					{
-						"buffer_size": 700,
+						"buffer_size": 713,
 						"regions":
 						{
 						},
@@ -1236,8 +1290,8 @@
 						"selection":
 						[
 							[
-								350,
-								350
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1256,15 +1310,15 @@
 					"file": "loaddata.cpp",
 					"settings":
 					{
-						"buffer_size": 914,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								214,
-								214
+								0,
+								0
 							]
 						],
 						"settings":
