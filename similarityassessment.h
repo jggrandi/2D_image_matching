@@ -26,16 +26,15 @@ class SimilarityAssessment
 public:
 	SimilarityAssessment();
 	~SimilarityAssessment();
-	vector<twoInts> checkSimilarity(Handle3DDataset *dataset1, Handle3DDataset *dataset2);	
-    vector<gpu::GpuMat> splitDataset(Handle3DDataset *dataset);
+	vector<twoInts> checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2);	
+    vector<gpu::GpuMat> splitDataset(Handle3DDataset dataset);
     void ordenaRank(vector<sliceRank> *srr);
 private:
-    Scalar mssimV,msurfV,mpsnrV;
-    vector<Mat> datasetSlices;
+    int rank_size;
+    Scalar mssimV,mpsnrV;
 	vector<gpu::GpuMat> datasetSlicesGPU;
     sliceRank sr_raw;
     vector<sliceRank> sr,sr_ranked;
-    int rank_size;
     twoInts sliceAndDistance;
     vector<twoInts> bestMatches;
     QualityAssessment qualAssess;

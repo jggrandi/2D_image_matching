@@ -10,10 +10,10 @@ class LogData
 public:
 	LogData();
 	~LogData();
+	void handleLog(char *l_fileName, vector<twoInts> l_similarityResults, double l_runtime);
 	bool createFile(char *l_fileName);
-	bool saveDataIntoFile(char *l_fileName, vector<twoInts> l_similarityResults);
+	bool saveDataIntoFile(char *l_fileName, vector<twoInts> l_similarityResults, double l_runtime);
 	bool closeFile(char *l_fileName);
-	void handleLog(char *l_fileName, vector<twoInts> l_similarityResults, DATAINFO *img1, DATAINFO *img2);
 private:
 	char *fileName;
 	FILE *logFile;

@@ -2,30 +2,45 @@
 
 HandleData::HandleData(){}
 
-HandleData::HandleData(DATAINFO *h_img1, DATAINFO *h_img2, OPT h_options)
+HandleData::~HandleData(){}
+
+int HandleData::loadData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options)
 {
 	oopt = h_options;
+
+	dataset1 = Handle3DDataset(h_img1);
+	dataset2 = Handle3DDataset(h_img2);
+
+	if(!dataset1.loadFile()) 
+	{
+		printf("Failed to load %s\n",h_img1.inputFileName);
+		return 1;
+	}
+	else
+		printf("%s loaded!\n",h_img1.inputFileName );
+
+	if(!dataset2.loadFile())
+	{
+		printf("Failed to load %s\n",h_img2.inputFileName);
+		return 1;
+	}
+	else 
+		printf("%s loaded!\n",h_img2.inputFileName );
 	
-	dataset1 = new Handle3DDataset(*h_img1);
-	dataset2 = new Handle3DDataset(*h_img2);
-
-	if(!dataset1->loadFile()) {printf("Fail to load %s\n",h_img1->inputFileName);return;}
-	else printf("%s loaded!\n",h_img1->inputFileName );
-
-	if(!dataset2->loadFile()){printf("Fail to load %s\n",h_img2->inputFileName);return;}
-	else printf("%s loaded!\n",h_img2->inputFileName );
+	return 0;
 }
-
-HandleData::~HandleData(){}
 
 void HandleData::similarityCheck()
 {
-	similarityResults = q.checkSimilarity(dataset1,dataset2);
-
 	if(oopt.logdata)
 	{
-		logData.handleLog(oopt.logfilename, similarityResults, img1, img2);
+		double timeCounter= (double)getTickCount();
+		similarityResults = q.checkSimilarity(dataset1,dataset2);
+		timeCounter = ((double)getTickCount() - timeCounter)/getTickFrequency();
+		logData.handleLog(oopt.logfilename, similarityResults,timeCounter);
 	}
+	else
+		similarityResults = q.checkSimilarity(dataset1,dataset2);
 }
 /*
 void HandleData::showData()
