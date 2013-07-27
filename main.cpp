@@ -52,12 +52,12 @@ int main(int argc, char *argv[])
 
 	HandleData handleData;
 
-	handleData.loadData(img1Info,img2Info,opt);
+	if(!handleData.loadData(img1Info,img2Info,opt))
+		return -1;
+
 	handleData.similarityCheck();
 
-	//handleData.showData();
-
-	printf("TCHAU\n"); 
+	printf("Hard work done! ;)\n"); 
 
     return 0;
 }

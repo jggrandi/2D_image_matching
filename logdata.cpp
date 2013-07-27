@@ -24,7 +24,7 @@ bool LogData::saveDataIntoFile(char *l_fileName, vector<twoInts> l_similarityRes
 {
 	for(unsigned int i=0; i<l_similarityResults.size(); i++)
 	{
-		fprintf(logFile, "%d;%d\n",l_similarityResults[i].sliceNumber,l_similarityResults[i].distanceToOptimal);
+		fprintf(logFile, "%d;%d;%f\n",l_similarityResults[i].sliceNumber,l_similarityResults[i].distanceToOptimal,l_similarityResults[i].value);
 	}
 	fprintf(logFile, "Runtime;%f\n",l_runtime );
 	return true;

@@ -31,12 +31,10 @@ class HandleData
 {
 public:
 	HandleData();
-	//HandleData(DATAINFO *h_img1, DATAINFO *h_img2, OPT h_options);
 	~HandleData();
 	int  loadData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options);
 	void similarityCheck();
 	void showData();
-	//friend void onTrackbar( int, void* );
 private:
 	Handle3DDataset dataset1,dataset2;
 	SimilarityAssessment q;

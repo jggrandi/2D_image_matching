@@ -25,6 +25,7 @@ struct twoInts
 {
     int sliceNumber;
     int distanceToOptimal;
+    float value;
 };
 
 
