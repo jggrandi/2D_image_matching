@@ -472,10 +472,21 @@
 	"buffers":
 	[
 		{
-			"file": "similarityassessment.h",
+			"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/src/handle3ddataset.h",
 			"settings":
 			{
-				"buffer_size": 1152,
+				"buffer_size": 2613,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/* Quality assessment\n	by: Jeronimo G. Grandi\n	Jun,2013\n*/  \n\n#ifndef SIMILARITYASSESSMENT\n#define SIMILARITYASSESSMENT\n\n#include <opencv2/imgproc/imgproc.hpp>  // Gaussian Blur\n#include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)\n#include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O\n#include <opencv2/features2d/features2d.hpp>\n#include <opencv2/nonfree/nonfree.hpp>\n#include <opencv2/gpu/gpu.hpp> \n\n#include <handle3ddataset.h>\n#include <qualityassessment.h>\n\n#include \"utils.h\"\n\nusing namespace cv;\n\n\nclass SimilarityAssessment\n{\npublic:\n	SimilarityAssessment();\n	~SimilarityAssessment();\n	vector<twoInts> checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2);	\n    vector<gpu::GpuMat> splitDataset(Handle3DDataset dataset);\n    void ordenaRank(vector<sliceRank> *srr);\nprivate:\n    int rank_size;\n    Scalar mssimV,mpsnrV;\n    sliceRank sr_raw;\n    vector<sliceRank> sr,sr_ranked;\n    twoInts sliceAndDistance;\n    vector<twoInts> bestMatches;\n    QualityAssessment qualAssess;\n};\n\n\n\n\n\n#endif // QUALITY_ASSESSMENT",
+			"file": "similarityassessment.h",
+			"file_size": 1072,
+			"file_write_time": 1378989998000000,
+			"settings":
+			{
+				"buffer_size": 1072,
 				"line_ending": "Unix"
 			}
 		},
@@ -483,7 +494,7 @@
 			"file": "utils.h",
 			"settings":
 			{
-				"buffer_size": 655,
+				"buffer_size": 672,
 				"line_ending": "Unix"
 			}
 		},
@@ -491,7 +502,7 @@
 			"file": "handledata.h",
 			"settings":
 			{
-				"buffer_size": 1006,
+				"buffer_size": 941,
 				"line_ending": "Unix"
 			}
 		},
@@ -499,7 +510,7 @@
 			"file": "logdata.h",
 			"settings":
 			{
-				"buffer_size": 469,
+				"buffer_size": 473,
 				"line_ending": "Unix"
 			}
 		},
@@ -507,7 +518,7 @@
 			"file": "similarityassessment.cpp",
 			"settings":
 			{
-				"buffer_size": 2480,
+				"buffer_size": 2461,
 				"line_ending": "Unix"
 			}
 		},
@@ -515,7 +526,7 @@
 			"file": "handledata.cpp",
 			"settings":
 			{
-				"buffer_size": 1037,
+				"buffer_size": 1233,
 				"line_ending": "Unix"
 			}
 		},
@@ -523,24 +534,16 @@
 			"file": "logdata.cpp",
 			"settings":
 			{
-				"buffer_size": 958,
+				"buffer_size": 994,
 				"line_ending": "Unix",
 				"name": "#include \"logdata.h\""
-			}
-		},
-		{
-			"file": "main2.cpp",
-			"settings":
-			{
-				"buffer_size": 1316,
-				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 1358,
+				"buffer_size": 1357,
 				"line_ending": "Unix"
 			}
 		}
@@ -593,6 +596,9 @@
 	},
 	"file_history":
 	[
+		"/mnt/truecrypt1/Dropbox/compartilhadaFrancis/bin/runSingleTest.sh",
+		"/mnt/truecrypt1/Dropbox/compartilhadaFrancis/datasets_for_tests/dataset_info.txt",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2.cpp",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/run2.sh",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Makefile2",
@@ -717,10 +723,7 @@
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/force.dat",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/plot",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/performanceXdevices.perf",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/bargraph.pl",
-		"/home/jeronimo/less",
-		"/home/jeronimo/goto_UFRGS_Mestrado_Devel.sh",
-		"/home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/src/cuda/row_filter.h"
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/bargraph.pl"
 	],
 	"find":
 	{
@@ -888,18 +891,45 @@
 			[
 				{
 					"buffer": 0,
-					"file": "similarityassessment.h",
+					"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/src/handle3ddataset.h",
 					"settings":
 					{
-						"buffer_size": 1152,
+						"buffer_size": 2613,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								500,
-								500
+								670,
+								670
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "similarityassessment.h",
+					"settings":
+					{
+						"buffer_size": 1072,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1006,
+								1006
 							]
 						],
 						"settings":
@@ -915,11 +945,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 655,
+						"buffer_size": 672,
 						"regions":
 						{
 						},
@@ -943,19 +973,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "handledata.h",
 					"settings":
 					{
-						"buffer_size": 1006,
+						"buffer_size": 941,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3,
-								3
+								0,
+								0
 							]
 						],
 						"settings":
@@ -970,19 +1000,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "logdata.h",
 					"settings":
 					{
-						"buffer_size": 469,
+						"buffer_size": 473,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								469,
-								469
+								0,
+								0
 							]
 						],
 						"settings":
@@ -998,23 +1028,23 @@
 			]
 		},
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "similarityassessment.cpp",
 					"settings":
 					{
-						"buffer_size": 2480,
+						"buffer_size": 2461,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								983,
-								983
+								1922,
+								1922
 							]
 						],
 						"settings":
@@ -1024,25 +1054,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "handledata.cpp",
 					"settings":
 					{
-						"buffer_size": 1037,
+						"buffer_size": 1233,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								581,
-								581
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1057,11 +1087,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "logdata.cpp",
 					"settings":
 					{
-						"buffer_size": 958,
+						"buffer_size": 994,
 						"regions":
 						{
 						},
@@ -1085,53 +1115,26 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "main2.cpp",
-					"settings":
-					{
-						"buffer_size": 1316,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1203,
-								1203
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 8,
 					"file": "Makefile",
 					"settings":
 					{
-						"buffer_size": 1358,
+						"buffer_size": 1357,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								87,
-								87
+								1051,
+								1051
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
-						"translation.x": 0.0,
+						"translation.x": 384.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},

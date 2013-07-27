@@ -32,7 +32,6 @@ public:
 private:
     int rank_size;
     Scalar mssimV,mpsnrV;
-	vector<gpu::GpuMat> datasetSlicesGPU;
     sliceRank sr_raw;
     vector<sliceRank> sr,sr_ranked;
     twoInts sliceAndDistance;
