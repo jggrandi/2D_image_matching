@@ -1,11 +1,7 @@
 #ifndef UTILS
 #define UTILS
 
-#include <opencv2/gpu/gpu.hpp> 
 #include <vector>
-
-
-using namespace cv;
 
 typedef struct options
 {

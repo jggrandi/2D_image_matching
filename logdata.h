@@ -5,6 +5,8 @@
 #include <handle3ddataset.h>
 #include "utils.h"
 
+using namespace std;
+
 class LogData
 {
 public:

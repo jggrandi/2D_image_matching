@@ -1,14 +1,30 @@
 #include <cstdlib>
 #include <unistd.h>
 #include <vector>
+#include <GL/glut.h>
 
 #include <handle3ddataset.h>
+
+#include "GlutWindow.h"
 #include "handledata.h"
 #include "utils.h"
 
 
+
+CGlutWindow *g_pMainWindow = 0;
+
+void display(void)                              { g_pMainWindow->renderFrame();}
+void idle(void)                                 { g_pMainWindow->idle();}
+void reshape(int width, int height)             { g_pMainWindow->resize(width, height);}
+void keyboard(unsigned char key, int x, int y)  { g_pMainWindow->keyEvent(key,x,y);}
+void mouse(int button, int state, int x, int y) { g_pMainWindow->mouseButtonEvent(button, state,x,y);}
+void move(int x, int y)                         { g_pMainWindow->mouseMoveEvent(x,y);}
+
+
+
 int main(int argc, char *argv[])
 {
+
 	
 	int option_index = 0;
 	OPT opt;
@@ -56,6 +72,19 @@ int main(int argc, char *argv[])
 		return -1;
 
 	handleData.similarityCheck();
+
+	glutInit(&argc, argv);
+
+	g_pMainWindow = new CGlutWindow();
+
+	glutDisplayFunc(display); 
+    glutReshapeFunc(reshape);
+    glutKeyboardFunc(keyboard);
+    glutMouseFunc(mouse);
+    glutMotionFunc(move);
+    //glutPassiveMotionFunc(move);
+	glutIdleFunc(idle);
+	glutMainLoop();	
 
 	printf("Hard work done! ;)\n"); 
 

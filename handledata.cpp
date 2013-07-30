@@ -32,19 +32,8 @@ void HandleData::similarityCheck()
 	else
 		similarityResults = q.checkSimilarity(dataset1,dataset2);
 }
-/*
-void HandleData::showData()
-{
-	namedWindow("Trackbar1",0);
-	createTrackbar("TB1","Trackbar1",0,img1->endStack-img1->initStack,onTrackbar);
-	onTrackbar(0,0);
-	namedWindow("Trackbar2",0);
-	createTrackbar("TB2","Trackbar2",0,img2->endStack-img2->initStack,onTrackbar);
-	onTrackbar(0,0);
 
-}
 
-*/
 
 
 

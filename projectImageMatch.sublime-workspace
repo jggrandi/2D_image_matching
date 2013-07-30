@@ -4,6 +4,34 @@
 		"selected_items":
 		[
 			[
+				"datas",
+				"datasetSlicesGPU"
+			],
+			[
+				"get",
+				"getPSNR_GPU_optimized"
+			],
+			[
+				"rank",
+				"rank_size"
+			],
+			[
+				"data",
+				"datasetSlices"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"slice",
+				"sliceNumber"
+			],
+			[
+				"sli",
+				"sliceAndDistance"
+			],
+			[
 				"MY_R_PATCH_",
 				"MY_R_PATCH_HANDLE3DDATASETS"
 			],
@@ -84,20 +112,12 @@
 				"cont_x"
 			],
 			[
-				"data",
-				"dataPartida"
-			],
-			[
 				"log",
 				"logFile"
 			],
 			[
 				"l",
 				"l_similarityResults"
-			],
-			[
-				"slice",
-				"sliceAndDistance"
 			],
 			[
 				"h",
@@ -140,10 +160,6 @@
 				"dataset1"
 			],
 			[
-				"get",
-				"getPSNR"
-			],
-			[
 				"spl",
 				"splitDataset"
 			],
@@ -176,10 +192,6 @@
 				"loadFile"
 			],
 			[
-				"datas",
-				"datasetRaw"
-			],
-			[
 				"e",
 				"endStack"
 			],
@@ -206,10 +218,6 @@
 			[
 				"va",
 				"val3"
-			],
-			[
-				"val",
-				"val2"
 			],
 			[
 				"gp",
@@ -290,10 +298,6 @@
 			[
 				"ran",
 				"rankSumm"
-			],
-			[
-				"sli",
-				"sliceRange"
 			],
 			[
 				"Qn",
@@ -475,7 +479,7 @@
 			"file": "similarityassessment.h",
 			"settings":
 			{
-				"buffer_size": 1152,
+				"buffer_size": 1072,
 				"line_ending": "Unix"
 			}
 		},
@@ -483,7 +487,7 @@
 			"file": "utils.h",
 			"settings":
 			{
-				"buffer_size": 655,
+				"buffer_size": 672,
 				"line_ending": "Unix"
 			}
 		},
@@ -491,7 +495,7 @@
 			"file": "handledata.h",
 			"settings":
 			{
-				"buffer_size": 1006,
+				"buffer_size": 941,
 				"line_ending": "Unix"
 			}
 		},
@@ -499,7 +503,7 @@
 			"file": "logdata.h",
 			"settings":
 			{
-				"buffer_size": 469,
+				"buffer_size": 473,
 				"line_ending": "Unix"
 			}
 		},
@@ -507,7 +511,7 @@
 			"file": "similarityassessment.cpp",
 			"settings":
 			{
-				"buffer_size": 2480,
+				"buffer_size": 2461,
 				"line_ending": "Unix"
 			}
 		},
@@ -515,7 +519,7 @@
 			"file": "handledata.cpp",
 			"settings":
 			{
-				"buffer_size": 1037,
+				"buffer_size": 1233,
 				"line_ending": "Unix"
 			}
 		},
@@ -523,24 +527,32 @@
 			"file": "logdata.cpp",
 			"settings":
 			{
-				"buffer_size": 958,
+				"buffer_size": 994,
 				"line_ending": "Unix",
 				"name": "#include \"logdata.h\""
-			}
-		},
-		{
-			"file": "main2.cpp",
-			"settings":
-			{
-				"buffer_size": 1316,
-				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 1358,
+				"buffer_size": 1357,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
+			"settings":
+			{
+				"buffer_size": 132,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "main.cpp",
+			"settings":
+			{
+				"buffer_size": 1324,
 				"line_ending": "Unix"
 			}
 		}
@@ -593,6 +605,9 @@
 	},
 	"file_history":
 	[
+		"/home/jeronimo/.cache/.fr-ebYUWC/VolumeRendering_vs2010_src/VolumeRendering_cp1/RawDataProcessor.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/misc/arguments_for_nevimer.txt",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2.cpp",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main.cpp",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/run2.sh",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Makefile2",
@@ -717,10 +732,7 @@
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/force.dat",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/plot",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/performanceXdevices.perf",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/bargraph.pl",
-		"/home/jeronimo/less",
-		"/home/jeronimo/goto_UFRGS_Mestrado_Devel.sh",
-		"/home/jeronimo/Downloads/opencv-cuda-all/src/opencv-2.4.4/modules/gpu/src/cuda/row_filter.h"
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/bargraph.pl"
 	],
 	"find":
 	{
@@ -738,6 +750,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"sr",
 			".",
 			"jogos[index]",
 			"jogos",
@@ -864,8 +877,7 @@
 			"I1",
 			"i1",
 			"I1",
-			"i1",
-			"descriptors_1"
+			"i1"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -891,15 +903,15 @@
 					"file": "similarityassessment.h",
 					"settings":
 					{
-						"buffer_size": 1152,
+						"buffer_size": 1072,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								500,
-								500
+								880,
+								880
 							]
 						],
 						"settings":
@@ -919,15 +931,15 @@
 					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 655,
+						"buffer_size": 672,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								327,
+								327
 							]
 						],
 						"settings":
@@ -947,15 +959,15 @@
 					"file": "handledata.h",
 					"settings":
 					{
-						"buffer_size": 1006,
+						"buffer_size": 941,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3,
-								3
+								779,
+								779
 							]
 						],
 						"settings":
@@ -974,15 +986,15 @@
 					"file": "logdata.h",
 					"settings":
 					{
-						"buffer_size": 469,
+						"buffer_size": 473,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								469,
-								469
+								151,
+								151
 							]
 						],
 						"settings":
@@ -998,7 +1010,7 @@
 			]
 		},
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1006,15 +1018,15 @@
 					"file": "similarityassessment.cpp",
 					"settings":
 					{
-						"buffer_size": 2480,
+						"buffer_size": 2461,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								983,
-								983
+								2180,
+								2180
 							]
 						],
 						"settings":
@@ -1034,15 +1046,15 @@
 					"file": "handledata.cpp",
 					"settings":
 					{
-						"buffer_size": 1037,
+						"buffer_size": 1233,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								581,
-								581
+								592,
+								592
 							]
 						],
 						"settings":
@@ -1061,15 +1073,15 @@
 					"file": "logdata.cpp",
 					"settings":
 					{
-						"buffer_size": 958,
+						"buffer_size": 994,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								957,
+								957
 							]
 						],
 						"settings":
@@ -1086,24 +1098,23 @@
 				},
 				{
 					"buffer": 7,
-					"file": "main2.cpp",
+					"file": "Makefile",
 					"settings":
 					{
-						"buffer_size": 1316,
+						"buffer_size": 1357,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1203,
-								1203
+								1323,
+								1323
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1113,23 +1124,50 @@
 				},
 				{
 					"buffer": 8,
-					"file": "Makefile",
+					"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
 					"settings":
 					{
-						"buffer_size": 1358,
+						"buffer_size": 132,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								87,
-								87
+								132,
+								132
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "main.cpp",
+					"settings":
+					{
+						"buffer_size": 1324,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1183,
+								1183
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
