@@ -5,7 +5,7 @@ COPTIMIZATION = -O4
 WARNINGOFF = -w
 PROG = ../bin/imageMatch
 
-SRC = main.cpp handledata.cpp similarityassessment.cpp logdata.cpp GlutWindow.cpp ArcBall.cpp mathutil/CMatrix.cpp mathutil/CPosition.cpp mathutil/CQuaternion.cpp mathutil/CVector.cpp
+SRC = main.cpp core.cpp handledata.cpp similarityassessment.cpp logdata.cpp GlutWindow.cpp ArcBall.cpp mathutil/CMatrix.cpp mathutil/CPosition.cpp mathutil/CQuaternion.cpp mathutil/CVector.cpp
 OPENGL = -lglut -lGL
 OPENCV = `pkg-config opencv --libs --cflags`
 

@@ -109,7 +109,28 @@ void CGlutWindow::resize(int width, int height) {
 	m_pCameraArcball->place(CPosition(width/2, height/2), 0.5 * sqrt(double(width * width + height * height)));
 }
 
-void CGlutWindow::keyEvent(unsigned char key,int x,int y){
+void CGlutWindow::keyEvent(unsigned char key,int x,int y)
+{
+	switch (key) {
+		case 'l':
+			{
+				m_nInteractionMode = MOVE_LIGHT;
+			}
+			break;
+		case 'c':
+			{
+				m_nInteractionMode = MOVE_CAMERA;
+			}
+			break;
+		case 'r':
+		case 'R':
+			{
+				m_pCameraArcball->reset();
+			}
+			break;
+	}
+
+	glutPostRedisplay();
 }
 
 void CGlutWindow::mouseButtonEvent(int button, int state,int x,int y){
