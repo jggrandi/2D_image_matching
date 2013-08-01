@@ -1,0 +1,86 @@
+#define EPSILON (0.003)
+
+uniform half3     vecKeyLight;
+uniform half3     colKeyLight;
+uniform half3     vecFillLight;
+uniform half3     colFillLight;
+uniform half3     vecBackLight;
+uniform half3     colBackLight;
+uniform half3     k_diff;
+uniform half3     k_spec;
+uniform half3     k_emit;
+uniform float     shininess;
+uniform sampler3D volume;
+uniform sampler1D colortable;
+		
+half3 shadingBlinn(float3 vecNormal, float3 vecView) {
+
+	half3 diffKey    = colKeyLight  * max(0.0, (dot( vecKeyLight,vecNormal)));
+	half3 diffFill   = colFillLight * max(0.0, (dot(vecFillLight,vecNormal)));
+	half3 diffBack   = colBackLight * max(0.0, (dot(vecBackLight,vecNormal)));
+	
+	half3 halfVecKey   = normalize(vecView + vecKeyLight);
+	half3 halfVecFill  = normalize(vecView + vecFillLight);
+	half3 halfVecBack  = normalize(vecView + vecBackLight);
+	
+	half3  specKey   = pow(max(0.0,dot(halfVecKey ,vecNormal)),shininess);	
+	half3  specFill  = pow(max(0.0,dot(halfVecFill,vecNormal)),shininess);	
+	half3  specBack  = pow(max(0.0,dot(halfVecBack,vecNormal)),shininess);	
+	
+	half3 result = k_diff * (diffKey + diffFill + diffBack);
+	result += k_spec * (specKey + specFill + specBack);
+
+	return result;
+}
+	
+float3 estimateGradient(half3 uvw) {
+
+	half4 valueX1 = tex3D(volume,uvw-half3(EPSILON,0.0,0.0));
+	half4 valueX2 = tex3D(volume,uvw+half3(EPSILON,0.0,0.0));
+	half4 valueY1 = tex3D(volume,uvw-half3(0.0,EPSILON,0.0));
+	half4 valueY2 = tex3D(volume,uvw+half3(0.0,EPSILON,0.0));
+	half4 valueZ1 = tex3D(volume,uvw-half3(0.0,0.0,EPSILON));
+	half4 valueZ2 = tex3D(volume,uvw+half3(0.0,0.0,EPSILON));
+	half4 value   = tex3D(volume,uvw);	
+	
+	float3 gradient;
+	
+#ifdef GRADIENT_AFTER_TF
+	float vX1   = tex1D(colortable,valueX1.a).a;
+	float vX2   = tex1D(colortable,valueX2.a).a;
+	float vY1   = tex1D(colortable,valueY1.a).a;
+	float vY2   = tex1D(colortable,valueY2.a).a;
+	float vZ1   = tex1D(colortable,valueZ1.a).a;
+	float vZ2   = tex1D(colortable,valueZ2.a).a;
+	gradient.x = vX2-vX1;
+	gradient.y = vY2-vY1;
+	gradient.z = vZ2-vZ1;
+	
+#else
+	gradient.x = valueX2-valueX1;
+	gradient.y = valueY2-valueY1;
+	gradient.z = valueZ2-valueZ1;
+#endif
+
+	return normalize(gradient);
+
+}	
+		
+#define GRADIENT_AFTER_TF
+half4 main(
+		half3 uvw : TEXCOORD0,
+		half4 col : COLOR,
+		
+		uniform half3     viewVec) : COLOR
+{
+
+	float sample   = tex3D(volume,uvw).a;	
+	half4 emis_abs = tex1D(colortable,sample);
+	
+	float3 vecGrad = estimateGradient(uvw);;
+	
+	half4 color = emis_abs;
+	color.xyz *= k_emit;
+	color.xyz += shadingBlinn(vecGrad,viewVec);
+	return color;
+}

@@ -1,0 +1,42 @@
+#define EPSILON (0.003)
+
+#define GRADIENT_AFTER_TF
+half4 main(
+		half3 uvw : TEXCOORD0,
+		half4 col : COLOR,
+		
+		uniform half3     viewVec,
+		uniform sampler3D volume,
+		uniform sampler1D colortable) : COLOR
+{
+	half4 valueX1 = tex3D(volume,uvw-half3(EPSILON,0.0,0.0));
+	half4 valueX2 = tex3D(volume,uvw+half3(EPSILON,0.0,0.0));
+	half4 valueY1 = tex3D(volume,uvw-half3(0.0,EPSILON,0.0));
+	half4 valueY2 = tex3D(volume,uvw+half3(0.0,EPSILON,0.0));
+	half4 valueZ1 = tex3D(volume,uvw-half3(0.0,0.0,EPSILON));
+	half4 valueZ2 = tex3D(volume,uvw+half3(0.0,0.0,EPSILON));
+	half4 value   = tex3D(volume,uvw);	
+	half4 color   = tex1D(colortable,value.a);
+	
+	half3 gradient;
+	
+#ifdef GRADIENT_AFTER_TF
+	half4 vX1   = tex1D(colortable,valueX1.a);
+	half4 vX2   = tex1D(colortable,valueX2.a);
+	half4 vY1   = tex1D(colortable,valueY1.a);
+	half4 vY2   = tex1D(colortable,valueY2.a);
+	half4 vZ1   = tex1D(colortable,valueZ1.a);
+	half4 vZ2   = tex1D(colortable,valueZ2.a);
+	gradient.x = vX2.a-vX1.a;
+	gradient.y = vY2.a-vY1.a;
+	gradient.z = vZ2.a-vZ1.a;
+	
+#else
+	gradient.x = valueX2-valueX1;
+	gradient.y = valueY2-valueY1;
+	gradient.z = valueZ2-valueZ1;
+#endif
+	color.xyz = (1.0+normalize(gradient))/2.0;
+	
+	return color;
+}

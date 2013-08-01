@@ -1,0 +1,58 @@
+
+#define ZERO 0.0
+#define ONE  1.0
+
+void main(int2   VIndexAndSlice : POSITION, 
+      
+		  // updated per cube
+		  uniform float3   vecTranslate,
+          uniform float3   vecView,
+          uniform int      frontIndex,
+          
+          // updated per frame
+          uniform float4x4 ModelViewProj,
+          
+          // const: never updated
+          uniform half2   dPlane,  // dPlane.x = startDistance; dPlane.y = increment
+		  uniform int     sequence[64],
+		  uniform float3  vecVertices[8],
+		  uniform int   v1[4*6],
+		  uniform int   v2[4*6],
+			
+			// output variables
+          out float4 VertexOut    : POSITION,
+          out half3 TexCoordOut  : TEXCOORD0
+          )
+{
+	
+    float dPlaneDist = dPlane.x + VIndexAndSlice.y * dPlane.y;
+        
+    float3 Position;
+    
+    for(int e = 0; e < 4; ++e) {
+    
+		int vidx1 = sequence[int(frontIndex * 8 + v1[VIndexAndSlice.x*4+e])];
+		int vidx2 = sequence[int(frontIndex * 8 + v2[VIndexAndSlice.x*4+e])];
+    
+		float3 vecV1 = vecVertices[vidx1];
+		float3 vecV2 = vecVertices[vidx2];
+        
+		float3 vecStart = vecV1+vecTranslate;
+		float3 vecDir   = vecV2-vecV1;
+    
+		float denom = dot(vecDir,vecView);
+		float lambda = (dPlaneDist - dot(vecStart,vecView))/denom;
+
+		if ((lambda > ZERO) && (lambda < ONE)) {
+			Position = vecStart + lambda * vecDir;
+			
+		}
+		
+    } 
+	
+	VertexOut = mul(ModelViewProj, float4(Position,1.0));
+	TexCoordOut = 0.5 * Position + 0.5;
+	return;
+	
+    
+}

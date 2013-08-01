@@ -1,0 +1,12 @@
+
+half4 main(
+		half3 uvw : TEXCOORD0,
+		half4 col : COLOR,
+		
+		uniform sampler3D volume,
+		uniform sampler1D colortable) : COLOR
+{
+	half4 value = tex3D(volume,uvw);
+	half4 color = tex1D(colortable,value.a);
+	return color;  
+}

@@ -1,7 +1,14 @@
 #pragma once
 
+#include <handle3ddataset.h>
+#include <Cg/cg.h>    /* Can't include this?  Is Cg Toolkit installed! */
+#include <Cg/cgGL.h>
+
+#include "TransferFunction.h"
 #include "mathutil/CVector.h"
 #include "mathutil/CPosition.h"
+#include "handledata.h"
+#include "utils.h"
 
 class CArcBall;
 
@@ -24,6 +31,8 @@ public:
 		KBUTTON_SHIFT  = 0x10
 	};
 
+	virtual void cgRenderGeometry();
+
 	void renderFrame();
 	void idle();
 	void resize(int width, int height);
@@ -35,6 +44,20 @@ public:
 	bool handleMoveEvent(int x, int y);
 
 protected:
+    //
+	int      m_nMode;
+	bool     m_bDisplayTF;
+	GLuint   m_pTextureIds[3];
+	int      m_nNumSlices;
+	CVector  m_pVertices[8];
+	Edge     m_pEdges[12];
+
+	CGprogram *m_pVertexPrograms;
+	CGprogram *m_pFragmentPrograms;
+	//
+	
+	HandleData   c_handleData;
+
 	int m_nWidth, m_nHeight;
 	double m_dFieldOfView;
 	double m_dCenter, m_dRadius, m_dZoom;
@@ -54,7 +77,21 @@ protected:
 	int m_nMouseState;
 	int m_nInteractionMode;
 
+	void initializeAppParameters();
 	void initializeGL();
+	bool loadTextures();
+	bool createPrograms();
+	CTransferFunction *m_pTransferFunction;
+
+private:
+ 	CGcontext s_CgContext;
+	CGprofile s_vertexProfile, s_fragmentProfile;
+	
+	
+	void chooseProfiles();
+	
+
+	virtual void initializeCg();	
 
 };
 

@@ -1,0 +1,17 @@
+
+
+void main(float4   VertexIn   : POSITION, 
+          float3   TexCoordIn : TEXCOORD0,
+      
+		  // output variables
+          out float4 VertexOut    : POSITION,
+          out float3 TexCoordOut   : TEXCOORD0,
+          
+          uniform float4x4 ModelViewProj
+          )
+{
+ 
+    VertexOut = mul(ModelViewProj, VertexIn);
+	TexCoordOut = (VertexIn.xyz + 1.0)/2.0;
+    
+}

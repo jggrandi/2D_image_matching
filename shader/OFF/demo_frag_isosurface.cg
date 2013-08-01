@@ -1,0 +1,20 @@
+
+half4 main(
+		half3 uvw : TEXCOORD0,
+		
+		uniform half3    lightVec,
+		uniform half3    viewVec,
+		uniform sampler3D texture,
+		uniform sampler1D colortable) : COLOR
+{
+	half4 value = tex3D(texture,uvw);
+	half3 normal = normalize(2.0*(value.xyz)-1.0.xxx);	
+	half diffuse = 0.8*abs(dot(lightVec,normal));
+	
+	half3 halfVec = normalize(lightVec+viewVec);
+	half specular = 0.3*pow(max(0,dot(halfVec,normal)),100);	
+	
+	half4 color = half4(diffuse.xxx,value.a);
+	color.xyz += specular.xxx;
+	return color;    
+}

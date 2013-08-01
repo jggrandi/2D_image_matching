@@ -1,0 +1,47 @@
+
+#define ZERO 0.0
+#define ONE  1.0
+
+void main(int4  EdgeIndices   : POSITION, 
+		  half3  Color        : COLOR,
+		  float  SliceNumber  : TEXCOORD0,
+      
+          uniform float4x4 ModelViewProj,
+		  uniform float    lambda[12],
+		  uniform float    lambda_inc[12],
+		  uniform float3   vertices[12],
+		  uniform float3   edges[12],
+			
+          out float4 VertexOut    : POSITION,
+          out half3 TexCoordOut  : TEXCOORD0
+          )
+{
+    
+    float4 lmb  = float4(lambda[EdgeIndices.x],
+                         lambda[EdgeIndices.y],
+                         lambda[EdgeIndices.z],
+                         lambda[EdgeIndices.w]);
+                        
+    float4 linc = float4(lambda_inc[EdgeIndices.x],
+                         lambda_inc[EdgeIndices.y],
+                         lambda_inc[EdgeIndices.z],
+                         lambda_inc[EdgeIndices.w]);
+    
+    float4 l = lmb + SliceNumber * linc;
+    
+    float3 Vertex;
+    
+    if ((l.x > ZERO) && (l.x < ONE)) {
+		Vertex = vertices[EdgeIndices.x] + l.x * edges[EdgeIndices.x];
+    } else if ((l.y > ZERO) && (l.y < ONE)) {
+		Vertex = vertices[EdgeIndices.y] + l.y * edges[EdgeIndices.y];
+    } else if ((l.z > ZERO) && (l.z < ONE)) {
+		Vertex = vertices[EdgeIndices.z] + l.z * edges[EdgeIndices.z];
+    } else  {
+		Vertex = vertices[EdgeIndices.w] + l.w * edges[EdgeIndices.w];
+    } 
+    
+    
+    VertexOut = mul(ModelViewProj, float4(Vertex,1.0));
+	TexCoordOut = 0.5 * Vertex + 0.5;
+}

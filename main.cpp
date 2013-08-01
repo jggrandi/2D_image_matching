@@ -53,9 +53,7 @@ int main(int argc, char **argv)
 
 
 	Core appCore(argc, argv);
-	if(!appCore.setup( img1Info,img2Info,opt))
-		return -1;
-	
+
 	appCore.run();
 
 

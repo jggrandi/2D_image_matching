@@ -1,0 +1,82 @@
+
+#define ZERO 0.0
+#define ONE  1.0
+
+void main(int2  VindexAndSlice : POSITION, 
+	      float3 color         : COLOR,
+      
+		  // updated per cube
+		  uniform float3   vecTranslate,
+          
+          // updated per frame
+          uniform float4x4 ModelViewProj,
+          uniform float3   vecView,
+          uniform int      frontIndex,
+          
+          // const: never updated
+          uniform float   dPlaneStart,
+          uniform float   dPlaneIncr,
+		  uniform int     sequence[64],
+		  uniform float3  vecVertices[8],
+		  uniform int   v1[24],
+		  uniform int   v2[24],
+			
+			// output variables
+          out float4 VertexOut    : POSITION,
+          out half3 TexCoordOut  : TEXCOORD0,
+          out half3 colorOut  : COLOR
+          )
+{
+#ifdef DEBUG_COLOR_VERTEX
+	half3 vcolor;
+	if (VindexAndSlice.x == 0.0) {
+		vcolor = half3(1.0,0.0,0.0);
+	} else if (VindexAndSlice.x == 1.0) {
+		vcolor = half3(1.0,1.0,0.0);
+	} else if (VindexAndSlice.x == 2.0) {
+		vcolor = half3(0.0,1.0,0.0);
+	} else if (VindexAndSlice.x == 3.0) {
+		vcolor = half3(0.0,1.0,1.0);
+	} else if (VindexAndSlice.x == 4.0) {
+		vcolor = half3(0.0,0.0,1.0);
+	} else if (VindexAndSlice.x == 5.0) {
+		vcolor = half3(1.0,0.0,1.0);
+	} 
+	colorOut = half3(0.0,0.0,0.0);
+#endif
+	
+
+    float dPlaneDist = dPlaneStart + VindexAndSlice.y * dPlaneIncr;
+        
+    float3 Position = vecTranslate;
+    
+    for(int e = 0; e < 4; ++e) {
+    
+		int vidx1 = sequence[int(frontIndex * 8 + v1[VindexAndSlice.x*4+e])];
+		int vidx2 = sequence[int(frontIndex * 8 + v2[VindexAndSlice.x*4+e])];
+    
+		float3 vecV1 = vecVertices[vidx1];
+		float3 vecV2 = vecVertices[vidx2];
+        
+		float3 vecStart = vecV1+vecTranslate;
+		float3 vecDir   = vecV2-vecV1;
+    
+		float denom = dot(vecDir,vecView);
+		float lambda = (denom != 0.0)? (dPlaneDist - dot(vecStart,vecView))/denom : -1.0;
+
+		if ((lambda >= ZERO) && (lambda <= ONE)) {
+			Position = vecStart + lambda * vecDir;
+#ifdef DEBUG_COLOR_VERTEX
+			colorOut = vcolor;
+#endif
+			break;
+		}
+		
+    } 
+	
+	VertexOut = mul(ModelViewProj, float4(Position,1.0));
+	TexCoordOut = 0.5 * (Position) + 0.5;
+	return;
+	
+    
+}
