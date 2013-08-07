@@ -14,10 +14,10 @@
 #define START_EPSILON (0.01)
 #define START_EPSILON1 (0.009)
 
-#define FILENAME ("../datasets_for_tests/Engine256.raw")
-#define XMAX (256)
-#define YMAX (256)
-#define ZMAX (256)
+#define FILENAME ("../datasets_for_tests/Bucky.32x32x32.raw")
+#define XMAX (32)
+#define YMAX (32)
+#define ZMAX (32)
 
 #define XSIZE 1.0  
 #define YSIZE 1.0

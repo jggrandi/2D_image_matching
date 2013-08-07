@@ -4,8 +4,7 @@
 
 #include <math.h>
 #include <GL/glut.h>
-#include <sys/timeb.h>
-#include <time.h>
+#include <sys/time.h>
 #include <stdio.h>
 
 
@@ -18,7 +17,7 @@
 static void handleCgError() 
 {
     fprintf(stderr, "Cg error: %s\n", cgGetErrorString(cgGetError()));
-   // exit(1);
+   	exit(1);
 }
 
 
@@ -32,7 +31,7 @@ CGlutWindow::CGlutWindow(void)
 	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize (800,600); 
 	glutInitWindowPosition (0, 0);
-	glutCreateWindow ("GLUT Window");
+	glutCreateWindow ("Image Match");
 
 	m_dFieldOfView = 30.0;
 	m_nWidth = 1;
@@ -74,7 +73,7 @@ void CGlutWindow::initializeCg()
 
 }
 
-
+GLfloat fNear=5.0f;
 void CGlutWindow::renderFrame() {
 
 	double dAspectRatio = double(m_nWidth)/double(m_nHeight);
@@ -83,11 +82,11 @@ void CGlutWindow::renderFrame() {
 	glClearColor(.5, .5, 1., 1.);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GLfloat fTop, fRight, fNear, fFar;
+	GLfloat fTop, fRight, fFar;
 
-	fNear   = float(m_dCenter - m_dRadius);
+	//fNear   = float(m_dCenter - m_dRadius);
 	fFar    = float(m_dCenter + m_dRadius);
-
+	//printf("%f\n",fNear);
 	if (dAspectRatio > 1.0) {
 		fRight = fNear * float(tan(DEG2RAD(m_dFieldOfView)/2.0) /m_dZoom);
 		fTop   = fRight * float(dAspectRatio);		
@@ -114,7 +113,7 @@ void CGlutWindow::renderFrame() {
 	glLoadIdentity();
 	glTranslated(m_dTranslateX * m_dRadius/m_dZoom, m_dTranslateY*m_dRadius/m_dZoom, -m_dCenter);
 	glMultMatrixd(matrix);
-	//glTranslated(m_vecCameraPosition[0], m_vecCameraPosition[1], m_vecCameraPosition[2]);
+	glTranslated(m_vecCameraPosition[0], m_vecCameraPosition[1], m_vecCameraPosition[2]);
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -167,6 +166,21 @@ void CGlutWindow::keyEvent(unsigned char key,int x,int y)
 			{
 				m_pCameraArcball->reset();
 			}
+			break;
+		case '=':
+			{
+				fNear+=0.1f;
+			}
+			break;
+		case '-':
+			{
+				fNear-=0.1f;	
+			}
+			break;			
+		case 'q':
+		case 'Q':
+			exit(1);
+		default:
 			break;
 	}
 
@@ -314,6 +328,37 @@ void CGlutWindow::mouseMoveEvent(int x,int y){
 }
 
 void CGlutWindow::idle(){
+	
+	// float timeCounter, lastFrameTimeCounter, DT, prevTime = 0.0, FPS;
+	// int         frame = 1, framesPerFPS;
+	// struct timeval tv;
+	// struct timeval tv0;
+	// static bool bFirstTime = true;
+
+	// if (bFirstTime) 
+	// {
+	// 	gettimeofday(&tv0, NULL);
+ // 		framesPerFPS = 10; 
+ // 		bFirstTime = false;
+ // 	}
+	
+	// lastFrameTimeCounter = timeCounter;
+ // 	gettimeofday(&tv, NULL);
+ // 	timeCounter = (float)(tv.tv_sec-tv0.tv_sec)*((float)(tv.tv_usec-tv0.tv_usec));
+ // 	DT = timeCounter - lastFrameTimeCounter; 
+ // 	frame++;
+
+ // 	if((frame%framesPerFPS) == 0) 
+ // 	{
+ //    	FPS = ((float)(framesPerFPS)) / (timeCounter-prevTime);
+ //    	prevTime = timeCounter;
+ //    	printf("FPS:%f\n",FPS);
+ //    	frame=0;
+ //    }
+
+   
+
+	glutPostRedisplay();
 /*
     __time64_t ltime;
     struct __timeb64 tstruct;
@@ -353,7 +398,7 @@ void CGlutWindow::idle(){
 		nStartCount = nMilliSeconds;
 	}
 */	
-	glutPostRedisplay();
+
 }
 
 void CGlutWindow::initializeGL()
@@ -433,8 +478,8 @@ bool CGlutWindow::loadTextures() {
 	}
 
 	int size = XMAX*YMAX*ZMAX;
-	unsigned char *pVolume = new unsigned char[size];
-	bool ok = (size == fread(pVolume,sizeof(unsigned char), size,pFile));
+	unsigned short *pVolume = new unsigned short[size];
+	bool ok = (size == fread(pVolume,sizeof(unsigned short), size,pFile));
 	fclose(pFile);
 
 	glGenTextures(3,m_pTextureIds);
@@ -806,7 +851,7 @@ void CGlutWindow::chooseProfiles()
             s_vertexProfile = CG_PROFILE_VP30;
         else {
             fprintf(stderr, "Neither arbvp1 or vp30 vertex profiles supported on this system.\n");
-            //exit(1);
+            exit(1);
         }
     }
 	cgGLSetOptimalOptions(s_vertexProfile);
@@ -819,7 +864,7 @@ void CGlutWindow::chooseProfiles()
             s_fragmentProfile = CG_PROFILE_FP30;
         else {
             fprintf(stderr, "Neither arbfp1 or fp30 fragment profiles supported on this system.\n");
-            //exit(1);
+            exit(1);
         }
     }
 	cgGLSetOptimalOptions(s_fragmentProfile);

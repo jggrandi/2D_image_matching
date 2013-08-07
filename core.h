@@ -23,8 +23,10 @@ public:
 	static void keyboard(unsigned char key, int x, int y);
 	static void mouse(int button, int state, int x, int y);
 	static void move(int x, int y);
+	static void countFPS(int value);
 private:
 	static CGlutWindow  *c_pMainWindow;
+	static unsigned int fpsCurrent,fpsCount;
 };
 
 

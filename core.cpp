@@ -2,9 +2,11 @@
 
 
 CGlutWindow *Core::c_pMainWindow=0;
-
+unsigned int Core::fpsCurrent=0;
+unsigned int Core::fpsCount=0;
 Core::Core(int c_argc, char **c_argv)
 {
+
 	glutInit(&c_argc, c_argv);
 	c_pMainWindow = new CGlutWindow();	
 }
@@ -21,6 +23,7 @@ void Core::run()
     glutKeyboardFunc(keyboard);
     glutMouseFunc(mouse);
     glutMotionFunc(move);
+    glutTimerFunc(1000, countFPS, 1);
 	glutIdleFunc(idle);
 	glutMainLoop();
 }
@@ -29,6 +32,7 @@ void Core::run()
 void Core::display(void)
 { 
 	c_pMainWindow->renderFrame();
+	fpsCurrent++;
 }
 
 void Core::idle(void)
@@ -56,6 +60,16 @@ void Core::move(int x, int y)
 	c_pMainWindow->mouseMoveEvent(x,y);
 }
 
+
+void Core::countFPS(int value) {
+	char title[120];
+	fpsCount = fpsCurrent;
+	fpsCurrent = 0;
+	
+	snprintf(title, 120, "%s. FPS: %d", "Image Match", fpsCount);
+	glutSetWindowTitle(title);
+	glutTimerFunc(1000, countFPS, 1);
+}
 
 
 
