@@ -10,7 +10,7 @@ SimilarityAssessment::SimilarityAssessment()
 SimilarityAssessment::~SimilarityAssessment(){}
 
 
-vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2)
+vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset<unsigned short>dataset1, Handle3DDataset <unsigned short>dataset2)
 {
 	vector<gpu::GpuMat> d1 = splitDataset(dataset1);
 	vector<gpu::GpuMat> d2 = splitDataset(dataset2);
@@ -53,7 +53,7 @@ vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset dataset1, 
     return bestMatches;
 }
 
-vector<gpu::GpuMat> SimilarityAssessment::splitDataset(Handle3DDataset dataset)
+vector<gpu::GpuMat> SimilarityAssessment::splitDataset(Handle3DDataset <unsigned short>dataset)
 {
 	
     DATAINFO imgInfo = dataset.getDatasetInfo();	

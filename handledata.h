@@ -36,7 +36,7 @@ public:
 	void similarityCheck();
 	void showData();
 private:
-	Handle3DDataset dataset1,dataset2;
+	Handle3DDataset <unsigned short>dataset1,dataset2;
 	SimilarityAssessment q;
 	OPT oopt;
 	LogData logData;
