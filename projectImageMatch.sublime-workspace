@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"GL",
+				"GLfloat"
+			],
+			[
 				"ini",
 				"initializeGL"
 			],
@@ -499,7 +503,7 @@
 			"file": "core.h",
 			"settings":
 			{
-				"buffer_size": 571,
+				"buffer_size": 647,
 				"line_ending": "Unix"
 			}
 		},
@@ -507,32 +511,16 @@
 			"file": "core.cpp",
 			"settings":
 			{
-				"buffer_size": 935,
+				"buffer_size": 1587,
 				"line_ending": "Unix",
 				"name": "#include \"core.h\""
-			}
-		},
-		{
-			"file": "ArcBall.h",
-			"settings":
-			{
-				"buffer_size": 1030,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ArcBall.cpp",
-			"settings":
-			{
-				"buffer_size": 2789,
-				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "GlutWindow.h",
 			"settings":
 			{
-				"buffer_size": 1851,
+				"buffer_size": 1796,
 				"line_ending": "Windows"
 			}
 		},
@@ -540,63 +528,15 @@
 			"file": "GlutWindow.cpp",
 			"settings":
 			{
-				"buffer_size": 21968,
+				"buffer_size": 22824,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/run/media/jeronimo/Data/Projetos/Devel 2009/_ORIGINAL_SimplePreIntegratedVolumeRenderer/SimplePreIntegratedVolumeRenderer/main.cpp",
-			"settings":
-			{
-				"buffer_size": 15682,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/Texture.cpp",
-			"settings":
-			{
-				"buffer_size": 7088,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "handledata.h",
-			"settings":
-			{
-				"buffer_size": 941,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "handledata.cpp",
-			"settings":
-			{
-				"buffer_size": 941,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "utils.h",
-			"settings":
-			{
-				"buffer_size": 1122,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "Makefile",
-			"settings":
-			{
-				"buffer_size": 1568,
-				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
 			"settings":
 			{
-				"buffer_size": 130,
+				"buffer_size": 131,
 				"line_ending": "Unix"
 			}
 		},
@@ -604,40 +544,48 @@
 			"file": "main.cpp",
 			"settings":
 			{
-				"buffer_size": 1244,
+				"buffer_size": 340,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "TransferFunction.h",
+			"file": "similarityassessment.cpp",
 			"settings":
 			{
-				"buffer_size": 851,
-				"line_ending": "Windows"
+				"buffer_size": 2508,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Trapez.h",
+			"file": "similarityassessment.h",
 			"settings":
 			{
-				"buffer_size": 1465,
-				"line_ending": "Windows"
+				"buffer_size": 1120,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "Trapez.cpp",
+			"file": "logdata.h",
 			"settings":
 			{
-				"buffer_size": 7303,
-				"line_ending": "Windows"
+				"buffer_size": 495,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "TransferFunction.cpp",
+			"file": "imageinfo.h",
 			"settings":
 			{
-				"buffer_size": 5812,
-				"line_ending": "Windows"
+				"buffer_size": 186,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "utils.h",
+			"settings":
+			{
+				"buffer_size": 1132,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -689,17 +637,57 @@
 	},
 	"file_history":
 	[
-		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/MyGLH.cpp",
+		"/home/jeronimo/.cache/.fr-iHuS33/main.cpp",
+		"/home/jeronimo/.cache/.fr-zUyfKx/tree.h",
+		"/run/media/jeronimo/Windows USB/bootmgr",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/acceptedCode0172.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/acceptedCode0174.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/PolyTriangularization/utilz.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/E3/Devel/Apps/UDP_Python/test.py",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/TransferFunction.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/TransferFunction.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Trapez.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Trapez.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/Makefile",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/ArcBall.cpp",
+		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/ArcBall.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/inutils.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset_withoutTemplate/src/build_handle3ddataset",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/utils.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_3d_comparison/src/main.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/src/codebk.cpp",
+		"/home/jeronimo/.cache/.fr-Ol61P6/GPUSlicer/src/volume/Block.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/Computacão Gráfica/trab2/ogl_fps_controls.cpp",
+		"/home/jeronimo/.cache/.fr-YWzltX/LivAR/jni/LivAR.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/Texture.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/Vis_ParaCirurgia/SimplePreIntegratedVolumeRenderer/main.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/Vis_ParaCirurgia/SimplePreIntegratedVolumeRenderer/declarations.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/Vis_ParaCirurgia/SimplePreIntegratedVolumeRenderer/Volume.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/Vis_ParaCirurgia/SimplePreIntegratedVolumeRenderer/util.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/Vis_ParaCirurgia/SimplePreIntegratedVolumeRenderer/objectAR.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/Vis_Liver_0.2/SimplePreIntegratedVolumeRenderer/main.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/IImage.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/RAWImage.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/IMedicalImage.h",
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/_ORIGINAL_SimplePreIntegratedVolumeRenderer/SimplePreIntegratedVolumeRenderer/main.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/IMedicalImage.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/SmartContour/SmartContour/main.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/dirent/dirent.h",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/reconstruction/changeLabel/changeLabel.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/reconstruction/char2short/char2short.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/VolumeFragmentation/SimplePreIntegratedVolumeRenderer/main.cpp",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/##ARTOOLKIT_SimplePreIntegratedVolumeRenderer_RC2(-testes + calibstuffs +improve colabor )/SimplePreIntegratedVolumeRenderer/main.cpp",
+		"/home/jeronimo/vvv/README.txt",
+		"/home/jeronimo/hs_err_pid19263.log",
+		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/MyGLH.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/shader/vp_simple.cg",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/logdata.cpp",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/similarityassessment.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/mathutil/CVector.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/mathutil/CVector.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/logdata.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/utils.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/similarityassessment.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/qualityassessment.h",
 		"/home/jeronimo/.cache/.fr-ebYUWC/VolumeRendering_vs2010_src/VolumeRendering_cp1/RawDataProcessor.cpp",
@@ -753,7 +741,6 @@
 		"/home/jeronimo/.cache/.fr-2eCfGu/conky-1.9.0/data/conky.conf",
 		"/home/jeronimo/.config/sublime-text-2/Packages/User/Xmo_Make.sublime-build",
 		"/home/jeronimo/.config/sublime-text-2/Packages/C++/C++.sublime-build",
-		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/Texture.cpp",
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/Texture.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/Cronograma[Jun-Ago].txt",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/runSingleTest.sh",
@@ -777,46 +764,7 @@
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/MyGLH.h",
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/SimplePreIntegratedVolumeRenderer/SimplePreIntegratedVolumeRenderer/main.cpp",
 		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata (Jeronimo Grandi's conflicted copy 2013-06-03).cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo (lanier's conflicted copy 2013-06-03).h",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/main2 (Jeronimo Grandi's conflicted copy 2013-06-03).cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata (Jeronimo Grandi's conflicted copy 2013-06-03).h",
-		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/MyMath.h",
-		"/home/jeronimo/Documents/PACKAGES.TXT",
-		"/home/jeronimo/Downloads/ex1.c",
-		"/home/jeronimo/Downloads/ex2.c",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/ponteiros1.cpp",
-		"/home/jeronimo/Downloads/moveShip.c",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/build_opencv2",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/new_main.txt",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/load_datasets_raw.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/runPartial.sh",
-		"/home/jeronimo/.cache/.fr-XD8U20/LiverSegments/vc8/SimplePreIntegratedVolumeRenderer/preIntegrationPixelShader.glsl",
-		"/home/jeronimo/.cache/.fr-u9MyZN/LiverSegments/vc8/SimplePreIntegratedVolumeRenderer/preIntegrationVertexShader.glsl",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/sem_contraste/DICOMDIR34",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/sem_contraste/DICOMDIR33",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/arterial/DICOMDIR33",
-		"/home/jeronimo/vboxbridge",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/MRI_datasets/173120/study2/serie18/mri1.nhdr",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Hepatec/Datasets/MRI_datasets/173120/study2/serie18/serie18.nhdr",
-		"/run/media/jeronimo/Data/Dropbox/stuff/make_learning/arrayTests/main.cpp",
-		"/run/media/jeronimo/Data/Downloads/opencv-2.4.5-cuda/PKGBUILD",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/funcoes1.cpp",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/ClubesFutebol.cpp",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/estado_civil.cpp",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/MaterialRadioativo.cpp",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/IPVA.cpp",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/imc.cpp",
-		"/run/media/jeronimo/Data/Dropbox/eclipse_workspace/aulaspraticas_sources/MaiorNumero.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXslicePlane0.dat",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/temp_data.csv",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/resolutionXAlgorithmsRuntime.perf",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/resolutionXCPUandGPU.perf",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXslicePlane0.pg",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXalgorithms1.pg",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/gnuplot_data/precisionXresolution0.pg",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/gpu.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/run_512.sh",
-		"/home/jeronimo/Downloads/opencv-cuda-all_BKP/src/opencv-2.4.4/doc/tutorials/core/adding_images/adding_images.rst"
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo (lanier's conflicted copy 2013-06-03).h"
 	],
 	"find":
 	{
@@ -834,6 +782,30 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"img1Info",
+			"loadTextures",
+			"argv",
+			"m_pTextureIds",
+			"GL_TEXTURE_3D",
+			"glEnable",
+			"GL_TEXTURE_3D",
+			"printf",
+			"getInstance()->",
+			"printf",
+			"CalculateFPS",
+			"UpdateTimeCounter",
+			"time",
+			"m_currentVolume",
+			"UpdateCurrentSlice",
+			"MoveCurrentSliceForward",
+			"SLICE_FORWARD_ID",
+			"3d",
+			"clamp",
+			"DrawSlices",
+			"VIEW_DISTANCE_MIN",
+			"fru",
+			"m_pTextureIds",
+			"pVolume",
 			"fNear",
 			"m_nNumSlices",
 			"initializeGL",
@@ -937,31 +909,7 @@
 			"43",
 			"ksize <=",
 			"ksize",
-			"32",
-			"ksize <= 32",
-			"31",
-			"311",
-			"33",
-			"25",
-			"1.5",
-			"22",
-			"11",
-			"32",
-			"11.5",
-			"21",
-			"20",
-			"11.5",
-			"111",
-			"1.5",
-			"ss",
-			"GB_S",
-			"GB_R",
-			"1.5",
-			"//",
-			"arterial_128",
-			"256",
-			"arterial_256",
-			"venosa_256"
+			"32"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -979,7 +927,7 @@
 	"groups":
 	[
 		{
-			"selected": 10,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -987,15 +935,15 @@
 					"file": "core.h",
 					"settings":
 					{
-						"buffer_size": 571,
+						"buffer_size": 647,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								235,
-								235
+								203,
+								203
 							]
 						],
 						"settings":
@@ -1014,21 +962,22 @@
 					"file": "core.cpp",
 					"settings":
 					{
-						"buffer_size": 935,
+						"buffer_size": 1587,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								93,
-								93
+								378,
+								378
 							]
 						],
 						"settings":
 						{
 							"auto_name": "#include \"core.h\"",
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1038,23 +987,24 @@
 				},
 				{
 					"buffer": 2,
-					"file": "ArcBall.h",
+					"file": "GlutWindow.h",
 					"settings":
 					{
-						"buffer_size": 1030,
+						"buffer_size": 1796,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								987,
-								987
+								345,
+								345
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1064,23 +1014,24 @@
 				},
 				{
 					"buffer": 3,
-					"file": "ArcBall.cpp",
+					"file": "GlutWindow.cpp",
 					"settings":
 					{
-						"buffer_size": 2789,
+						"buffer_size": 22824,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								517,
-								517
+								354,
+								354
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1090,187 +1041,25 @@
 				},
 				{
 					"buffer": 4,
-					"file": "GlutWindow.h",
+					"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
 					"settings":
 					{
-						"buffer_size": 1851,
+						"buffer_size": 131,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12,
-								12
+								130,
+								130
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "GlutWindow.cpp",
-					"settings":
-					{
-						"buffer_size": 21968,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3674,
-								3674
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1832.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/run/media/jeronimo/Data/Projetos/Devel 2009/_ORIGINAL_SimplePreIntegratedVolumeRenderer/SimplePreIntegratedVolumeRenderer/main.cpp",
-					"settings":
-					{
-						"buffer_size": 15682,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2744,
-								2744
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 350.0,
-						"translation.y": 1787.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/Texture.cpp",
-					"settings":
-					{
-						"buffer_size": 7088,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2159,
-								2159
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 422.0,
-						"translation.y": 1532.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "handledata.h",
-					"settings":
-					{
-						"buffer_size": 941,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								691,
-								691
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "handledata.cpp",
-					"settings":
-					{
-						"buffer_size": 941,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								254,
-								254
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "utils.h",
-					"settings":
-					{
-						"buffer_size": 1122,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								251,
-								251
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
+						"translation.x": 663.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1283,11 +1072,120 @@
 			"sheets":
 			[
 				{
-					"buffer": 11,
-					"file": "Makefile",
+					"buffer": 5,
+					"file": "main.cpp",
 					"settings":
 					{
-						"buffer_size": 1568,
+						"buffer_size": 340,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								88,
+								88
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "similarityassessment.cpp",
+					"settings":
+					{
+						"buffer_size": 2508,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1521,
+								1521
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "similarityassessment.h",
+					"settings":
+					{
+						"buffer_size": 1120,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								738,
+								738
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "logdata.h",
+					"settings":
+					{
+						"buffer_size": 495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								97,
+								97
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "imageinfo.h",
+					"settings":
+					{
+						"buffer_size": 186,
 						"regions":
 						{
 						},
@@ -1300,7 +1198,7 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1309,159 +1207,24 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
-					"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
+					"buffer": 10,
+					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 130,
+						"buffer_size": 1132,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								127,
-								127
+								264,
+								264
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
-						},
-						"translation.x": 385.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 13,
-					"file": "main.cpp",
-					"settings":
-					{
-						"buffer_size": 1244,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1171,
-								1171
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "TransferFunction.h",
-					"settings":
-					{
-						"buffer_size": 851,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								119,
-								119
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "Trapez.h",
-					"settings":
-					{
-						"buffer_size": 1465,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								24,
-								24
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "Trapez.cpp",
-					"settings":
-					{
-						"buffer_size": 7303,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								41,
-								41
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "TransferFunction.cpp",
-					"settings":
-					{
-						"buffer_size": 5812,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								51,
-								51
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1500,7 +1263,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.45,
 			1.0
 		],
 		"rows":

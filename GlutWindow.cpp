@@ -20,9 +20,11 @@ static void handleCgError()
    	exit(1);
 }
 
+CGlutWindow::CGlutWindow(){};
 
-CGlutWindow::CGlutWindow(void)
+CGlutWindow::CGlutWindow(DATAINFO dInfo)
 {
+	m_datasetInfo = dInfo;
 	s_fragmentProfile = s_vertexProfile = CG_PROFILE_UNKNOWN;
 
 	m_pCameraArcball = new CArcBall();
@@ -328,77 +330,8 @@ void CGlutWindow::mouseMoveEvent(int x,int y){
 }
 
 void CGlutWindow::idle(){
-	
-	// float timeCounter, lastFrameTimeCounter, DT, prevTime = 0.0, FPS;
-	// int         frame = 1, framesPerFPS;
-	// struct timeval tv;
-	// struct timeval tv0;
-	// static bool bFirstTime = true;
-
-	// if (bFirstTime) 
-	// {
-	// 	gettimeofday(&tv0, NULL);
- // 		framesPerFPS = 10; 
- // 		bFirstTime = false;
- // 	}
-	
-	// lastFrameTimeCounter = timeCounter;
- // 	gettimeofday(&tv, NULL);
- // 	timeCounter = (float)(tv.tv_sec-tv0.tv_sec)*((float)(tv.tv_usec-tv0.tv_usec));
- // 	DT = timeCounter - lastFrameTimeCounter; 
- // 	frame++;
-
- // 	if((frame%framesPerFPS) == 0) 
- // 	{
- //    	FPS = ((float)(framesPerFPS)) / (timeCounter-prevTime);
- //    	prevTime = timeCounter;
- //    	printf("FPS:%f\n",FPS);
- //    	frame=0;
- //    }
-
-   
 
 	glutPostRedisplay();
-/*
-    __time64_t ltime;
-    struct __timeb64 tstruct;
-
-	static bool bFirstTime = true;
-	static long nStartMilliSeconds;
-	static long nMilliSeconds = 0;
-	static long nStartCount   = 0;
-
-	if (bFirstTime) {
-		 _time64( &ltime );
-		nStartMilliSeconds = (unsigned long) ltime;
-		nStartMilliSeconds *= 1000;
-		_ftime64( &tstruct );
-		nStartMilliSeconds += tstruct.millitm;        
-		bFirstTime = false;
-		nStartCount = nStartMilliSeconds;
-	}
-
-	 _time64( &ltime );
-	nMilliSeconds = (unsigned long) ltime;
-	nMilliSeconds *= 1000;
-	_ftime64( &tstruct );
-	nMilliSeconds += tstruct.millitm;        
-	bFirstTime = false;
-
-	nMilliSeconds -= nStartMilliSeconds;
-    //printf( "Plus milliseconds:%u\n",nMilliSeconds-nStartCount);
-
-	static int nFrameCount = 0;
-
-	nFrameCount++;
-	if (nFrameCount > 10) {
-		double dFramesPerSecond = double(nFrameCount*1000)/double(nMilliSeconds-nStartCount);
-		printf( "fps:%f\n",dFramesPerSecond);
-		nFrameCount = 0;
-		nStartCount = nMilliSeconds;
-	}
-*/	
-
 }
 
 void CGlutWindow::initializeGL()
@@ -471,13 +404,13 @@ void CGlutWindow::initializeAppParameters()
 }
 
 bool CGlutWindow::loadTextures() {
-	
-	FILE *pFile = fopen(FILENAME,"rb");
+		
+	FILE *pFile = fopen(m_datasetInfo.inputFileName,"rb");
 	if (NULL == pFile) {
 		return false;
 	}
 
-	int size = XMAX*YMAX*ZMAX;
+	int size = m_datasetInfo.resWidth*m_datasetInfo.resHeight*m_datasetInfo.resDepth;
 	unsigned short *pVolume = new unsigned short[size];
 	bool ok = (size == fread(pVolume,sizeof(unsigned short), size,pFile));
 	fclose(pFile);

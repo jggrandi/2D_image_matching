@@ -8,7 +8,17 @@ Core::Core(int c_argc, char **c_argv)
 {
 
 	glutInit(&c_argc, c_argv);
-	c_pMainWindow = new CGlutWindow();	
+
+	DATAINFO c_datasetInfo;
+
+	c_datasetInfo.inputFileName= c_argv[0];
+	c_datasetInfo.resWidth	   = atoi(c_argv[1]);
+	c_datasetInfo.resHeight	   = atoi(c_argv[2]);
+	c_datasetInfo.initStack    = atoi(c_argv[3]);
+	c_datasetInfo.endStack     = atoi(c_argv[4]);
+	c_datasetInfo.resDepth     = c_datasetInfo.endStack - c_datasetInfo.initStack;
+	
+	c_pMainWindow = new CGlutWindow(c_datasetInfo);	
 }
 
 Core::~Core(){}
@@ -16,8 +26,6 @@ Core::~Core(){}
 
 void Core::run()
 {
-//	c_handleData.similarityCheck();	
-	
 	glutDisplayFunc(display); 
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);

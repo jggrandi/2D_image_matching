@@ -1,13 +1,12 @@
 #pragma once
 
 #include <handle3ddataset.h>
-#include <Cg/cg.h>    /* Can't include this?  Is Cg Toolkit installed! */
+#include <Cg/cg.h>
 #include <Cg/cgGL.h>
 
 #include "TransferFunction.h"
 #include "mathutil/CVector.h"
 #include "mathutil/CPosition.h"
-#include "handledata.h"
 #include "utils.h"
 
 class CArcBall;
@@ -15,7 +14,8 @@ class CArcBall;
 class CGlutWindow
 {
 public:
-	CGlutWindow(void);
+	CGlutWindow();
+	CGlutWindow(DATAINFO dInfo);
 	~CGlutWindow(void);
 
 	enum {
@@ -45,6 +45,7 @@ public:
 
 protected:
     //
+    DATAINFO m_datasetInfo;
 	int      m_nMode;
 	bool     m_bDisplayTF;
 	GLuint   m_pTextureIds[3];
@@ -55,8 +56,6 @@ protected:
 	CGprogram *m_pVertexPrograms;
 	CGprogram *m_pFragmentPrograms;
 	//
-	
-	HandleData   c_handleData;
 
 	int m_nWidth, m_nHeight;
 	double m_dFieldOfView;

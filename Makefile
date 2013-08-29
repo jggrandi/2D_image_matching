@@ -10,9 +10,9 @@ OPENGL = -lglut -lGL -lGLU -lGL
 OPENCV = `pkg-config opencv --libs --cflags`
 CG = -lCg -lCgGL
 
-MY_INCLUDE_HANDLE3DDATASETS =-I/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/src 
+MY_INCLUDE_HANDLE3DDATASETS =-I../../my_libs/Handle3DDataset/src 
 #MY_LIB_HANDLE3DDATASETS = -lhandle3ddataset
-MY_LIB_PATCH_HANDLE3DDATASETS = -L/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/bin
+MY_LIB_PATCH_HANDLE3DDATASETS = -L../../my_libs/Handle3DDataset/bin
 #MY_R_PATCH_HANDLE3DDATASETS = -Wl,-R/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/bin
 
 MY_INCLUDE_QUALITYASSESSMENT =-I/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/QualityAssessment/src 
