@@ -503,7 +503,7 @@
 			"file": "core.h",
 			"settings":
 			{
-				"buffer_size": 647,
+				"buffer_size": 618,
 				"line_ending": "Unix"
 			}
 		},
@@ -520,7 +520,7 @@
 			"file": "GlutWindow.h",
 			"settings":
 			{
-				"buffer_size": 1796,
+				"buffer_size": 1845,
 				"line_ending": "Windows"
 			}
 		},
@@ -528,7 +528,7 @@
 			"file": "GlutWindow.cpp",
 			"settings":
 			{
-				"buffer_size": 22824,
+				"buffer_size": 21291,
 				"line_ending": "Windows"
 			}
 		},
@@ -536,7 +536,15 @@
 			"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
 			"settings":
 			{
-				"buffer_size": 131,
+				"buffer_size": 70,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 531,
 				"line_ending": "Unix"
 			}
 		},
@@ -544,39 +552,7 @@
 			"file": "main.cpp",
 			"settings":
 			{
-				"buffer_size": 340,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "similarityassessment.cpp",
-			"settings":
-			{
-				"buffer_size": 2508,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "similarityassessment.h",
-			"settings":
-			{
-				"buffer_size": 1120,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "logdata.h",
-			"settings":
-			{
-				"buffer_size": 495,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "imageinfo.h",
-			"settings":
-			{
-				"buffer_size": 186,
+				"buffer_size": 311,
 				"line_ending": "Unix"
 			}
 		},
@@ -584,7 +560,7 @@
 			"file": "utils.h",
 			"settings":
 			{
-				"buffer_size": 1132,
+				"buffer_size": 1139,
 				"line_ending": "Unix"
 			}
 		}
@@ -637,11 +613,16 @@
 	},
 	"file_history":
 	[
+		"/mnt/truecrypt1/Dropbox/compartilhadaFrancis/datasets_for_tests/dataset_info.txt",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/logdata.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/similarityassessment.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/similarityassessment.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.h",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
+		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo.h",
 		"/home/jeronimo/.cache/.fr-iHuS33/main.cpp",
 		"/home/jeronimo/.cache/.fr-zUyfKx/tree.h",
 		"/run/media/jeronimo/Windows USB/bootmgr",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/acceptedCode0172.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/ConvexHull/acceptedCode0174.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Disciplinas/AlgoritmosGeometricos/PolyTriangularization/utilz.h",
@@ -684,11 +665,8 @@
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/source/MyGLH.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/shader/vp_simple.cg",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/logdata.cpp",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/similarityassessment.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/mathutil/CVector.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/mathutil/CVector.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/logdata.h",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/similarityassessment.h",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/qualityassessment.h",
 		"/home/jeronimo/.cache/.fr-ebYUWC/VolumeRendering_vs2010_src/VolumeRendering_cp1/RawDataProcessor.cpp",
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/misc/arguments_for_nevimer.txt",
@@ -726,7 +704,6 @@
 		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/systemmessages.h",
 		"/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/handledata.cpp",
 		"/mnt/truecrypt1/Dropbox/eclipse_workspace/aulaspraticas_sources/arqBinario.cpp",
-		"/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo.h",
 		"/home/jeronimo/Documents/minc-2.0.18/libsrc/voxel_loop.h",
 		"/home/jeronimo/Documents/minc-2.0.18/libsrc/voxel_loop.c",
 		"/home/jeronimo/Documents/minc-2.0.18/libtool",
@@ -763,8 +740,7 @@
 		"/home/jeronimo/Downloads/draft.txt",
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/shared/include/MyGLH.h",
 		"/run/media/jeronimo/Data/Projetos/Devel 2009/SimplePreIntegratedVolumeRenderer/SimplePreIntegratedVolumeRenderer/main.cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata (Jeronimo Grandi's conflicted copy 2013-06-03).cpp",
-		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/imageinfo (lanier's conflicted copy 2013-06-03).h"
+		"/run/media/jeronimo/Data/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/src/loaddata (Jeronimo Grandi's conflicted copy 2013-06-03).cpp"
 	],
 	"find":
 	{
@@ -782,6 +758,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"printf",
+			"char",
+			"unsigned short",
 			"img1Info",
 			"loadTextures",
 			"argv",
@@ -906,10 +885,7 @@
 			"06",
 			"32",
 			"33",
-			"43",
-			"ksize <=",
-			"ksize",
-			"32"
+			"43"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -935,15 +911,15 @@
 					"file": "core.h",
 					"settings":
 					{
-						"buffer_size": 647,
+						"buffer_size": 618,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								203,
-								203
+								87,
+								87
 							]
 						],
 						"settings":
@@ -969,8 +945,8 @@
 						"selection":
 						[
 							[
-								378,
-								378
+								833,
+								833
 							]
 						],
 						"settings":
@@ -990,15 +966,15 @@
 					"file": "GlutWindow.h",
 					"settings":
 					{
-						"buffer_size": 1796,
+						"buffer_size": 1845,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								345,
-								345
+								74,
+								74
 							]
 						],
 						"settings":
@@ -1017,15 +993,15 @@
 					"file": "GlutWindow.cpp",
 					"settings":
 					{
-						"buffer_size": 22824,
+						"buffer_size": 21291,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								354,
-								354
+								9312,
+								9312
 							]
 						],
 						"settings":
@@ -1034,7 +1010,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 5582.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1044,22 +1020,48 @@
 					"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/2d_image_matching/bin/runSingleTest.sh",
 					"settings":
 					{
-						"buffer_size": 131,
+						"buffer_size": 70,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								130,
-								130
+								40,
+								40
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
-						"translation.x": 663.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "Makefile",
+					"settings":
+					{
+						"buffer_size": 531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								102,
+								102
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1072,19 +1074,19 @@
 			"sheets":
 			[
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "main.cpp",
 					"settings":
 					{
-						"buffer_size": 340,
+						"buffer_size": 311,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								88,
-								88
+								308,
+								308
 							]
 						],
 						"settings":
@@ -1099,127 +1101,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "similarityassessment.cpp",
-					"settings":
-					{
-						"buffer_size": 2508,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1521,
-								1521
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 540.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 7,
-					"file": "similarityassessment.h",
-					"settings":
-					{
-						"buffer_size": 1120,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								738,
-								738
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "logdata.h",
-					"settings":
-					{
-						"buffer_size": 495,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								97,
-								97
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "imageinfo.h",
-					"settings":
-					{
-						"buffer_size": 186,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
 					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 1132,
+						"buffer_size": 1139,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								264,
-								264
+								631,
+								631
 							]
 						],
 						"settings":
@@ -1227,7 +1121,7 @@
 							"syntax": "Packages/C++/C++.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

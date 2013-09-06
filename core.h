@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <GL/glut.h>
-#include <handle3ddataset.h>
 
 #include "GlutWindow.h"
 #include "utils.h"

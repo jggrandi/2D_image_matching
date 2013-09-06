@@ -1,13 +1,18 @@
 #pragma once
 
-#include <handle3ddataset.h>
+#include <fstream>
+
 #include <Cg/cg.h>
 #include <Cg/cgGL.h>
 
 #include "TransferFunction.h"
 #include "mathutil/CVector.h"
 #include "mathutil/CPosition.h"
+
+#include <cstdlib>
+#include <cstdio>
 #include "utils.h"
+#include <assert.h>
 
 class CArcBall;
 

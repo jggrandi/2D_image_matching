@@ -14,16 +14,25 @@
 #define START_EPSILON (0.01)
 #define START_EPSILON1 (0.009)
 
-#define FILENAME ("../datasets_for_tests/Bucky.32x32x32.raw")
-#define XMAX (32)
-#define YMAX (32)
-#define ZMAX (32)
-
 #define XSIZE 1.0  
 #define YSIZE 1.0
 #define ZSIZE 1.0
 
 #define CLAMP(a,b,c) { b = ((b) < (a))? (a) : (((b) > (c))? (c): (b));}
+
+
+typedef struct data
+{
+    char *inputFileName;
+    char *outputFileName;
+    char viewOrientation;
+    int  resWidth;
+    int  resHeight;
+    int  resDepth;
+    int  initStack;
+    int  endStack;
+}DATAINFO;
+
 
 typedef struct options
 {
@@ -57,14 +66,13 @@ struct Edge {
 
 static char usage[] =
 "\n"
-"  (C) 2013 Image Matching\n"
+"  (C) 2013 Volume Rendering\n"
 "\n"
-"  usage: ./imageMatch [options] <imagedata1> <width> <height> <stack init> <stack end> <imagedata2> <widht> <height> <stack init> <stack end>\n"
+"  usage: ./volumeRendering <imagedata> <res width> <res height> <stack init> <stack end> \n"
 "\n"
-"  Common options:\n"
+"  ex: "
 "\n"
-"      -l <file>    : log data to a file\n"
-"      -v   : verbose mode\n"
+"	./volumeRendering Bucky.32x32x32.raw 32 32 0 32"
 "\n";
 
 

@@ -5,7 +5,6 @@
 #include <math.h>
 #include <GL/glut.h>
 #include <sys/time.h>
-#include <stdio.h>
 
 
 #define DEG2RAD(a) ((a)/57.295)
@@ -33,7 +32,7 @@ CGlutWindow::CGlutWindow(DATAINFO dInfo)
 	glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize (800,600); 
 	glutInitWindowPosition (0, 0);
-	glutCreateWindow ("Image Match");
+	glutCreateWindow ("Volume Rendering");
 
 	m_dFieldOfView = 30.0;
 	m_nWidth = 1;
@@ -411,8 +410,8 @@ bool CGlutWindow::loadTextures() {
 	}
 
 	int size = m_datasetInfo.resWidth*m_datasetInfo.resHeight*m_datasetInfo.resDepth;
-	unsigned short *pVolume = new unsigned short[size];
-	bool ok = (size == fread(pVolume,sizeof(unsigned short), size,pFile));
+	unsigned int *pVolume = new unsigned int[size];
+	bool ok = (size == fread(pVolume,sizeof(unsigned int), size,pFile));
 	fclose(pFile);
 
 	glGenTextures(3,m_pTextureIds);
@@ -426,7 +425,7 @@ bool CGlutWindow::loadTextures() {
 	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-	glTexImage3D(GL_TEXTURE_3D,0,GL_INTENSITY,XMAX,YMAX,ZMAX,0,GL_LUMINANCE,GL_UNSIGNED_BYTE,pVolume);
+	glTexImage3D(GL_TEXTURE_3D,0,GL_INTENSITY,m_datasetInfo.resWidth,m_datasetInfo.resHeight,m_datasetInfo.resDepth,0,GL_LUMINANCE,GL_UNSIGNED_BYTE,pVolume);
 
 	delete [] pVolume;
 
