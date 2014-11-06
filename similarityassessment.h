@@ -26,8 +26,8 @@ class SimilarityAssessment
 public:
 	SimilarityAssessment();
 	~SimilarityAssessment();
-	vector<twoInts> checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2);	
-    vector<gpu::GpuMat> splitDataset(Handle3DDataset dataset);
+	vector<twoInts> checkSimilarity(Handle3DDataset <imgT>dataset1, Handle3DDataset <imgT>dataset2);	
+    vector<gpu::GpuMat> splitDataset(Handle3DDataset <imgT>dataset);
     void ordenaRank(vector<sliceRank> *srr);
 private:
     int rank_size;

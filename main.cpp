@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <vector>
 
-#include <handle3ddataset.h>
+//#include <handle3ddataset.h>
 #include "handledata.h"
 #include "utils.h"
 
@@ -36,14 +36,14 @@ int main(int argc, char *argv[])
 	DATAINFO img1Info;
 	DATAINFO img2Info;
 
-	img1Info.inputFileName= argv[0];
+	img1Info.fileName= argv[0];
 	img1Info.resWidth	  = atoi(argv[1]);
 	img1Info.resHeight 	  = atoi(argv[2]);
 	img1Info.initStack 	  = atoi(argv[3]);
 	img1Info.endStack     = atoi(argv[4]);
 	img1Info.resDepth     = img1Info.endStack - img1Info.initStack;
 	
-	img2Info.inputFileName= argv[5];
+	img2Info.fileName= argv[5];
 	img2Info.resWidth     = atoi(argv[6]);
 	img2Info.resHeight    = atoi(argv[7]);
 	img2Info.initStack    = atoi(argv[8]);

@@ -472,21 +472,21 @@
 	"buffers":
 	[
 		{
+			"contents": "",
 			"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/src/handle3ddataset.h",
+			"file_size": -1,
+			"file_write_time": -1,
 			"settings":
 			{
-				"buffer_size": 2613,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "/* Quality assessment\n	by: Jeronimo G. Grandi\n	Jun,2013\n*/  \n\n#ifndef SIMILARITYASSESSMENT\n#define SIMILARITYASSESSMENT\n\n#include <opencv2/imgproc/imgproc.hpp>  // Gaussian Blur\n#include <opencv2/core/core.hpp>        // Basic OpenCV structures (cv::Mat, Scalar)\n#include <opencv2/highgui/highgui.hpp>  // OpenCV window I/O\n#include <opencv2/features2d/features2d.hpp>\n#include <opencv2/nonfree/nonfree.hpp>\n#include <opencv2/gpu/gpu.hpp> \n\n#include <handle3ddataset.h>\n#include <qualityassessment.h>\n\n#include \"utils.h\"\n\nusing namespace cv;\n\n\nclass SimilarityAssessment\n{\npublic:\n	SimilarityAssessment();\n	~SimilarityAssessment();\n	vector<twoInts> checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2);	\n    vector<gpu::GpuMat> splitDataset(Handle3DDataset dataset);\n    void ordenaRank(vector<sliceRank> *srr);\nprivate:\n    int rank_size;\n    Scalar mssimV,mpsnrV;\n    sliceRank sr_raw;\n    vector<sliceRank> sr,sr_ranked;\n    twoInts sliceAndDistance;\n    vector<twoInts> bestMatches;\n    QualityAssessment qualAssess;\n};\n\n\n\n\n\n#endif // QUALITY_ASSESSMENT",
 			"file": "similarityassessment.h",
-			"file_size": 1072,
-			"file_write_time": 1378989998000000,
 			"settings":
 			{
-				"buffer_size": 1072,
+				"buffer_size": 1090,
 				"line_ending": "Unix"
 			}
 		},
@@ -494,7 +494,7 @@
 			"file": "utils.h",
 			"settings":
 			{
-				"buffer_size": 672,
+				"buffer_size": 702,
 				"line_ending": "Unix"
 			}
 		},
@@ -502,7 +502,7 @@
 			"file": "handledata.h",
 			"settings":
 			{
-				"buffer_size": 941,
+				"buffer_size": 972,
 				"line_ending": "Unix"
 			}
 		},
@@ -518,7 +518,7 @@
 			"file": "similarityassessment.cpp",
 			"settings":
 			{
-				"buffer_size": 2461,
+				"buffer_size": 2483,
 				"line_ending": "Unix"
 			}
 		},
@@ -526,7 +526,7 @@
 			"file": "handledata.cpp",
 			"settings":
 			{
-				"buffer_size": 1233,
+				"buffer_size": 1312,
 				"line_ending": "Unix"
 			}
 		},
@@ -543,7 +543,7 @@
 			"file": "Makefile",
 			"settings":
 			{
-				"buffer_size": 1357,
+				"buffer_size": 788,
 				"line_ending": "Unix"
 			}
 		}
@@ -894,15 +894,15 @@
 					"file": "/mnt/truecrypt1/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/src/handle3ddataset.h",
 					"settings":
 					{
-						"buffer_size": 2613,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								670,
-								670
+								0,
+								0
 							]
 						],
 						"settings":
@@ -921,7 +921,7 @@
 					"file": "similarityassessment.h",
 					"settings":
 					{
-						"buffer_size": 1072,
+						"buffer_size": 1090,
 						"regions":
 						{
 						},
@@ -949,7 +949,7 @@
 					"file": "utils.h",
 					"settings":
 					{
-						"buffer_size": 672,
+						"buffer_size": 702,
 						"regions":
 						{
 						},
@@ -977,7 +977,7 @@
 					"file": "handledata.h",
 					"settings":
 					{
-						"buffer_size": 941,
+						"buffer_size": 972,
 						"regions":
 						{
 						},
@@ -1036,15 +1036,15 @@
 					"file": "similarityassessment.cpp",
 					"settings":
 					{
-						"buffer_size": 2461,
+						"buffer_size": 2483,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1922,
-								1922
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1064,7 +1064,7 @@
 					"file": "handledata.cpp",
 					"settings":
 					{
-						"buffer_size": 1233,
+						"buffer_size": 1312,
 						"regions":
 						{
 						},
@@ -1119,15 +1119,15 @@
 					"file": "Makefile",
 					"settings":
 					{
-						"buffer_size": 1357,
+						"buffer_size": 788,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1051,
-								1051
+								0,
+								0
 							]
 						],
 						"settings":

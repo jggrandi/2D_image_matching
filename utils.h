@@ -7,6 +7,8 @@
 
 using namespace cv;
 
+typedef unsigned short imgT;
+
 typedef struct options
 {
 	bool verbose;

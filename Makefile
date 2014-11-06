@@ -1,29 +1,28 @@
 CC = g++
 CFLAGS = -Wall 
 CDEBUG = -g
-COPTIMIZATION = -O4
+COPTIMIZATION = -O3
 WARNINGOFF = -w
 PROG = ../bin/imageMatch
 
 SRC = main.cpp handledata.cpp similarityassessment.cpp logdata.cpp
 OPENGL = -lglut
-OPENCV = `pkg-config opencv --libs --cflags`
+OPENCV = -L /opt/cuda/lib64 `pkg-config opencv --libs --cflags`
 
-MY_INCLUDE_HANDLE3DDATASETS =-I/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/src 
-MY_LIB_HANDLE3DDATASETS = -lhandle3ddataset
-MY_LIB_PATCH_HANDLE3DDATASETS = -L/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/bin
-MY_R_PATCH_HANDLE3DDATASETS = -Wl,-R/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/Handle3DDataset/bin
+I_ARRAY = -I../../my_libs/Array
+L_ARRAY = -L../../my_libs/Array
 
-MY_INCLUDE_QUALITYASSESSMENT =-I/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/QualityAssessment/src 
-MY_LIB_QUALITYASSESSMENT = -lqualityassessment
-MY_LIB_PATCH_QUALITYASSESSMENT = -L/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/QualityAssessment/bin
-MY_R_PATCH_QUALITYASSESSMENT = -Wl,-R/home/jeronimo/Dropbox/UFRGS/Mestrado/Devel/my_libs/QualityAssessment/bin
+I_HANDLE3DDATASETS = -I../../my_libs/Handle3DDataset/src 
+L_HANDLE3DDATASETS = -L../../my_libs/Handle3DDataset/bin
+
+I_QUALITYASSESSMENT = -I../../my_libs/QualityAssessment/src 
+L_QUALITYASSESSMENT = -L../../my_libs/QualityAssessment/bin
 
 
 
 
 $(PROG): $(SRC)
-	 $(CC) $(CFLAGS) $(CDEBUG) -o $(PROG) $(SRC) $(OPENGL) $(OPENCV) $(MY_INCLUDE_HANDLE3DDATASETS) $(MY_INCLUDE_QUALITYASSESSMENT) $(MY_LIB_HANDLE3DDATASETS) $(MY_LIB_QUALITYASSESSMENT) $(MY_LIB_PATCH_HANDLE3DDATASETS) $(MY_LIB_PATCH_QUALITYASSESSMENT) $(MY_R_PATCH_HANDLE3DDATASETS) $(MY_R_PATCH_QUALITYASSESSMENT)
+	 $(CC) $(CFLAGS) $(CDEBUG) $(I_ARRAY) $(I_HANDLE3DDATASETS) $(I_QUALITYASSESSMENT) $(L_ARRAY) $(L_HANDLE3DDATASETS) $(L_QUALITYASSESSMENT)  -o $(PROG) $(SRC) $(OPENGL) $(OPENCV) 
 
 
 clean:

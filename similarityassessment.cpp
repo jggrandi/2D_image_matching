@@ -10,12 +10,12 @@ SimilarityAssessment::SimilarityAssessment()
 SimilarityAssessment::~SimilarityAssessment(){}
 
 
-vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset dataset1, Handle3DDataset dataset2)
+vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset <imgT>dataset1, Handle3DDataset <imgT>dataset2)
 {
 	vector<gpu::GpuMat> d1 = splitDataset(dataset1);
 	vector<gpu::GpuMat> d2 = splitDataset(dataset2);
-    DATAINFO imgInfoDataset1 = dataset1.getDatasetInfo();
-    DATAINFO imgInfoDataset2 = dataset2.getDatasetInfo();
+    DATAINFO imgInfoDataset1 = dataset1.getDatasetInfo(0);
+    DATAINFO imgInfoDataset2 = dataset2.getDatasetInfo(0);
 
     for(int i=0; i<imgInfoDataset1.resDepth; i++)
     {
@@ -53,15 +53,15 @@ vector<twoInts> SimilarityAssessment::checkSimilarity(Handle3DDataset dataset1, 
     return bestMatches;
 }
 
-vector<gpu::GpuMat> SimilarityAssessment::splitDataset(Handle3DDataset dataset)
+vector<gpu::GpuMat> SimilarityAssessment::splitDataset(Handle3DDataset <imgT>dataset)
 {
 	
-    DATAINFO imgInfo = dataset.getDatasetInfo();	
+    DATAINFO imgInfo = dataset.getDatasetInfo(0);	
     vector<gpu::GpuMat> datasetSlicesGPU;
 
 	for( int i = 0; i < imgInfo.resDepth; i++ )
 	{
-        unsigned short** d = dataset.getDataset();
+        unsigned short** d = dataset.getDataset(0);
 		Mat slice(imgInfo.resHeight,imgInfo.resWidth,CV_16UC1,d[i]);
 		Mat plane;
 		gpu::GpuMat planeGPU;
