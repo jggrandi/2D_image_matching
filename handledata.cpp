@@ -23,17 +23,17 @@ int HandleData::loadData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options)
 	return 1;
 }
 
-void HandleData::similarityCheck()
+void HandleData::similarityCheck(int option, bool gpuoptimization)
 {
 	if(oopt.logdata)
 	{
 		double timeCounter= (double)getTickCount();
-		similarityResults = q.checkSimilarity(dataset1,dataset2);
+		similarityResults = q.checkSimilarity(dataset1,dataset2,option, gpuoptimization);
 		timeCounter = ((double)getTickCount() - timeCounter)/getTickFrequency();
 		logData.handleLog(oopt.logfilename, similarityResults,timeCounter);
 	}
 	else
-		similarityResults = q.checkSimilarity(dataset1,dataset2);
+		similarityResults = q.checkSimilarity(dataset1,dataset2,option,gpuoptimization);
 }
 /*
 void HandleData::showData()

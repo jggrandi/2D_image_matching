@@ -34,7 +34,7 @@ public:
 	HandleData();
 	~HandleData();
 	int  loadData(DATAINFO h_img1, DATAINFO h_img2, OPT h_options);
-	void similarityCheck();
+	void similarityCheck(int option, bool gpuoptimization);
 	void showData();
 private:
 	Handle3DDataset <imgT>dataset1;

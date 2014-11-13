@@ -13,6 +13,8 @@ typedef struct options
 {
 	bool verbose;
 	bool logdata;
+    bool gpuOptimized;
+    int  simMetric;
 	char *logfilename;
 }OPT;
 
@@ -39,6 +41,7 @@ static char usage[] =
 "\n"
 "  Common options:\n"
 "\n"
+"      -m <0,1,2>   : 0=PSNR, 1=SSIM, 2=2STEP \n"
 "      -l <file>    : log data to a file\n"
 "      -v   : verbose mode\n"
 "\n";
